@@ -1,0 +1,25 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_MFileSystem_TextFileW">
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="vbscript">
+            Function GetSaveAsFileName()
+                GetSaveAsFileName = InputBox("SaveAsFileName")
+            End Function
+        </script>
+        <script language="jscript">
+            Test_MFileSystem_TextFileW(GetSaveAsFileName());
+        </script>
+    </job>
+    <job id="Test_MFileSystem_TextFileA">
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="vbscript">
+            Function GetSaveAsFileName()
+                GetSaveAsFileName = InputBox("SaveAsFileName")
+            End Function
+        </script>
+        <script language="jscript">
+            Test_MFileSystem_TextFileA(GetSaveAsFileName());
+        </script>
+    </job>
+</package>
