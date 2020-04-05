@@ -1,0 +1,49 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_MADODBStream_TextFileW">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="vbscript">
+            Function GetSaveAsFileName()
+                GetSaveAsFileName = InputBox("SaveAsFileName")
+            End Function
+        </script>
+        <script language="jscript">
+            Test_MADODBStream_TextFileW(GetSaveAsFileName());
+        </script>
+    </job>
+    <job id="Test_MADODBStream_TextFileA">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="vbscript">
+            Function GetSaveAsFileName()
+                GetSaveAsFileName = InputBox("SaveAsFileName")
+            End Function
+        </script>
+        <script language="jscript">
+            Test_MADODBStream_TextFileA(GetSaveAsFileName());
+        </script>
+    </job>
+    <job id="Test_MADODBStream_TextFileUTF8">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="vbscript">
+            Function GetSaveAsFileName()
+                GetSaveAsFileName = InputBox("SaveAsFileName")
+            End Function
+        </script>
+        <script language="jscript">
+            Test_MADODBStream_TextFileUTF8(GetSaveAsFileName());
+        </script>
+    </job>
+    <!--
+    <job id="Test_MADODBStream_BinaryFile">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="vbscript">
+            Function GetSaveAsFileName()
+                GetSaveAsFileName = InputBox("SaveAsFileName")
+            End Function
+        </script>
+        <script language="jscript">
+            Test_MADODBStream_BinaryFile(GetSaveAsFileName());
+        </script>
+    </job>
+    -->
+</package>
