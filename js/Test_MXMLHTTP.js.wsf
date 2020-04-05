@@ -1,0 +1,28 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_HttpGet">
+        <script language="jscript" src="MXMLHTTP.js" />
+        <script language="vbscript">
+            Function GetUrl()
+                GetUrl = InputBox("Url")
+            End Function
+        </script>
+        <script language="jscript">
+            Test_HttpGet(GetUrl());
+        </script>
+    </job>
+    <job id="Test_HttpPost">
+        <script language="jscript" src="MXMLHTTP.js" />
+        <script language="vbscript">
+            Function GetUrl()
+                GetUrl = InputBox("Url")
+            End Function
+            Function GetBody()
+                GetBody = InputBox("Body")
+            End Function
+        </script>
+        <script language="jscript">
+            Test_HttpPost(GetUrl(), GetBody());
+        </script>
+    </job>
+</package>
