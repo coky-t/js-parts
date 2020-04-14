@@ -1,0 +1,329 @@
+<html>
+
+<head>
+<title>Test_MRegExp.js.hta</title>
+
+<meta http-equiv="msthemecompatible" content="yes">
+
+<hta:application innerborder="no" scroll="no" />
+
+<script language="jscript">
+<!--
+//
+// Copyright (c) 2020 Koki Takeyama
+//
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the "Software"),
+// to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense,
+// and/or sell copies of the Software, and to permit persons to whom the
+// Software is furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+// IN THE SOFTWARE.
+//
+
+//
+// === RegExp ===
+//
+
+//
+// RegExp_Execute
+// - Executes a regular expression search against a specified string.
+//
+// RegExp_Replace
+// - Replaces text found in a regular expression search.
+//
+// RegExp_Test
+// - Executes a regular expression search against a specified string
+//   and returns a Boolean value that indicates if a pattern match was found.
+//
+
+//
+// InputString:
+//   Required. The text string upon which the regular expression is executed.
+//
+// ReplaceString:
+//   Required. The replacement text string.
+//
+// Pattern:
+//   Required. Regular string expression being searched for.
+//   https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/f97kw5ka(v=vs.84)
+//
+// IgnoreCase:
+//   Optional. The value is False if the search is case-sensitive,
+//   True if it is not. Default is False.
+//
+// GlobalMatch:
+//   Optional. The value is True if the search applies to the entire string,
+//   False if it does not. Default is False.
+//
+// MultiLine:
+//   Optional. The value is False if the search is single-line mode,
+//   True if it is multi-line mode. Default is False.
+//
+
+function RegExp_Execute(
+    InputString,
+    Pattern,
+    IgnoreCase,
+    GlobalMatch,
+    MultiLine) {
+    
+    var flags = "";
+    if (IgnoreCase) { flags = flags + "i"; }
+    if (GlobalMatch) { flags = flags + "g"; }
+    if (MultiLine) { flags = flags + "m"; }
+    
+    var re = new RegExp(Pattern, flags);
+    
+    return InputString.match(re);
+}
+
+function RegExp_Replace(
+    InputString,
+    ReplaceString,
+    Pattern,
+    IgnoreCase,
+    GlobalMatch,
+    MultiLine) {
+    
+    var flags = "";
+    if (IgnoreCase) { flags = flags + "i"; }
+    if (GlobalMatch) { flags = flags + "g"; }
+    if (MultiLine) { flags = flags + "m"; }
+    
+    var re = new RegExp(Pattern, flags);
+    
+    return InputString.replace(re, ReplaceString);
+}
+
+function RegExp_Test(
+    InputString,
+    Pattern,
+    IgnoreCase,
+    MultiLine) {
+    
+    var flags = "";
+    if (IgnoreCase) { flags = flags + "i"; }
+    if (MultiLine) { flags = flags + "m"; }
+    
+    var re = new RegExp(Pattern, flags);
+    
+    return re.test(InputString);
+}
+
+//
+// --- Test ---
+//
+
+function btnTest_OnClick() {
+    var InputString;
+    InputString = textareaInputString.innerText;
+    if (InputString == "") {
+        alert("InputString: is blank.");
+        return;
+    }
+    
+    var Pattern;
+    Pattern = inputPattern.value;
+    if (Pattern == "") {
+        alert("Pattern: is blank.");
+        return;
+    }
+    
+    var IgnoreCase;
+    IgnoreCase = inputIgnoreCase.checked;
+    
+    var MultiLine;
+    MultiLine = inputMultiLine.checked;
+    
+    var Result;
+    Result =
+        RegExp_Test(InputString, Pattern, IgnoreCase, MultiLine);
+    
+    tdResult.innerText = Result.toString();
+}
+
+function btnReplace_OnClick() {
+    var InputString;
+    InputString = textareaInputString.innerText;
+    if (InputString == "") {
+        alert("InputString: is blank.");
+        return;
+    }
+    
+    var ReplaceString;
+    ReplaceString = inputReplaceString.value;
+    if (ReplaceString == "") {
+        alert("ReplaceString: is blank.");
+        return;
+    }
+    
+    var Pattern;
+    Pattern = inputPattern.value;
+    if (Pattern == "") {
+        alert("Pattern: is blank.");
+        return;
+    }
+    
+    var IgnoreCase;
+    IgnoreCase = inputIgnoreCase.checked;
+    
+    var GlobalMatch;
+    GlobalMatch = inputGlobalMatch.checked;
+    
+    var MultiLine;
+    MultiLine = inputMultiLine.checked;
+    
+    var Result;
+    Result =
+        RegExp_Replace(
+            InputString,
+            ReplaceString,
+            Pattern,
+            IgnoreCase,
+            GlobalMatch,
+            MultiLine);
+    
+    tdResult.innerText = Result;
+}
+
+function btnExecute_OnClick() {
+    var InputString;
+    InputString = textareaInputString.innerText;
+    if (InputString == "") {
+        alert("InputString: is blank.");
+        return;
+    }
+    
+    var Pattern;
+    Pattern = inputPattern.value;
+    if (Pattern == "") {
+        alert("Pattern: is blank.");
+        return;
+    }
+    
+    var IgnoreCase;
+    IgnoreCase = inputIgnoreCase.checked;
+    
+    var GlobalMatch;
+    GlobalMatch = inputGlobalMatch.checked;
+    
+    var MultiLine;
+    MultiLine = inputMultiLine.checked;
+    
+    var Matches;
+    Matches =
+        RegExp_Execute(
+            InputString,
+            Pattern,
+            IgnoreCase,
+            GlobalMatch,
+            MultiLine);
+    
+    Test_RegExp_Execute_Matches(Matches);
+}
+
+function Test_RegExp_Execute_Matches(
+    Matches) {
+    
+    if (Matches == null) {
+        tdResult.innerText = "Matches: null";
+        return;
+    } else if (Matches.length == 0) {
+        tdResult.innerText = "Matches: No item";
+        return;
+    } else {
+        //nop
+    }
+    
+    var Html;
+    Html = "<table>";
+    Html = Html + "<tr>";
+    Html = Html + "<th>No.</th>";
+    Html = Html + "<th>Value</th>";
+    Html = Html + "</tr>";
+    
+    for (var Index = 0; Index < Matches.length; Index++) {
+        Html = Html + "<tr>";
+        Html = Html + "<td>" + Index.toString() + "</td>";
+        Html = Html + "<td>" + Matches[Index] + "</td>";
+        Html = Html + "</tr>";
+    }
+    
+    Html = Html + "</table>";
+    
+    tdResult.innerHTML = Html;
+}
+-->
+</script>
+
+</head>
+
+<body style="margin:0">
+
+<table width="100%">
+
+<colgroup>
+<col width="100pt"></col>
+<col></col>
+</colgroup>
+
+<tr>
+<td>InputString:</td>
+<td><textarea id="textareaInputString" rows="10" cols="50" style="width:100%"></textarea></td>
+</tr>
+
+<tr>
+<td>ReplaceString:</td>
+<td><input id="inputReplaceString" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td>Pattern:</td>
+<td><input id="inputPattern" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td>IgnoreCase:</td>
+<td><input id="inputIgnoreCase" type="checkbox" /></td>
+</tr>
+
+<tr>
+<td>Global:</td>
+<td><input id="inputGlobalMatch" type="checkbox" /></td>
+</tr>
+
+<tr>
+<td>MultiLine:</td>
+<td><input id="inputMultiLine" type="checkbox" /></td>
+</tr>
+
+<tr>
+<td></td>
+<td>
+<button id="btnTest" onclick="btnTest_OnClick();">Test</button>
+<button id="btnReplace" onclick="btnReplace_OnClick();">Replace</button>
+<button id="btnExecute" onclick="btnExecute_OnClick();">Execute</button>
+</td>
+</tr>
+
+<tr>
+<td>Result:</td>
+<td id="tdResult"></td>
+</tr>
+
+</table>
+
+</body>
+
+</html>
