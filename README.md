@@ -51,7 +51,8 @@ Microsoft XML, vX.X
 
 - [Base](js/MRegExp.js)
 - [HTA](js.hta/Test_MRegExp.js.hta)
-- [HTML](docs/js.html/TTest_MRegExp.js.html) [(github.io)](https://coky-t.github.io/js-parts/js.html/TTest_MRegExp.js.html)
+- [HTML](docs/js.html/Test_MRegExp.js.html)
+- [HTML (github.io)](https://coky-t.github.io/js-parts/js.html/Test_MRegExp.js.html)
 
 #### Reference
 
