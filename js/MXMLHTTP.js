@@ -104,6 +104,7 @@ function OpenAndSendAndResponseText(
     } else {
         Text = "";
     }
+    delete MSXML2XMLHTTP;
     MSXML2XMLHTTP = null;
     
     return Text;
