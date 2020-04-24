@@ -268,24 +268,20 @@ function OpenTextFileAndReadAll(
     FileName,
     Format) {
     
-    var TextFile;
-    
     try {
-        TextFile =
-            FileSystemObject.OpenTextFile(
-                FileName,
-                Scripting_ForReading,
-                false,
-                Format);
+        with (FileSystemObject.OpenTextFile(
+            FileName,
+            Scripting_ForReading,
+            false,
+            Format)) {
+            
+            var Text = ReadAll();
+            Close();
+            return Text;
+        }
     } catch (e) {
         return "";
     }
-    
-    var Text = TextFile.ReadAll();
-    TextFile.Close();
-    TextFile = null;
-    
-    return Text;
 }
 
 //
@@ -322,18 +318,14 @@ function OpenTextFileAndWrite(
     IOMode,
     Format) {
     
-    var TextFile;
-    
     try {
-        TextFile =
-            FileSystemObject.OpenTextFile(FileName, IOMode, true, Format);
+        with (FileSystemObject.OpenTextFile(FileName, IOMode, true, Format)) {
+            Write(Text);
+            Close();
+        }
     } catch (e) {
         return;
     }
-    
-    TextFile.Write(Text);
-    TextFile.Close();
-    TextFile = null;
 }
 
 //
@@ -365,17 +357,14 @@ function CreateTextFileAndWrite(
     Text,
     Unicode) {
     
-    var TextFile;
-    
     try {
-        TextFile = FileSystemObject.CreateTextFile(FileName, true, Unicode);
+        with (FileSystemObject.CreateTextFile(FileName, true, Unicode)) {
+            Write(Text);
+            Close();
+        }
     } catch (e) {
         return;
     }
-    
-    TextFile.Write(Text);
-    TextFile.Close();
-    TextFile = null;
 }
 
 //
@@ -449,10 +438,14 @@ function CreateFolder(
     
     if (FileSystemObject.FolderExists(FolderPath)) { return; }
     
-    CreateFolder(
-        FileSystemObject,
-        FileSystemObject.GetParentFolderName(FolderPath));
-    FileSystemObject.CreateFolder(FolderPath);
+    try {
+        CreateFolder(
+            FileSystemObject,
+            FileSystemObject.GetParentFolderName(FolderPath));
+        FileSystemObject.CreateFolder(FolderPath);
+    } catch (e) {
+        return;
+    }
 }
 
 //
@@ -473,17 +466,12 @@ function GetParentFolderName(
     FileSystemObject,
     Path) {
     
-    var ParentFolderName;
-    
     try {
-        ParentFolderName = 
-            FileSystemObject.GetParentFolderName(
+        return FileSystemObject.GetParentFolderName(
                 FileSystemObject.GetAbsolutePathName(Path));
     } catch (e) {
-        ParentFolderName = "";
+        return "";
     }
-    
-    return ParentFolderName;
 }
 
 //
@@ -508,17 +496,12 @@ function GetDriveName(
     FileSystemObject,
     Path) {
     
-    var DriveName;
-    
     try {
-        DriveName =
-            FileSystemObject.GetDriveName(
+        return FileSystemObject.GetDriveName(
                 FileSystemObject.GetAbsolutePathName(Path));
     } catch (e) {
-        DriveName = "";
+        return "";
     }
-    
-    return DrivaName;
 }
 
 //

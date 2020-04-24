@@ -86,28 +86,19 @@ function OpenAndSendAndResponseText(
     Url,
     Body) {
     
-    var MSXML2XMLHTTP;
-    
     try {
-        MSXML2XMLHTTP =
-            new ActiveXObject("MSXML2.XMLHTTP");
+        with (new ActiveXObject("MSXML2.XMLHTTP")) {
+            Open(Method, Url, false);
+            Send(Body);
+            if (Status == 200) {
+                return responseText;
+            } else {
+                return "";
+            }
+        }
     } catch (e) {
         return "";
     }
-    
-    var Text;
-    
-    MSXML2XMLHTTP.Open(Method, Url, false);
-    MSXML2XMLHTTP.Send(Body);
-    if (MSXML2XMLHTTP.Status == 200) {
-        Text = MSXML2XMLHTTP.responseText;
-    } else {
-        Text = "";
-    }
-    delete MSXML2XMLHTTP;
-    MSXML2XMLHTTP = null;
-    
-    return Text;
 }
 
 //

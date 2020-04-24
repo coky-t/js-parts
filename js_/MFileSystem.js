@@ -274,24 +274,20 @@ function OpenTextFileAndReadAll(
     FileName,
     Format) {
     
-    var TextFile;
-    
     try {
-        TextFile =
-            FileSystemObject.OpenTextFile(
-                FileName,
-                MFileSystem_ForReading,
-                false,
-                Format);
+        with (FileSystemObject.OpenTextFile(
+            FileName,
+            MFileSystem_ForReading,
+            false,
+            Format)) {
+            
+            var Text = ReadAll();
+            Close();
+            return Text;
+        }
     } catch (e) {
         return "";
     }
-    
-    var Text = TextFile.ReadAll();
-    TextFile.Close();
-    TextFile = null;
-    
-    return Text;
 }
 
 //
@@ -328,18 +324,14 @@ function OpenTextFileAndWrite(
     IOMode,
     Format) {
     
-    var TextFile;
-    
     try {
-        TextFile =
-            FileSystemObject.OpenTextFile(FileName, IOMode, true, Format);
+        with (FileSystemObject.OpenTextFile(FileName, IOMode, true, Format)) {
+            Write(Text);
+            Close();
+        }
     } catch (e) {
         return;
     }
-    
-    TextFile.Write(Text);
-    TextFile.Close();
-    TextFile = null;
 }
 
 //
@@ -371,17 +363,14 @@ function CreateTextFileAndWrite(
     Text,
     Unicode) {
     
-    var TextFile;
-    
     try {
-        TextFile = FileSystemObject.CreateTextFile(FileName, true, Unicode);
+        with (FileSystemObject.CreateTextFile(FileName, true, Unicode)) {
+            Write(Text);
+            Close();
+        }
     } catch (e) {
         return;
     }
-    
-    TextFile.Write(Text);
-    TextFile.Close();
-    TextFile = null;
 }
 
 //

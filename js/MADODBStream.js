@@ -272,16 +272,22 @@ function WriteTextFile(
 function LoadFromFileAndReadText(
     ADODBStream,
     FileName,
-    Charset) {
+    Charset_) {
     
-    ADODBStream.Type = 2; //2: adTypeText
-    if (Charset != "") { ADODBStream.Charset = Charset; }
-    ADODBStream.Open();
-    ADODBStream.LoadFromFile(FileName);
-    var Text = ADODBStream.ReadText();
-    ADODBStream.Close();
-    
-    return Text;
+    try {
+        var Text;
+        with (ADODBStream) {
+            Type = 2; //2: adTypeText
+            if (Charset_ != "") { Charset = Charset_; }
+            Open();
+            LoadFromFile(FileName);
+            Text = ReadText();
+            Close();
+        }
+        return Text;
+    } catch (e) {
+        return "";
+    }
 }
 
 //
@@ -324,26 +330,32 @@ function WriteTextAndSaveToFile(
     ADODBStream,
     FileName,
     Text,
-    Position,
-    Charset) {
+    Position_,
+    Charset_) {
     
-    ADODBStream.Type = 2; //2: adTypeText
-    if (Charset != "") { ADODBStream.Charset = Charset; }
-    ADODBStream.Open();
-    if (Position == 0) {
-        // nop
-    } else {
-        ADODBStream.LoadFromFile(FileName);
-        if (Position > 0) {
-            ADODBStream.Position = Position;
-            ADODBStream.SetEOS();
-        } else { //if (Position < 0) {
-            ADODBStream.Position = ADODBStream.Size;
+    try {
+        with (ADODBStream) {
+            Type = 2; //2: adTypeText
+            if (Charset_ != "") { Charset = Charset_; }
+            Open();
+            if (Position_ == 0) {
+                // nop
+            } else {
+                LoadFromFile(FileName);
+                if (Position_ > 0) {
+                    Position = Position_;
+                    SetEOS();
+                } else { //if (Position_ < 0) {
+                    Position = Size;
+                }
+            }
+            WriteText(Text);
+            SaveToFile(FileName, 2); //2: ADODB.adSaveCreateOverWrite
+            Close();
         }
+    } catch (e) {
+        return;
     }
-    ADODBStream.WriteText(Text);
-    ADODBStream.SaveToFile(FileName, 2); //2: ADODB.adSaveCreateOverWrite
-    ADODBStream.Close();
 }
 
 //
@@ -482,16 +494,22 @@ function WriteBinaryFileT(
 function LoadFromFileAndRead(
     ADODBStream,
     FileName,
-    Position) {
+    Position_) {
     
-    ADODBStream.Type = 1; //1: ADODB.adTypeBinary
-    ADODBStream.Open();
-    ADODBStream.LoadFromFile(FileName);
-    if (Position > 0) { ADODBStream.Position = Position; }
-    var Binary = ADODBStream.Read();
-    ADODBStream.Close();
-    
-    return Binary;
+    try {
+        var Binary;
+        with (ADODBStream) {
+            Type = 1; //1: ADODB.adTypeBinary
+            Open();
+            LoadFromFile(FileName);
+            if (Position_ > 0) { Position = Position_; }
+            Binary = Read();
+            Close();
+        }
+        return Binary;
+    } catch (e) {
+        return null;
+    }
 }
 
 //
@@ -522,24 +540,30 @@ function WriteAndSaveToFile(
     ADODBStream,
     FileName,
     Buffer,
-    Position) {
+    Position_) {
     
-    ADODBStream.Type = 1; //1: ADODB.adTypeBinary
-    ADODBStream.Open();
-    if (Position == 0) {
-        // nop
-    } else {
-        ADODBStream.LoadFromFile(FileName)
-        if (Position > 0) {
-            ADODBStream.Position = Position;
-            ADODBStream.SetEOS();
-        } else { //if (Position < 0) {
-            ADODBStream.Position = ADODBStream.Size;
+    try {
+        with (ADODBStream) {
+            Type = 1; //1: ADODB.adTypeBinary
+            Open();
+            if (Position_ == 0) {
+                // nop
+            } else {
+                LoadFromFile(FileName)
+                if (Position_ > 0) {
+                    Position = Position_;
+                    SetEOS();
+                } else { //if (Position_ < 0) {
+                    Position = Size;
+                }
+            }
+            Write(Buffer);
+            SaveToFile(FileName, 2); //2: ADODB.adSaveCreateOverWrite
+            Close();
         }
+    } catch (e) {
+        return;
     }
-    ADODBStream.Write(Buffer);
-    ADODBStream.SaveToFile(FileName, 2); //2: ADODB.adSaveCreateOverWrite
-    ADODBStream.Close();
 }
 
 //

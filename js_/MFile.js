@@ -163,20 +163,15 @@ function OpenAsTextStreamAndReadAll(
     FileObject,
     Format) {
     
-    var TextFile;
-    
     try {
-        TextFile =
-            FileObject.OpenAsTextStream(MFile_ForReading, Format);
+        with (FileObject.OpenAsTextStream(MFile_ForReading, Format)) {
+            var Text = ReadAll();
+            Close();
+            return Text;
+        }
     } catch (e) {
         return "";
     }
-    
-    var Text = TextFile.ReadAll();
-    TextFile.Close();
-    TextFile = null;
-    
-    return Text;
 }
 
 //
@@ -209,18 +204,14 @@ function OpenAsTextStreamAndWrite(
     IOMode,
     Format) {
     
-    var TextFile;
-    
     try {
-        TextFile =
-            FileObject.OpenAsTextStream(IOMode, Format);
+        with (FileObject.OpenAsTextStream(IOMode, Format)) {
+            Write(Text);
+            Close();
+        }
     } catch (e) {
         return;
     }
-    
-    TextFile.Write(Text);
-    TextFile.Close();
-    TextFile = null;
 }
 
 //
