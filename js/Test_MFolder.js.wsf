@@ -1,0 +1,25 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_GetFolders">
+        <script language="jscript" src="MFolder.js" />
+        <script language="vbscript">
+            Function GetFolderName()
+                GetFolderName = InputBox("FolderName")
+            End Function
+        </script>
+        <script language="jscript">
+            Test_GetFolders(GetFolderName());
+        </script>
+    </job>
+    <job id="Test_GetFiles">
+        <script language="jscript" src="MFolder.js" />
+        <script language="vbscript">
+            Function GetFolderName()
+                GetFolderName = InputBox("FolderName")
+            End Function
+        </script>
+        <script language="jscript">
+            Test_GetFiles(GetFolderName());
+        </script>
+    </job>
+</package>
