@@ -77,3 +77,14 @@ Microsoft XML, vX.X
 #### Reference
 
 - [Regular Expression](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/6wzad2b2(v=vs.84))
+
+## Dialog Box
+
+### MExcelApp.js - File Dialog Box
+
+- [Base](js/MExcelApp.js)
+
+#### Reference
+
+Microsoft Excel X.X Object Library
+- [Excel.Application](https://docs.microsoft.com/en-us/office/vba/api/excel.application(object))

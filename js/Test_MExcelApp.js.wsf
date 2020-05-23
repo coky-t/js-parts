@@ -1,0 +1,15 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_GetOpenFileName">
+        <script language="jscript" src="MExcelApp.js" />
+        <script language="jscript">
+            Test_GetOpenFileName();
+        </script>
+    </job>
+    <job id="Test_GetSaveAsFileName">
+        <script language="jscript" src="MExcelApp.js" />
+        <script language="jscript">
+            Test_GetSaveAsFileName();
+        </script>
+    </job>
+</package>
