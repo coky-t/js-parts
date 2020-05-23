@@ -80,7 +80,7 @@ Microsoft XML, vX.X
 
 ## Dialog Box
 
-### MExcelApp.js - File Dialog Box
+### MExcelApp.js - File/Folder Dialog Box
 
 - [Base](js/MExcelApp.js)
 
@@ -88,3 +88,4 @@ Microsoft XML, vX.X
 
 Microsoft Excel X.X Object Library
 - [Excel.Application](https://docs.microsoft.com/en-us/office/vba/api/excel.application(object))
+- [Office.FileDialog](https://docs.microsoft.com/en-us/office/vba/api/office.filedialog)

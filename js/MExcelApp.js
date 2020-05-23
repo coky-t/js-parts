@@ -154,6 +154,42 @@ function GetSaveAsFileName(
 }
 
 //
+// --- Folder Dialog Box ---
+//
+
+//
+// GetFolderName
+// - Displays the standard Open dialog box and gets a folder name.
+//
+
+//
+// ExcelApplication:
+//   Optional. The name of a Excel.Application object.
+//
+// Title:
+//   Optional. Specifies the title of the dialog box.
+//   If this argument is omitted, the default title is used.
+//
+
+function GetFolderName(
+    ExcelApplication,
+    Title_) {
+    
+    try {
+        var FolderName = "";
+        with (GetExcelApplication(ExcelApplication)) {
+            with (FileDialog(4)) { //4: msoFileDialogFolderPicker
+                if (Title_ != "") { Title = Title_; }
+                if (Show() == -1) { FolderName = SelectedItems(1); }
+            }
+        }
+        return FolderName;
+    } catch (e) {
+        return "";
+    }
+}
+
+//
 // --- Test ---
 //
 
@@ -167,6 +203,12 @@ function Test_GetSaveAsFileName() {
     var FileName;
     FileName = GetSaveAsFileName(null, "", "", 0, "");
     Debug_Print(FileName);
+}
+
+function Test_GetFolderName() {
+    var FolderName;
+    FolderName = GetFolderName(null, "");
+    Debug_Print(FolderName);
 }
 
 function Debug_Print(Str) {
