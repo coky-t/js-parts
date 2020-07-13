@@ -35,29 +35,7 @@ var MFileSystem_ForReading = 1;
 var MFileSystem_ForWriting = 2;
 var MFileSystem_ForAppending = 8;
 
-//
-// --- FileSystemObject ---
-//
-
-//
-// GetFileSystemObject
-// - Returns a FileSystemObject object.
-//
-
-//
-// FileSystemObject:
-//   Optional. The name of a FileSystemObject object.
-//
-
-function GetFileSystemObject(
-    FileSystemObject) {
-    
-    if (FileSystemObject == null) {
-        return new ActiveXObject("Scripting.FileSystemObject");
-    } else {
-        return FileSystemObject;
-    }
-}
+var FileSystemObject;
 
 //
 // === TextFile ===
@@ -75,52 +53,23 @@ function GetFileSystemObject(
 // FileName:
 //   Required. String expression that identifies the file to open.
 //
-// FileSystemObject:
-//   Optional. The name of a FileSystemObject object.
-//
 
-function MFileSystem_ReadTextFileW(
-    FileName,
-    FileSystemObject) {
-    
-    return MFileSystem_ReadTextFileT(
-        FileName,
-        MFileSystem_TristateTrue,
-        FileSystemObject);
+function MFileSystem_ReadTextFileW(FileName) {
+    return MFileSystem_ReadTextFile(FileName, MFileSystem_TristateTrue);
 }
 
-function MFileSystem_ReadTextFileA(
-    FileName,
-    FileSystemObject) {
-    
-    return MFileSystem_ReadTextFileT(
-        FileName,
-        MFileSystem_TristateFalse,
-        FileSystemObject);
-}
-
-function MFileSystem_ReadTextFileT(
-    FileName,
-    Format,
-    FileSystemObject) {
-    
-    return MFileSystem_ReadTextFile(
-        GetFileSystemObject(FileSystemObject),
-        FileName,
-        Format);
+function MFileSystem_ReadTextFileA(FileName) {
+    return MFileSystem_ReadTextFile(FileName, MFileSystem_TristateFalse);
 }
 
 function MFileSystem_ReadTextFile(
-    FileSystemObject,
     FileName,
     Format) {
     
-    if (FileSystemObject == null) { return ""; }
-    
     if (FileName == "") { return ""; }
-    if (!FileSystemObject.FileExists(FileName)) { return ""; }
+    if (!GetFileSystemObject().FileExists(FileName)) { return ""; }
     
-    return OpenTextFileAndReadAll(FileSystemObject, FileName, Format);
+    return OpenTextFileAndReadAll(FileName, Format);
 }
 
 //
@@ -144,105 +93,77 @@ function MFileSystem_ReadTextFile(
 // Text:
 //   Required. The text you want to write to the file.
 //
-// FileSystemObject:
-//   Optional. The name of a FileSystemObject object.
-//
 
-function MFileSystem_WriteTextFileW(
-    FileName,
-    Text,
-    FileSystemObject) {
-    
-    MFileSystem_WriteTextFileT(
-        FileName,
-        Text,
-        MFileSystem_ForWriting,
-        MFileSystem_TristateTrue,
-        FileSystemObject);
-}
-
-function MFileSystem_WriteTextFileA(
-    FileName,
-    Text,
-    FileSystemObject) {
-    
-    MFileSystem_WriteTextFileT(
-        FileName,
-        Text,
-        MFileSystem_ForWriting,
-        MFileSystem_TristateFalse,
-        FileSystemObject);
-}
-
-function MFileSystem_AppendTextFileW(
-    FileName,
-    Text,
-    FileSystemObject) {
-    
-    MFileSystem_WriteTextFileT(
-        FileName,
-        Text,
-        MFileSystem_ForAppending,
-        MFileSystem_TristateTrue,
-        FileSystemObject);
-}
-
-function MFileSystem_AppendTextFileA(
-    FileName,
-    Text,
-    FileSystemObject) {
-    
-    MFileSystem_WriteTextFileT(
-        FileName,
-        Text,
-        MFileSystem_ForAppending,
-        MFileSystem_TristateFalse,
-        FileSystemObject);
-}
-
-function MFileSystem_WriteTextFileT(
-    FileName,
-    Text,
-    IOMode,
-    Format,
-    FileSystemObject) {
-    
+function MFileSystem_WriteTextFileW(FileName, Text) {
     MFileSystem_WriteTextFile(
-        GetFileSystemObject(FileSystemObject),
         FileName,
         Text,
-        IOMode,
-        Format);
+        MFileSystem_ForWriting,
+        MFileSystem_TristateTrue);
+}
+
+function MFileSystem_WriteTextFileA(FileName, Text) {
+    MFileSystem_WriteTextFile(
+        FileName,
+        Text,
+        MFileSystem_ForWriting,
+        MFileSystem_TristateFalse);
+}
+
+function MFileSystem_AppendTextFileW(FileName, Text) {
+    MFileSystem_WriteTextFile(
+        FileName,
+        Text,
+        MFileSystem_ForAppending,
+        MFileSystem_TristateTrue);
+}
+
+function MFileSystem_AppendTextFileA(FileName, Text) {
+    MFileSystem_WriteTextFile(
+        FileName,
+        Text,
+        MFileSystem_ForAppending,
+        MFileSystem_TristateFalse);
 }
 
 function MFileSystem_WriteTextFile(
-    FileSystemObject,
     FileName,
     Text,
     IOMode,
     Format) {
     
-    if (FileSystemObject == null) { return; }
-    
     if (FileName == "") { return; }
-    if (FileSystemObject.FolderExists(FileName)) { return; }
+    if (GetFileSystemObject().FolderExists(FileName)) { return; }
     
     if (IOMode == MFileSystem_ForReading) { return; }
     
-    MakeFolder(
-        FileSystemObject,
-        GetParentFolderName(FileSystemObject, FileName));
+    MakeDirectory(GetParentFolderName(FileName));
     
     if (IOMode == MFileSystem_ForWriting) {
         CreateTextFileAndWrite(
-            FileSystemObject,
             FileName,
             Text,
             (Format == MFileSystem_TristateTrue));
         return;
     }
     
-    OpenTextFileAndWrite(FileSystemObject, FileName, Text, IOMode, Format);
+    OpenTextFileAndWrite(FileName, Text, IOMode, Format);
+}
+
+//
+// --- FileSystemObject ---
+//
+
+//
+// GetFileSystemObject
+// - Returns a FileSystemObject object.
+//
+
+function GetFileSystemObject() {
+    if (FileSystemObject == null) {
+        FileSystemObject = new ActiveXObject("Scripting.FileSystemObject");
+    }
+    return FileSystemObject;
 }
 
 //
@@ -254,9 +175,6 @@ function MFileSystem_WriteTextFile(
 // - Reads an entire file and returns the resulting string.
 //
 
-//
-// FileSystemObject:
-//   Required. The name of a FileSystemObject object.
 //
 // FileName:
 //   Required. String expression that identifies the file to open.
@@ -270,24 +188,24 @@ function MFileSystem_WriteTextFile(
 //
 
 function OpenTextFileAndReadAll(
-    FileSystemObject,
     FileName,
     Format) {
     
+    var Text = "";
     try {
-        with (FileSystemObject.OpenTextFile(
+        with (GetFileSystemObject().OpenTextFile(
             FileName,
             MFileSystem_ForReading,
             false,
             Format)) {
             
-            var Text = ReadAll();
+            Text = ReadAll();
             Close();
-            return Text;
         }
     } catch (e) {
-        return "";
+        Text = "";
     }
+    return Text;
 }
 
 //
@@ -295,9 +213,6 @@ function OpenTextFileAndReadAll(
 // - Writes a specified string to a file.
 //
 
-//
-// FileSystemObject:
-//   Required. The name of a FileSystemObject object.
 //
 // FileName:
 //   Required. String expression that identifies the file to create.
@@ -318,19 +233,20 @@ function OpenTextFileAndReadAll(
 //
 
 function OpenTextFileAndWrite(
-    FileSystemObject,
     FileName,
     Text,
     IOMode,
     Format) {
     
     try {
-        with (FileSystemObject.OpenTextFile(FileName, IOMode, true, Format)) {
+        with (GetFileSystemObject().OpenTextFile(
+            FileName, IOMode, true, Format)) {
+            
             Write(Text);
             Close();
         }
     } catch (e) {
-        return;
+        // nop
     }
 }
 
@@ -339,9 +255,6 @@ function OpenTextFileAndWrite(
 // - Writes a specified string to a file.
 //
 
-//
-// FileSystemObject:
-//   Required. The name of a FileSystemObject object.
 //
 // FileName:
 //   Required. String expression that identifies the file to create.
@@ -358,18 +271,17 @@ function OpenTextFileAndWrite(
 //
 
 function CreateTextFileAndWrite(
-    FileSystemObject,
     FileName,
     Text,
     Unicode) {
     
     try {
-        with (FileSystemObject.CreateTextFile(FileName, true, Unicode)) {
+        with (GetFileSystemObject().CreateTextFile(FileName, true, Unicode)) {
             Write(Text);
             Close();
         }
     } catch (e) {
-        return;
+        // nop
     }
 }
 
@@ -386,28 +298,18 @@ function CreateTextFileAndWrite(
 // DirName:
 //   Required. String expression that identifies the directory to create.
 //
-// FileSystemObject:
-//   Optional. The name of a FileSystemObject object.
-//
 
-function MakeDirectory(
-    DirName,
-    FileSystemObject) {
-    
-    MakeFolder(GetFileSystemObject(FileSystemObject), DirName);
-}
-
-function MakeFolder(
-    FileSystemObject,
-    FolderName) {
+function MakeDirectory(DirName) {
+    var FileSystemObject;
+    FileSystemObject = GetFileSystemObject();
     
     if (FileSystemObject == null) { return; }
     
-    if (FolderName == "") { return; }
-    if (FileSystemObject.FolderExists(FolderName)) { return; }
+    if (DirName == "") { return; }
+    if (FileSystemObject.FolderExists(DirName)) { return; }
     
     var FolderPath;
-    FolderPath = FileSystemObject.GetAbsolutePathName(FolderName);
+    FolderPath = FileSystemObject.GetAbsolutePathName(DirName);
     if (FolderPath == "") { return; }
     
     var DriveName;
@@ -416,7 +318,7 @@ function MakeFolder(
         if (!FileSystemObject.DriveExists(DriveName)) { return; }
     }
     
-    CreateFolder(FileSystemObject, FolderPath);
+    CreateFolder(FolderPath);
 }
 
 //
@@ -429,25 +331,21 @@ function MakeFolder(
 //
 
 //
-// FileSystemObject:
-//   Required. The name of a FileSystemObject object.
-//
 // FolderPath:
 //   Required. String expression that identifies the folder to create.
 //
 
-function CreateFolder(
-    FileSystemObject,
-    FolderPath) {
-    
+function CreateFolder(FolderPath) {
     if (FolderPath == "") { return; }
     
-    if (FileSystemObject.FolderExists(FolderPath)) { return; }
+    if (GetFileSystemObject().FolderExists(FolderPath)) { return; }
     
-    CreateFolder(
-        FileSystemObject,
-        FileSystemObject.GetParentFolderName(FolderPath));
-    FileSystemObject.CreateFolder(FolderPath);
+    try {
+        CreateFolder(GetFileSystemObject().GetParentFolderName(FolderPath));
+        GetFileSystemObject().CreateFolder(FolderPath);
+    } catch (e) {
+        // nop
+    }
 }
 
 //
@@ -457,28 +355,19 @@ function CreateFolder(
 //
 
 //
-// FileSystemObject:
-//   Required. The name of a FileSystemObject object.
-//
 // Path:
 //   Required. String expression that identifies the folder.
 //
 
-function GetParentFolderName(
-    FileSystemObject,
-    Path) {
-    
-    var ParentFolderName;
-    
+function GetParentFolderName(Path) {
+    var FolderName = ""
     try {
-        ParentFolderName = 
-            FileSystemObject.GetParentFolderName(
-                FileSystemObject.GetAbsolutePathName(Path));
+        FolderName = GetFileSystemObject().GetParentFolderName(
+            GetFileSystemObject().GetAbsolutePathName(Path));
     } catch (e) {
-        ParentFolderName = "";
+        FolderName = "";
     }
-    
-    return ParentFolderName;
+    return FolderName;
 }
 
 //
@@ -491,29 +380,20 @@ function GetParentFolderName(
 //
 
 //
-// FileSystemObject:
-//   Required. The name of a FileSystemObject object.
-//
 // Path:
 //   Required. The path specification for the component whose drive name is
 //   to be returned.
 //
 
-function GetDriveName(
-    FileSystemObject,
-    Path) {
-    
-    var DriveName;
-    
+function GetDriveName(Path) {
+    var DriveName = "";
     try {
-        DriveName =
-            FileSystemObject.GetDriveName(
-                FileSystemObject.GetAbsolutePathName(Path));
+        DriveName = GetFileSystemObject().GetDriveName(
+            GetFileSystemObject().GetAbsolutePathName(Path));
     } catch (e) {
         DriveName = "";
     }
-    
-    return DrivaName;
+    return DriveName;
 }
 
 //
@@ -526,13 +406,13 @@ function Test_MFileSystem_TextFileW(FileName) {
     var Text;
     
     Text = "WriteTextFileW\r\n";
-    MFileSystem_WriteTextFileW(FileName, Text, null);
-    Text = MFileSystem_ReadTextFileW(FileName, null);
+    MFileSystem_WriteTextFileW(FileName, Text);
+    Text = MFileSystem_ReadTextFileW(FileName);
     MFileSystem_Debug_Print(Text);
     
     Text = "AppendTextFileW\r\n";
-    MFileSystem_AppendTextFileW(FileName, Text, null);
-    Text = MFileSystem_ReadTextFileW(FileName, null);
+    MFileSystem_AppendTextFileW(FileName, Text);
+    Text = MFileSystem_ReadTextFileW(FileName);
     MFileSystem_Debug_Print(Text);
 }
 
@@ -542,13 +422,13 @@ function Test_MFileSystem_TextFileA(FileName) {
     var Text;
     
     Text = "WriteTextFileA\r\n";
-    MFileSystem_WriteTextFileA(FileName, Text, null);
-    Text = MFileSystem_ReadTextFileA(FileName, null);
+    MFileSystem_WriteTextFileA(FileName, Text);
+    Text = MFileSystem_ReadTextFileA(FileName);
     MFileSystem_Debug_Print(Text);
     
     Text = "AppendTextFileA\r\n";
-    MFileSystem_AppendTextFileA(FileName, Text, null);
-    Text = MFileSystem_ReadTextFileA(FileName, null);
+    MFileSystem_AppendTextFileA(FileName, Text);
+    Text = MFileSystem_ReadTextFileA(FileName);
     MFileSystem_Debug_Print(Text);
 }
 
