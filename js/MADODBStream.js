@@ -25,29 +25,7 @@
 // - ADODB.Stream
 //
 
-//
-// --- ADODB.Stream ---
-//
-
-//
-// GetADODBStream
-// - Returns a ADODB.Stream object.
-//
-
-//
-// ADODBStream:
-//   Optional. The name of a ADODB.Stream object.
-//
-
-function GetADODBStream(
-    ADODBStream) {
-    
-    if (ADODBStream == null) {
-        return new ActiveXObject("ADODB.Stream");
-    } else {
-        return ADODBStream;
-    }
-}
+var ADODBStream;
 
 //
 // === TextFile ===
@@ -69,49 +47,26 @@ function GetADODBStream(
 //   Required. A String value that contains the name of a file.
 //   FileName can contain any valid path and name in UNC format.
 //
-// ADODBStream:
-//   Optional. The name of a ADODB.Stream object.
-//
 
-function ReadTextFileW(
-    FileName,
-    ADODBStream) {
-    
-    return ReadTextFileT(FileName, "unicode", ADODBStream);
+function ReadTextFileW(FileName) {
+    return ReadTextFile(FileName, "unicode");
 }
 
-function ReadTextFileA(
-    FileName,
-    ADODBStream) {
-    
-    return ReadTextFileT(FileName, "iso-8859-1", ADODBStream);
+function ReadTextFileA(FileName) {
+    return ReadTextFile(FileName, "iso-8859-1");
 }
 
-function ReadTextFileUTF8(
-    FileName,
-    ADODBStream) {
-    
-    return ReadTextFileT(FileName, "utf-8", ADODBStream);
-}
-
-function ReadTextFileT(
-    FileName,
-    Charset,
-    ADODBStream) {
-    
-    return ReadTextFile(GetADODBStream(ADODBStream), FileName, Charset);
+function ReadTextFileUTF8(FileName) {
+    return ReadTextFile(FileName, "utf-8");
 }
 
 function ReadTextFile(
-    ADODBStream,
     FileName,
     Charset) {
     
-    if (ADODBStream == null) { return ""; }
-    
     if (FileName == "") { return ""; }
     
-    return LoadFromFileAndReadText(ADODBStream, FileName, Charset);
+    return LoadFromFileAndReadText(FileName, Charset);
 }
 
 //
@@ -145,99 +100,80 @@ function ReadTextFile(
 //   Required. A String value that contains the text in characters to be
 //   written.
 //
-// ADODBStream:
-//   Optional. The name of a ADODB.Stream object.
-//
 
-function WriteTextFileW(
-    FileName,
-    Text,
-    ADODBStream) {
-    
-    WriteTextFileT(FileName, Text, 0, "unicode", ADODBStream);
+function WriteTextFileW(FileName, Text) {
+    WriteTextFile(FileName, Text, 0, "unicode");
 }
 
-function WriteTextFileA(
-    FileName,
-    Text,
-    ADODBStream) {
-    
-    WriteTextFileT(FileName, Text, 0, "iso-8859-1", ADODBStream);
+function WriteTextFileA(FileName, Text) {
+    WriteTextFile(FileName, Text, 0, "iso-8859-1");
 }
 
 function WriteTextFileUTF8(
     FileName,
-    Text,
-    //BOM,
-    ADODBStream) {
+    Text/*,
+    BOM*/) {
     
-    WriteTextFileT(FileName, Text, 0, "utf-8", ADODBStream);
+    WriteTextFile(FileName, Text, 0, "utf-8");
     
     /*
     if (!BOM) {
         var Data;
-        Data = ReadBinaryFile(FileName, 3, ADODBStream);
-        WriteBinaryFile(FileName, Data, ADODBStream);
+        Data = ReadBinaryFile(FileName, 3);
+        WriteBinaryFile(FileName, Data);
     }
     */
 }
 
-function AppendTextFileW(
-    FileName,
-    Text,
-    ADODBStream) {
-    
-    WriteTextFileT(FileName, Text, -1, "unicode", ADODBStream);
+function AppendTextFileW(FileName, Text) {
+    WriteTextFile(FileName, Text, -1, "unicode");
 }
 
-function AppendTextFileA(
-    FileName,
-    Text,
-    ADODBStream) {
-    
-    WriteTextFileT(FileName, Text, -1, "iso-8859-1", ADODBStream);
+function AppendTextFileA(FileName, Text) {
+    WriteTextFile(FileName, Text, -1, "iso-8859-1");
 }
 
 function AppendTextFileUTF8(
     FileName,
-    Text,
-    //BOM,
-    ADODBStream) {
+    Text/*,
+    BOM*/) {
     
-    WriteTextFileT(FileName, Text, -1, "utf-8", ADODBStream);
+    WriteTextFile(FileName, Text, -1, "utf-8");
     
     /*
     if (!BOM) {
         var Data;
-        Data = ReadBinaryFile(FileName, 3, ADODBStream);
-        WriteBinaryFile(FileName, Data, ADODBStream);
+        Data = ReadBinaryFile(FileName, 3);
+        WriteBinaryFile(FileName, Data);
     }
     */
 }
 
-function WriteTextFileT(
-    FileName,
-    Text,
-    Position,
-    Charset,
-    ADODBStream) {
-    
-    WriteTextFile(
-        GetADODBStream(ADODBStream), FileName, Text, Position, Charset);
-}
-
 function WriteTextFile(
-    ADODBStream,
     FileName,
     Text,
     Position,
     Charset) {
     
-    if (ADODBStream == null) { return; }
-    
     if (FileName == "") { return; }
     
-    WriteTextAndSaveToFile(ADODBStream, FileName, Text, Position, Charset);
+    WriteTextAndSaveToFile(FileName, Text, Position, Charset);
+}
+
+//
+// --- ADODB.Stream ---
+//
+
+//
+// GetADODBStream
+// - Returns a ADODB.Stream object.
+//
+
+function GetADODBStream() {
+    if (ADODBStream == null) {
+        ADODBStream = new ActiveXObject("ADODB.Stream");
+    }
+    return ADODBStream;
 }
 
 //
@@ -249,9 +185,6 @@ function WriteTextFile(
 // - Reads an entire file and returns the resulting string.
 //
 
-//
-// ADODBStream:
-//   Required. The name of a ADODB.Stream object.
 //
 // FileName:
 //   Required. A String value that contains the name of a file.
@@ -270,24 +203,24 @@ function WriteTextFile(
 //
 
 function LoadFromFileAndReadText(
-    ADODBStream,
     FileName,
     Charset_) {
     
+    var Text = "";
     try {
-        var Text;
+        var ADODBStream = GetADODBStream();
         with (ADODBStream) {
-            Type = 2; //2: adTypeText
+            Type = 2; //ADODB.adTypeText
             if (Charset_ != "") { Charset = Charset_; }
             Open();
             LoadFromFile(FileName);
             Text = ReadText();
             Close();
         }
-        return Text;
     } catch (e) {
-        return "";
+        Text = "";
     }
+    return Text;
 }
 
 //
@@ -295,9 +228,6 @@ function LoadFromFileAndReadText(
 // - Writes a specified string to a file.
 //
 
-//
-// ADODBStream:
-//   Required. The name of a ADODB.Stream object.
 //
 // FileName:
 //   Required. A String value that contains the fully-qualified name of
@@ -327,15 +257,15 @@ function LoadFromFileAndReadText(
 //
 
 function WriteTextAndSaveToFile(
-    ADODBStream,
     FileName,
     Text,
     Position_,
     Charset_) {
     
     try {
+        var ADODBStream = GetADODBStream();
         with (ADODBStream) {
-            Type = 2; //2: adTypeText
+            Type = 2; //ADODB.adTypeText
             if (Charset_ != "") { Charset = Charset_; }
             Open();
             if (Position_ == 0) {
@@ -350,11 +280,11 @@ function WriteTextAndSaveToFile(
                 }
             }
             WriteText(Text);
-            SaveToFile(FileName, 2); //2: ADODB.adSaveCreateOverWrite
+            SaveToFile(FileName, 2); //ADODB.adSaveCreateOverWrite
             Close();
         }
     } catch (e) {
-        return;
+        // nop
     }
 }
 
@@ -377,29 +307,15 @@ function WriteTextAndSaveToFile(
 //   bytes, of the current position from the beginning of the stream.
 //   The default is 0, which represents the first byte in the stream.
 //
-// ADODBStream:
-//   Optional. The name of a ADODB.Stream object.
-//
 
 /*
 function ReadBinaryFile(
     FileName,
-    Position,
-    ADODBStream) {
-    
-    return ReadBinaryFileT(GetADODBStream(ADODBStream), FileName, Position);
-}
-
-function ReadBinaryFileT(
-    ADODBStream,
-    FileName,
     Position) {
-    
-    if (ADODBStream == null) { return ""; }
     
     if (FileName == "") { return ""; }
     
-    return LoadFromFileAndRead(ADODBStream, FileName, Position);
+    return LoadFromFileAndRead(FileName, Position);
 }
 */
 
@@ -421,47 +337,33 @@ function ReadBinaryFileT(
 // Buffer:
 //   Required. A Variant that contains an array of bytes to be written.
 //
-// ADODBStream:
-//   Optional. The name of a ADODB.Stream object.
-//
 
 /*
-function WriteBinaryFile(
-    FileName,
-    Buffer,
-    ADODBStream) {
-    
-    WriteBinaryFileT(GetADODBStream(ADODBStream), FileName, Buffer, 0);
+function WriteBinaryFile(FileName, Buffer) {
+    WriteBinaryFileT(FileName, Buffer, 0);
 }
 
-function AppendBinaryFile(
-    FileName,
-    Buffer,
-    ADODBStream) {
-    
-    WriteBinaryFileT(GetADODBStream(ADODBStream), FileName, Buffer, -1);
+function AppendBinaryFile(FileName, Buffer) {
+    WriteBinaryFileT(FileName, Buffer, -1);
 }
 
 function WriteBinaryFileT(
-    ADODBStream,
     FileName,
     Buffer,
-    Position)
-    
-    if (ADODBStream == null) { return; }
+    Position) {
     
     if (FileName == "") { return; }
     
-    //WriteAndSaveToFile(ADODBStream, FileName, Buffer, Position);
+    //WriteAndSaveToFile(FileName, Buffer, Position);
     
     var Buf;
     for (var Index = 0; Index < Buffer.length; Index++) {
         Buf = Buf + String.fromCharCode(Buffer.charAt(Index).charCodeAt(0));
     }
     if (Position == 0) {
-        WriteTextFileA(FileName, Buf, ADODBStream);
+        WriteTextFileA(FileName, Buf);
     } else if (Position < 0) {
-        AppendTextFileA(FileName, Buf, ADODBStream);
+        AppendTextFileA(FileName, Buf);
     } else {
         // To Do
     }
@@ -478,9 +380,6 @@ function WriteBinaryFileT(
 //
 
 //
-// ADODBStream:
-//   Required. The name of a ADODB.Stream object.
-//
 // FileName:
 //   Required. A String value that contains the name of a file.
 //   FileName can contain any valid path and name in UNC format.
@@ -492,24 +391,24 @@ function WriteBinaryFileT(
 //
 
 function LoadFromFileAndRead(
-    ADODBStream,
     FileName,
     Position_) {
     
+    var Binary = null;
     try {
-        var Binary;
+        var ADODBStream = GetADODBStream();
         with (ADODBStream) {
-            Type = 1; //1: ADODB.adTypeBinary
+            Type = 1; //ADODB.adTypeBinary
             Open();
             LoadFromFile(FileName);
             if (Position_ > 0) { Position = Position_; }
             Binary = Read();
             Close();
         }
-        return Binary;
     } catch (e) {
-        return null;
+        Binary = null;
     }
+    return Binary;
 }
 
 //
@@ -517,9 +416,6 @@ function LoadFromFileAndRead(
 // - Writes a binary data to a file.
 //
 
-//
-// ADODBStream:
-//   Required. The name of a ADODB.Stream object.
 //
 // FileName:
 //   Required. A String value that contains the fully-qualified name of
@@ -537,14 +433,14 @@ function LoadFromFileAndRead(
 //
 
 function WriteAndSaveToFile(
-    ADODBStream,
     FileName,
     Buffer,
     Position_) {
     
     try {
+        var ADODBStream = GetADODBStream();
         with (ADODBStream) {
-            Type = 1; //1: ADODB.adTypeBinary
+            Type = 1; //ADODB.adTypeBinary
             Open();
             if (Position_ == 0) {
                 // nop
@@ -558,11 +454,11 @@ function WriteAndSaveToFile(
                 }
             }
             Write(Buffer);
-            SaveToFile(FileName, 2); //2: ADODB.adSaveCreateOverWrite
+            SaveToFile(FileName, 2); //ADODB.adSaveCreateOverWrite
             Close();
         }
     } catch (e) {
-        return;
+        // nop
     }
 }
 
@@ -576,13 +472,13 @@ function Test_TextFileW(FileName) {
     var Text;
     
     Text = "WriteTextFileW\r\n";
-    WriteTextFileW(FileName, Text, null);
-    Text = ReadTextFileW(FileName, null);
+    WriteTextFileW(FileName, Text);
+    Text = ReadTextFileW(FileName);
     Debug_Print(Text);
     
     Text = "AppendTextFileW\r\n";
-    AppendTextFileW(FileName, Text, null);
-    Text = ReadTextFileW(FileName, null);
+    AppendTextFileW(FileName, Text);
+    Text = ReadTextFileW(FileName);
     Debug_Print(Text);
 }
 
@@ -592,13 +488,13 @@ function Test_TextFileA(FileName) {
     var Text;
     
     Text = "WriteTextFileA\r\n";
-    WriteTextFileA(FileName, Text, null);
-    Text = ReadTextFileA(FileName, null);
+    WriteTextFileA(FileName, Text);
+    Text = ReadTextFileA(FileName);
     Debug_Print(Text);
     
     Text = "AppendTextFileA\r\n";
-    AppendTextFileA(FileName, Text, null);
-    Text = ReadTextFileA(FileName, null);
+    AppendTextFileA(FileName, Text);
+    Text = ReadTextFileA(FileName);
     Debug_Print(Text);
 }
 
@@ -608,13 +504,13 @@ function Test_TextFileUTF8(FileName) {
     var Text;
     
     Text = "WriteTextFileUTF8\r\n";
-    WriteTextFileUTF8(FileName, Text, /* true, */ null);
-    Text = ReadTextFileUTF8(FileName, null);
+    WriteTextFileUTF8(FileName, Text/*, true*/);
+    Text = ReadTextFileUTF8(FileName);
     Debug_Print(Text);
     
     Text = "AppendTextFileUTF8\r\n";
-    AppendTextFileUTF8(FileName, Text, /* true, */ null);
-    Text = ReadTextFileUTF8(FileName, null);
+    AppendTextFileUTF8(FileName, Text/*, true*/);
+    Text = ReadTextFileUTF8(FileName);
     Debug_Print(Text);
 }
 
@@ -625,13 +521,13 @@ function Test_TextFileUTF8_withoutBOM(FileName) {
     var Text;
     
     Text = "WriteTextFileUTF8 (w/o BOM)\r\n";
-    WriteTextFileUTF8(FileName, Text, false, null);
-    Text = ReadTextFileUTF8(FileName, null);
+    WriteTextFileUTF8(FileName, Text, false);
+    Text = ReadTextFileUTF8(FileName);
     Debug_Print(Text);
     
     Text = "AppendTextFileUTF8 (w/o BOM)\r\n";
-    AppendTextFileUTF8(FileName, Text, false, null);
-    Text = ReadTextFileUTF8(FileName, null);
+    AppendTextFileUTF8(FileName, Text, false);
+    Text = ReadTextFileUTF8(FileName);
     Debug_Print(Text);
 }
 */
@@ -644,10 +540,10 @@ function Test_BinaryFile(FileName) {
     for (var Index = 0; Index < 256; Index++) {
         Buffer = Buffer + String.fromCharCode(Index);
     }
-    WriteBinaryFile(FileName, Buffer, null);
+    WriteBinaryFile(FileName, Buffer);
     
     var Data;
-    Data = ReadBinaryFile(FileName, 0, null);
+    Data = ReadBinaryFile(FileName, 0);
     
     var Text;
     for (var Index1 = 0; Index1 < Data.length; Index1 += 16) {
@@ -663,8 +559,8 @@ function Test_BinaryFile(FileName) {
     
     Debug_Print(Text);
     
-    AppendBinaryFile(FileName, Buffer, null);
-    Data = ReadBinaryFile(FileName, 0, null);
+    AppendBinaryFile(FileName, Buffer);
+    Data = ReadBinaryFile(FileName, 0);
     
     Text = "";
     for (var Index1 = 0; Index1 < Data.length; Index1 += 16) {

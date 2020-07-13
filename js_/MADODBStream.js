@@ -25,29 +25,7 @@
 // - ADODB.Stream
 //
 
-//
-// --- ADODB.Stream ---
-//
-
-//
-// GetADODBStream
-// - Returns a ADODB.Stream object.
-//
-
-//
-// ADODBStream:
-//   Optional. The name of a ADODB.Stream object.
-//
-
-function GetADODBStream(
-    ADODBStream) {
-    
-    if (ADODBStream == null) {
-        return new ActiveXObject("ADODB.Stream");
-    } else {
-        return ADODBStream;
-    }
-}
+var ADODBStream;
 
 //
 // === TextFile ===
@@ -69,50 +47,26 @@ function GetADODBStream(
 //   Required. A String value that contains the name of a file.
 //   FileName can contain any valid path and name in UNC format.
 //
-// ADODBStream:
-//   Optional. The name of a ADODB.Stream object.
-//
 
-function MADODBStream_ReadTextFileW(
-    FileName,
-    ADODBStream) {
-    
-    return MADODBStream_ReadTextFileT(FileName, "unicode", ADODBStream);
+function MADODBStream_ReadTextFileW(FileName) {
+    return MADODBStream_ReadTextFile(FileName, "unicode");
 }
 
-function MADODBStream_ReadTextFileA(
-    FileName,
-    ADODBStream) {
-    
-    return MADODBStream_ReadTextFileT(FileName, "iso-8859-1", ADODBStream);
+function MADODBStream_ReadTextFileA(FileName) {
+    return MADODBStream_ReadTextFile(FileName, "iso-8859-1");
 }
 
-function MADODBStream_ReadTextFileUTF8(
-    FileName,
-    ADODBStream) {
-    
-    return MADODBStream_ReadTextFileT(FileName, "utf-8", ADODBStream);
-}
-
-function MADODBStream_ReadTextFileT(
-    FileName,
-    Charset,
-    ADODBStream) {
-    
-    return MADODBStream_ReadTextFile(
-        GetADODBStream(ADODBStream), FileName, Charset);
+function MADODBStream_ReadTextFileUTF8(FileName) {
+    return MADODBStream_ReadTextFile(FileName, "utf-8");
 }
 
 function MADODBStream_ReadTextFile(
-    ADODBStream,
     FileName,
     Charset) {
     
-    if (ADODBStream == null) { return ""; }
-    
     if (FileName == "") { return ""; }
     
-    return LoadFromFileAndReadText(ADODBStream, FileName, Charset);
+    return LoadFromFileAndReadText(FileName, Charset);
 }
 
 //
@@ -146,99 +100,80 @@ function MADODBStream_ReadTextFile(
 //   Required. A String value that contains the text in characters to be
 //   written.
 //
-// ADODBStream:
-//   Optional. The name of a ADODB.Stream object.
-//
 
-function MADODBStream_WriteTextFileW(
-    FileName,
-    Text,
-    ADODBStream) {
-    
-    MADODBStream_WriteTextFileT(FileName, Text, 0, "unicode", ADODBStream);
+function MADODBStream_WriteTextFileW(FileName, Text) {
+    MADODBStream_WriteTextFile(FileName, Text, 0, "unicode");
 }
 
-function MADODBStream_WriteTextFileA(
-    FileName,
-    Text,
-    ADODBStream) {
-    
-    MADODBStream_WriteTextFileT(FileName, Text, 0, "iso-8859-1", ADODBStream);
+function MADODBStream_WriteTextFileA(FileName, Text) {
+    MADODBStream_WriteTextFile(FileName, Text, 0, "iso-8859-1");
 }
 
 function MADODBStream_WriteTextFileUTF8(
     FileName,
-    Text,
-    //BOM,
-    ADODBStream) {
+    Text/*,
+    BOM*/) {
     
-    MADODBStream_WriteTextFileT(FileName, Text, 0, "utf-8", ADODBStream);
+    MADODBStream_WriteTextFile(FileName, Text, 0, "utf-8");
     
     /*
     if (!BOM) {
         var Data;
-        Data = MADODBStream_ReadBinaryFile(FileName, 3, ADODBStream);
-        MADODBStream_WriteBinaryFile(FileName, Data, ADODBStream);
+        Data = MADODBStream_ReadBinaryFile(FileName, 3);
+        MADODBStream_WriteBinaryFile(FileName, Data);
     }
     */
 }
 
-function MADODBStream_AppendTextFileW(
-    FileName,
-    Text,
-    ADODBStream) {
-    
-    MADODBStream_WriteTextFileT(FileName, Text, -1, "unicode", ADODBStream);
+function MADODBStream_AppendTextFileW(FileName, Text) {
+    MADODBStream_WriteTextFile(FileName, Text, -1, "unicode");
 }
 
-function MADODBStream_AppendTextFileA(
-    FileName,
-    Text,
-    ADODBStream) {
-    
-    MADODBStream_WriteTextFileT(FileName, Text, -1, "iso-8859-1", ADODBStream);
+function MADODBStream_AppendTextFileA(FileName, Text) {
+    MADODBStream_WriteTextFile(FileName, Text, -1, "iso-8859-1");
 }
 
 function MADODBStream_AppendTextFileUTF8(
     FileName,
-    Text,
-    //BOM,
-    ADODBStream) {
+    Text/*,
+    BOM*/) {
     
-    MADODBStream_WriteTextFileT(FileName, Text, -1, "utf-8", ADODBStream);
+    MADODBStream_WriteTextFile(FileName, Text, -1, "utf-8");
     
     /*
     if (!BOM) {
         var Data;
-        Data = MADODBStream_ReadBinaryFile(FileName, 3, ADODBStream);
-        MADODBStream_WriteBinaryFile(FileName, Data, ADODBStream);
+        Data = MADODBStream_ReadBinaryFile(FileName, 3);
+        MADODBStream_WriteBinaryFile(FileName, Data);
     }
     */
 }
 
-function MADODBStream_WriteTextFileT(
-    FileName,
-    Text,
-    Position,
-    Charset,
-    ADODBStream) {
-    
-    MADODBStream_WriteTextFile(
-        GetADODBStream(ADODBStream), FileName, Text, Position, Charset);
-}
-
 function MADODBStream_WriteTextFile(
-    ADODBStream,
     FileName,
     Text,
     Position,
     Charset) {
     
-    if (ADODBStream == null) { return; }
-    
     if (FileName == "") { return; }
     
-    WriteTextAndSaveToFile(ADODBStream, FileName, Text, Position, Charset);
+    WriteTextAndSaveToFile(FileName, Text, Position, Charset);
+}
+
+//
+// --- ADODB.Stream ---
+//
+
+//
+// GetADODBStream
+// - Returns a ADODB.Stream object.
+//
+
+function GetADODBStream() {
+    if (ADODBStream == null) {
+        ADODBStream = new ActiveXObject("ADODB.Stream");
+    }
+    return ADODBStream;
 }
 
 //
@@ -250,9 +185,6 @@ function MADODBStream_WriteTextFile(
 // - Reads an entire file and returns the resulting string.
 //
 
-//
-// ADODBStream:
-//   Required. The name of a ADODB.Stream object.
 //
 // FileName:
 //   Required. A String value that contains the name of a file.
@@ -271,24 +203,24 @@ function MADODBStream_WriteTextFile(
 //
 
 function LoadFromFileAndReadText(
-    ADODBStream,
     FileName,
     Charset_) {
     
+    var Text = "";
     try {
-        var Text;
+        var ADODBStream = GetADODBStream();
         with (ADODBStream) {
-            Type = 2; //2: adTypeText
+            Type = 2; //ADODB.adTypeText
             if (Charset_ != "") { Charset = Charset_; }
             Open();
             LoadFromFile(FileName);
             Text = ReadText();
             Close();
         }
-        return Text;
     } catch (e) {
-        return "";
+        Text = "";
     }
+    return Text;
 }
 
 //
@@ -296,9 +228,6 @@ function LoadFromFileAndReadText(
 // - Writes a specified string to a file.
 //
 
-//
-// ADODBStream:
-//   Required. The name of a ADODB.Stream object.
 //
 // FileName:
 //   Required. A String value that contains the fully-qualified name of
@@ -328,15 +257,15 @@ function LoadFromFileAndReadText(
 //
 
 function WriteTextAndSaveToFile(
-    ADODBStream,
     FileName,
     Text,
     Position_,
     Charset_) {
     
     try {
+        var ADODBStream = GetADODBStream();
         with (ADODBStream) {
-            Type = 2; //2: adTypeText
+            Type = 2; //ADODB.adTypeText
             if (Charset_ != "") { Charset = Charset_; }
             Open();
             if (Position_ == 0) {
@@ -351,11 +280,11 @@ function WriteTextAndSaveToFile(
                 }
             }
             WriteText(Text);
-            SaveToFile(FileName, 2); //2: ADODB.adSaveCreateOverWrite
+            SaveToFile(FileName, 2); //ADODB.adSaveCreateOverWrite
             Close();
         }
     } catch (e) {
-        return;
+        // nop
     }
 }
 
@@ -378,30 +307,15 @@ function WriteTextAndSaveToFile(
 //   bytes, of the current position from the beginning of the stream.
 //   The default is 0, which represents the first byte in the stream.
 //
-// ADODBStream:
-//   Optional. The name of a ADODB.Stream object.
-//
 
 /*
-function MADODBStream_ReadBinaryFile(
-    FileName,
-    Position,
-    ADODBStream) {
-    
-    return MADODBStream_ReadBinaryFileT(
-        GetADODBStream(ADODBStream), FileName, Position);
-}
-
-function MADODBStream_ReadBinaryFileT(
-    ADODBStream,
+function ReadBinaryFile(
     FileName,
     Position) {
     
-    if (ADODBStream == null) { return ""; }
-    
     if (FileName == "") { return ""; }
     
-    return LoadFromFileAndRead(ADODBStream, FileName, Position);
+    return LoadFromFileAndRead(FileName, Position);
 }
 */
 
@@ -423,49 +337,33 @@ function MADODBStream_ReadBinaryFileT(
 // Buffer:
 //   Required. A Variant that contains an array of bytes to be written.
 //
-// ADODBStream:
-//   Optional. The name of a ADODB.Stream object.
-//
 
 /*
-function MADODBStream_WriteBinaryFile(
-    FileName,
-    Buffer,
-    ADODBStream) {
-    
-    MADODBStream_WriteBinaryFileT(
-        GetADODBStream(ADODBStream), FileName, Buffer, 0);
+function WriteBinaryFile(FileName, Buffer) {
+    WriteBinaryFileT(FileName, Buffer, 0);
 }
 
-function MADODBStream_AppendBinaryFile(
-    FileName,
-    Buffer,
-    ADODBStream) {
-    
-    MADODBStream_WriteBinaryFileT(
-        GetADODBStream(ADODBStream), FileName, Buffer, -1);
+function AppendBinaryFile(FileName, Buffer) {
+    WriteBinaryFileT(FileName, Buffer, -1);
 }
 
-function MADODBStream_WriteBinaryFileT(
-    ADODBStream,
+function WriteBinaryFileT(
     FileName,
     Buffer,
-    Position)
-    
-    if (ADODBStream == null) { return; }
+    Position) {
     
     if (FileName == "") { return; }
     
-    //WriteAndSaveToFile(ADODBStream, FileName, Buffer, Position);
+    //WriteAndSaveToFile(FileName, Buffer, Position);
     
     var Buf;
     for (var Index = 0; Index < Buffer.length; Index++) {
         Buf = Buf + String.fromCharCode(Buffer.charAt(Index).charCodeAt(0));
     }
     if (Position == 0) {
-        MADODBStream_WriteTextFileA(FileName, Buf, ADODBStream);
+        WriteTextFileA(FileName, Buf);
     } else if (Position < 0) {
-        MADODBStream_AppendTextFileA(FileName, Buf, ADODBStream);
+        AppendTextFileA(FileName, Buf);
     } else {
         // To Do
     }
@@ -482,9 +380,6 @@ function MADODBStream_WriteBinaryFileT(
 //
 
 //
-// ADODBStream:
-//   Required. The name of a ADODB.Stream object.
-//
 // FileName:
 //   Required. A String value that contains the name of a file.
 //   FileName can contain any valid path and name in UNC format.
@@ -496,24 +391,24 @@ function MADODBStream_WriteBinaryFileT(
 //
 
 function LoadFromFileAndRead(
-    ADODBStream,
     FileName,
     Position_) {
     
+    var Binary = null;
     try {
-        var Binary;
+        var ADODBStream = GetADODBStream();
         with (ADODBStream) {
-            Type = 1; //1: ADODB.adTypeBinary
+            Type = 1; //ADODB.adTypeBinary
             Open();
             LoadFromFile(FileName);
             if (Position_ > 0) { Position = Position_; }
             Binary = Read();
             Close();
         }
-        return Binary;
     } catch (e) {
-        return null;
+        Binary = null;
     }
+    return Binary;
 }
 
 //
@@ -521,9 +416,6 @@ function LoadFromFileAndRead(
 // - Writes a binary data to a file.
 //
 
-//
-// ADODBStream:
-//   Required. The name of a ADODB.Stream object.
 //
 // FileName:
 //   Required. A String value that contains the fully-qualified name of
@@ -541,14 +433,14 @@ function LoadFromFileAndRead(
 //
 
 function WriteAndSaveToFile(
-    ADODBStream,
     FileName,
     Buffer,
     Position_) {
     
     try {
+        var ADODBStream = GetADODBStream();
         with (ADODBStream) {
-            Type = 1; //1: ADODB.adTypeBinary
+            Type = 1; //ADODB.adTypeBinary
             Open();
             if (Position_ == 0) {
                 // nop
@@ -562,11 +454,11 @@ function WriteAndSaveToFile(
                 }
             }
             Write(Buffer);
-            SaveToFile(FileName, 2); //2: ADODB.adSaveCreateOverWrite
+            SaveToFile(FileName, 2); //ADODB.adSaveCreateOverWrite
             Close();
         }
     } catch (e) {
-        return;
+        // nop
     }
 }
 
@@ -580,13 +472,13 @@ function Test_MADODBStream_TextFileW(FileName) {
     var Text;
     
     Text = "WriteTextFileW\r\n";
-    MADODBStream_WriteTextFileW(FileName, Text, null);
-    Text = MADODBStream_ReadTextFileW(FileName, null);
+    MADODBStream_WriteTextFileW(FileName, Text);
+    Text = MADODBStream_ReadTextFileW(FileName);
     MADODBStream_Debug_Print(Text);
     
     Text = "AppendTextFileW\r\n";
-    MADODBStream_AppendTextFileW(FileName, Text, null);
-    Text = MADODBStream_ReadTextFileW(FileName, null);
+    MADODBStream_AppendTextFileW(FileName, Text);
+    Text = MADODBStream_ReadTextFileW(FileName);
     MADODBStream_Debug_Print(Text);
 }
 
@@ -596,13 +488,13 @@ function Test_MADODBStream_TextFileA(FileName) {
     var Text;
     
     Text = "WriteTextFileA\r\n";
-    MADODBStream_WriteTextFileA(FileName, Text, null);
-    Text = MADODBStream_ReadTextFileA(FileName, null);
+    MADODBStream_WriteTextFileA(FileName, Text);
+    Text = MADODBStream_ReadTextFileA(FileName);
     MADODBStream_Debug_Print(Text);
     
     Text = "AppendTextFileA\r\n";
-    MADODBStream_AppendTextFileA(FileName, Text, null);
-    Text = MADODBStream_ReadTextFileA(FileName, null);
+    MADODBStream_AppendTextFileA(FileName, Text);
+    Text = MADODBStream_ReadTextFileA(FileName);
     MADODBStream_Debug_Print(Text);
 }
 
@@ -612,13 +504,13 @@ function Test_MADODBStream_TextFileUTF8(FileName) {
     var Text;
     
     Text = "WriteTextFileUTF8\r\n";
-    MADODBStream_WriteTextFileUTF8(FileName, Text, /* true, */ null);
-    Text = MADODBStream_ReadTextFileUTF8(FileName, null);
+    MADODBStream_WriteTextFileUTF8(FileName, Text/*, true*/);
+    Text = MADODBStream_ReadTextFileUTF8(FileName);
     MADODBStream_Debug_Print(Text);
     
     Text = "AppendTextFileUTF8\r\n";
-    MADODBStream_AppendTextFileUTF8(FileName, Text, /* true, */ null);
-    Text = MADODBStream_ReadTextFileUTF8(FileName, null);
+    MADODBStream_AppendTextFileUTF8(FileName, Text/*, true*/);
+    Text = MADODBStream_ReadTextFileUTF8(FileName);
     MADODBStream_Debug_Print(Text);
 }
 
@@ -629,13 +521,13 @@ function Test_MADODBStream_TextFileUTF8_withoutBOM(FileName) {
     var Text;
     
     Text = "WriteTextFileUTF8 (w/o BOM)\r\n";
-    MADODBStream_WriteTextFileUTF8(FileName, Text, false, null);
-    Text = MADODBStream_ReadTextFileUTF8(FileName, null);
+    MADODBStream_WriteTextFileUTF8(FileName, Text, false);
+    Text = MADODBStream_ReadTextFileUTF8(FileName);
     MADODBStream_Debug_Print(Text);
     
     Text = "AppendTextFileUTF8 (w/o BOM)\r\n";
-    MADODBStream_AppendTextFileUTF8(FileName, Text, false, null);
-    Text = MADODBStream_ReadTextFileUTF8(FileName, null);
+    MADODBStream_AppendTextFileUTF8(FileName, Text, false);
+    Text = MADODBStream_ReadTextFileUTF8(FileName);
     MADODBStream_Debug_Print(Text);
 }
 */
@@ -648,10 +540,10 @@ function Test_MADODBStream_BinaryFile(FileName) {
     for (var Index = 0; Index < 256; Index++) {
         Buffer = Buffer + String.fromCharCode(Index);
     }
-    MADODBStream_WriteBinaryFile(FileName, Buffer, null);
+    MADODBStream_WriteBinaryFile(FileName, Buffer);
     
     var Data;
-    Data = MADODBStream_ReadBinaryFile(FileName, 0, null);
+    Data = MADODBStream_ReadBinaryFile(FileName, 0);
     
     var Text;
     for (var Index1 = 0; Index1 < Data.length; Index1 += 16) {
@@ -667,8 +559,8 @@ function Test_MADODBStream_BinaryFile(FileName) {
     
     MADODBStream_Debug_Print(Text);
     
-    MADODBStream_AppendBinaryFile(FileName, Buffer, null);
-    Data = MADODBStream_ReadBinaryFile(FileName, 0, null);
+    MADODBStream_AppendBinaryFile(FileName, Buffer);
+    Data = MADODBStream_ReadBinaryFile(FileName, 0);
     
     Text = "";
     for (var Index1 = 0; Index1 < Data.length; Index1 += 16) {
