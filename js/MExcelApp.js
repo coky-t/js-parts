@@ -25,6 +25,8 @@
 // - Excel.Application
 //
 
+var ExcelApplication;
+
 //
 // --- Excel.Application ---
 //
@@ -34,23 +36,15 @@
 // - Returns a Excel.Application object.
 //
 
-//
-// ExcelApplication:
-//   Optional. The name of a Excel.Application object.
-//
-
-function GetExcelApplication(
-    ExcelApplication) {
-    
+function GetExcelApplication() {
     if (ExcelApplication == null) {
-        return new ActiveXObject("Excel.Application");
-    } else {
-        return ExcelApplication;
+        ExcelApplication = new ActiveXObject("Excel.Application");
     }
+    return ExcelApplication;
 }
 
 //
-// --- File DialogBox ---
+// --- File Dialog Box ---
 //
 
 //
@@ -59,9 +53,6 @@ function GetExcelApplication(
 //   without actually opening any files.
 //
 
-//
-// ExcelApplication:
-//   Optional. The name of a Excel.Application object.
 //
 // FileFilter:
 //   Optional. A string specifying file filtering criteria.
@@ -78,25 +69,24 @@ function GetExcelApplication(
 //
 
 function GetOpenFileName(
-    ExcelApplication,
     FileFilter,
     FilterIndex,
     Title) {
     
+    var OpenFileName = "";
     try {
-        var OpenFileName;
         OpenFileName =
-            GetExcelApplication(ExcelApplication).
+            GetExcelApplication().
             GetOpenFileName(FileFilter, FilterIndex, Title);
         if (OpenFileName == false) {
             OpenFileName = "";
         } else {
             // nop
         }
-        return OpenFileName;
     } catch (e) {
-        return "";
+        OpenFileName = "";
     }
+    return OpenFileName;
 }
 
 //
@@ -105,9 +95,6 @@ function GetOpenFileName(
 //   the user without actually saving any files.
 //
 
-//
-// ExcelApplication:
-//   Optional. The name of a Excel.Application object.
 //
 // InitialFileName:
 //   Optional. Specifies the suggested file name.
@@ -127,16 +114,15 @@ function GetOpenFileName(
 //
 
 function GetSaveAsFileName(
-    ExcelApplication,
     InitialFileName,
     FileFilter,
     FilterIndex,
     Title) {
     
+    var SaveAsFileName = "";
     try {
-        var SaveAsFileName;
         SaveAsFileName =
-            GetExcelApplication(ExcelApplication).
+            GetExcelApplication().
             GetSaveAsFileName(
                 InitialFileName,
                 FileFilter,
@@ -147,10 +133,10 @@ function GetSaveAsFileName(
         } else {
             // nop
         }
-        return SaveAsFileName;
     } catch (e) {
-        return "";
+        SaveAsFileName = "";
     }
+    return SaveAsFileName;
 }
 
 //
@@ -163,30 +149,24 @@ function GetSaveAsFileName(
 //
 
 //
-// ExcelApplication:
-//   Optional. The name of a Excel.Application object.
-//
 // Title:
 //   Optional. Specifies the title of the dialog box.
 //   If this argument is omitted, the default title is used.
 //
 
-function GetFolderName(
-    ExcelApplication,
-    Title_) {
-    
+function GetFolderName(Title_) {
+    var FolderName = "";
     try {
-        var FolderName = "";
-        with (GetExcelApplication(ExcelApplication)) {
-            with (FileDialog(4)) { //4: msoFileDialogFolderPicker
+        with (GetExcelApplication()) {
+            with (FileDialog(4)) { //msoFileDialogFolderPicker
                 if (Title_ != "") { Title = Title_; }
                 if (Show() == -1) { FolderName = SelectedItems(1); }
             }
         }
-        return FolderName;
     } catch (e) {
-        return "";
+        FolderName = "";
     }
+    return FolderName;
 }
 
 //
@@ -195,19 +175,19 @@ function GetFolderName(
 
 function Test_GetOpenFileName() {
     var FileName;
-    FileName = GetOpenFileName(null, "", 0, "");
+    FileName = GetOpenFileName("", 0, "");
     Debug_Print(FileName);
 }
 
 function Test_GetSaveAsFileName() {
     var FileName;
-    FileName = GetSaveAsFileName(null, "", "", 0, "");
+    FileName = GetSaveAsFileName("", "", 0, "");
     Debug_Print(FileName);
 }
 
 function Test_GetFolderName() {
     var FolderName;
-    FolderName = GetFolderName(null, "");
+    FolderName = GetFolderName("");
     Debug_Print(FolderName);
 }
 
