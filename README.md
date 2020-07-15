@@ -24,7 +24,7 @@ Microsoft Scripting Runtime
 Microsoft Scripting Runtime
 - [Scripting.File](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/1ft05taf(v=vs.84))
 
-### MADODBStream.js - Read/Write Text File
+### MADODBStream.js - Read/Write Text/Binary File
 
 - [Base](js/MADODBStream.js)
 - [Fix](js_/MADODBStream.js)

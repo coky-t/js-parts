@@ -25,7 +25,7 @@
 // - ADODB.Stream
 //
 
-var ADODBStream;
+var ADODBStream
 
 //
 // === TextFile ===
@@ -111,18 +111,16 @@ function WriteTextFileA(FileName, Text) {
 
 function WriteTextFileUTF8(
     FileName,
-    Text/*,
-    BOM*/) {
+    Text,
+    BOM) {
     
     WriteTextFile(FileName, Text, 0, "utf-8");
     
-    /*
     if (!BOM) {
         var Data;
         Data = ReadBinaryFile(FileName, 3);
         WriteBinaryFile(FileName, Data);
     }
-    */
 }
 
 function AppendTextFileW(FileName, Text) {
@@ -135,18 +133,16 @@ function AppendTextFileA(FileName, Text) {
 
 function AppendTextFileUTF8(
     FileName,
-    Text/*,
-    BOM*/) {
+    Text,
+    BOM) {
     
     WriteTextFile(FileName, Text, -1, "utf-8");
     
-    /*
     if (!BOM) {
         var Data;
         Data = ReadBinaryFile(FileName, 3);
         WriteBinaryFile(FileName, Data);
     }
-    */
 }
 
 function WriteTextFile(
@@ -308,7 +304,6 @@ function WriteTextAndSaveToFile(
 //   The default is 0, which represents the first byte in the stream.
 //
 
-/*
 function ReadBinaryFile(
     FileName,
     Position) {
@@ -317,7 +312,6 @@ function ReadBinaryFile(
     
     return LoadFromFileAndRead(FileName, Position);
 }
-*/
 
 //
 // WriteBinaryFile
@@ -338,7 +332,6 @@ function ReadBinaryFile(
 //   Required. A Variant that contains an array of bytes to be written.
 //
 
-/*
 function WriteBinaryFile(FileName, Buffer) {
     WriteBinaryFileT(FileName, Buffer, 0);
 }
@@ -354,21 +347,54 @@ function WriteBinaryFileT(
     
     if (FileName == "") { return; }
     
-    //WriteAndSaveToFile(FileName, Buffer, Position);
+    WriteAndSaveToFile(FileName, Buffer, Position);
+}
+
+function WriteBinaryFileFromString(FileName, Buffer) {
+    WriteBinaryFileFromStringT(FileName, Buffer, 0);
+}
+
+function AppendBinaryFileFromString(FileName, Buffer) {
+    WriteBinaryFileFromStringT(FileName, Buffer, -1);
+}
+
+function WriteBinaryFileFromStringT(
+    FileName,
+    Buffer,
+    Position) {
     
-    var Buf;
-    for (var Index = 0; Index < Buffer.length; Index++) {
-        Buf = Buf + String.fromCharCode(Buffer.charAt(Index).charCodeAt(0));
-    }
+    if (FileName == "") { return; }
+    
     if (Position == 0) {
-        WriteTextFileA(FileName, Buf);
+        WriteTextFileA(FileName, Buffer);
     } else if (Position < 0) {
-        AppendTextFileA(FileName, Buf);
+        AppendTextFileA(FileName, Buffer);
     } else {
         // To Do
     }
 }
-*/
+
+function WriteBinaryFileFromArray(FileName, Buffer) {
+    WriteBinaryFileFromArrayT(FileName, Buffer, 0);
+}
+
+function AppendBinaryFileFromArray(FileName, Buffer) {
+    WriteBinaryFileFromArrayT(FileName, Buffer, -1);
+}
+
+function WriteBinaryFileFromArrayT(
+    FileName,
+    Buffer,
+    Position) {
+    
+    if (FileName == "") { return; }
+    
+    var Buf = "";
+    for (var Index = 0; Index < Buffer.length; Index++) {
+        Buf = Buf + String.fromCharCode(Buffer[Index]);
+    }
+    WriteBinaryFileFromStringT(FileName, Buf, Position);
+}
 
 //
 // --- BinaryFile ---
@@ -504,17 +530,16 @@ function Test_TextFileUTF8(FileName) {
     var Text;
     
     Text = "WriteTextFileUTF8\r\n";
-    WriteTextFileUTF8(FileName, Text/*, true*/);
+    WriteTextFileUTF8(FileName, Text, true);
     Text = ReadTextFileUTF8(FileName);
     Debug_Print(Text);
     
     Text = "AppendTextFileUTF8\r\n";
-    AppendTextFileUTF8(FileName, Text/*, true*/);
+    AppendTextFileUTF8(FileName, Text, true);
     Text = ReadTextFileUTF8(FileName);
     Debug_Print(Text);
 }
 
-/*
 function Test_TextFileUTF8_withoutBOM(FileName) {
     if (FileName == "") { return; }
     
@@ -530,18 +555,17 @@ function Test_TextFileUTF8_withoutBOM(FileName) {
     Text = ReadTextFileUTF8(FileName);
     Debug_Print(Text);
 }
-*/
 
-/*
 function Test_BinaryFile(FileName) {
     if (FileName == "") { return; }
     
-    var Buffer;
+    var Buffer = new Array();
     for (var Index = 0; Index < 256; Index++) {
-        Buffer = Buffer + String.fromCharCode(Index);
+        Buffer.push(Index);
     }
-    WriteBinaryFile(FileName, Buffer);
+    WriteBinaryFileFromArray(FileName, Buffer);
     
+    /*
     var Data;
     Data = ReadBinaryFile(FileName, 0);
     
@@ -558,8 +582,10 @@ function Test_BinaryFile(FileName) {
     }
     
     Debug_Print(Text);
+    */
     
-    AppendBinaryFile(FileName, Buffer);
+    AppendBinaryFileFromArray(FileName, Buffer);
+    /*
     Data = ReadBinaryFile(FileName, 0);
     
     Text = "";
@@ -576,8 +602,8 @@ function Test_BinaryFile(FileName) {
     
     Debug_Print("---");
     Debug_Print(Text);
+    */
 }
-*/
 
 function Debug_Print(Str) {
     WScript.Echo(Str);

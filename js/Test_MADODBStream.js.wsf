@@ -33,7 +33,17 @@
             Test_TextFileUTF8(GetSaveAsFileName());
         </script>
     </job>
-    <!--
+    <job id="Test_TextFileUTF8_withoutBOM">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="vbscript">
+            Function GetSaveAsFileName()
+                GetSaveAsFileName = InputBox("SaveAsFileName")
+            End Function
+        </script>
+        <script language="jscript">
+            Test_TextFileUTF8_withoutBOM(GetSaveAsFileName());
+        </script>
+    </job>
     <job id="Test_BinaryFile">
         <script language="jscript" src="MADODBStream.js" />
         <script language="vbscript">
@@ -45,5 +55,4 @@
             Test_BinaryFile(GetSaveAsFileName());
         </script>
     </job>
-    -->
 </package>

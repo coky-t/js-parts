@@ -25,7 +25,7 @@
 // - ADODB.Stream
 //
 
-var ADODBStream;
+var ADODBStream
 
 //
 // === TextFile ===
@@ -111,18 +111,16 @@ function MADODBStream_WriteTextFileA(FileName, Text) {
 
 function MADODBStream_WriteTextFileUTF8(
     FileName,
-    Text/*,
-    BOM*/) {
+    Text,
+    BOM) {
     
     MADODBStream_WriteTextFile(FileName, Text, 0, "utf-8");
     
-    /*
     if (!BOM) {
         var Data;
         Data = MADODBStream_ReadBinaryFile(FileName, 3);
         MADODBStream_WriteBinaryFile(FileName, Data);
     }
-    */
 }
 
 function MADODBStream_AppendTextFileW(FileName, Text) {
@@ -135,18 +133,16 @@ function MADODBStream_AppendTextFileA(FileName, Text) {
 
 function MADODBStream_AppendTextFileUTF8(
     FileName,
-    Text/*,
-    BOM*/) {
+    Text,
+    BOM) {
     
     MADODBStream_WriteTextFile(FileName, Text, -1, "utf-8");
     
-    /*
     if (!BOM) {
         var Data;
         Data = MADODBStream_ReadBinaryFile(FileName, 3);
         MADODBStream_WriteBinaryFile(FileName, Data);
     }
-    */
 }
 
 function MADODBStream_WriteTextFile(
@@ -308,8 +304,7 @@ function WriteTextAndSaveToFile(
 //   The default is 0, which represents the first byte in the stream.
 //
 
-/*
-function ReadBinaryFile(
+function MADODBStream_ReadBinaryFile(
     FileName,
     Position) {
     
@@ -317,7 +312,6 @@ function ReadBinaryFile(
     
     return LoadFromFileAndRead(FileName, Position);
 }
-*/
 
 //
 // WriteBinaryFile
@@ -338,37 +332,69 @@ function ReadBinaryFile(
 //   Required. A Variant that contains an array of bytes to be written.
 //
 
-/*
-function WriteBinaryFile(FileName, Buffer) {
-    WriteBinaryFileT(FileName, Buffer, 0);
+function MADODBStream_WriteBinaryFile(FileName, Buffer) {
+    MADODBStream_WriteBinaryFileT(FileName, Buffer, 0);
 }
 
-function AppendBinaryFile(FileName, Buffer) {
-    WriteBinaryFileT(FileName, Buffer, -1);
+function MADODBStream_AppendBinaryFile(FileName, Buffer) {
+    MADODBStream_WriteBinaryFileT(FileName, Buffer, -1);
 }
 
-function WriteBinaryFileT(
+function MADODBStream_WriteBinaryFileT(
     FileName,
     Buffer,
     Position) {
     
     if (FileName == "") { return; }
     
-    //WriteAndSaveToFile(FileName, Buffer, Position);
+    WriteAndSaveToFile(FileName, Buffer, Position);
+}
+
+function MADODBStream_WriteBinaryFileFromString(FileName, Buffer) {
+    MADODBStream_WriteBinaryFileFromStringT(FileName, Buffer, 0);
+}
+
+function MADODBStream_AppendBinaryFileFromString(FileName, Buffer) {
+    MADODBStream_WriteBinaryFileFromStringT(FileName, Buffer, -1);
+}
+
+function MADODBStream_WriteBinaryFileFromStringT(
+    FileName,
+    Buffer,
+    Position) {
     
-    var Buf;
-    for (var Index = 0; Index < Buffer.length; Index++) {
-        Buf = Buf + String.fromCharCode(Buffer.charAt(Index).charCodeAt(0));
-    }
+    if (FileName == "") { return; }
+    
     if (Position == 0) {
-        WriteTextFileA(FileName, Buf);
+        MADODBStream_WriteTextFileA(FileName, Buffer);
     } else if (Position < 0) {
-        AppendTextFileA(FileName, Buf);
+        MADODBStream_AppendTextFileA(FileName, Buffer);
     } else {
         // To Do
     }
 }
-*/
+
+function MADODBStream_WriteBinaryFileFromArray(FileName, Buffer) {
+    MADODBStream_WriteBinaryFileFromArrayT(FileName, Buffer, 0);
+}
+
+function MADODBStream_AppendBinaryFileFromArray(FileName, Buffer) {
+    MADODBStream_WriteBinaryFileFromArrayT(FileName, Buffer, -1);
+}
+
+function MADODBStream_WriteBinaryFileFromArrayT(
+    FileName,
+    Buffer,
+    Position) {
+    
+    if (FileName == "") { return; }
+    
+    var Buf = "";
+    for (var Index = 0; Index < Buffer.length; Index++) {
+        Buf = Buf + String.fromCharCode(Buffer[Index]);
+    }
+    MADODBStream_WriteBinaryFileFromStringT(FileName, Buf, Position);
+}
 
 //
 // --- BinaryFile ---
@@ -504,17 +530,16 @@ function Test_MADODBStream_TextFileUTF8(FileName) {
     var Text;
     
     Text = "WriteTextFileUTF8\r\n";
-    MADODBStream_WriteTextFileUTF8(FileName, Text/*, true*/);
+    MADODBStream_WriteTextFileUTF8(FileName, Text, true);
     Text = MADODBStream_ReadTextFileUTF8(FileName);
     MADODBStream_Debug_Print(Text);
     
     Text = "AppendTextFileUTF8\r\n";
-    MADODBStream_AppendTextFileUTF8(FileName, Text/*, true*/);
+    MADODBStream_AppendTextFileUTF8(FileName, Text, true);
     Text = MADODBStream_ReadTextFileUTF8(FileName);
     MADODBStream_Debug_Print(Text);
 }
 
-/*
 function Test_MADODBStream_TextFileUTF8_withoutBOM(FileName) {
     if (FileName == "") { return; }
     
@@ -530,18 +555,17 @@ function Test_MADODBStream_TextFileUTF8_withoutBOM(FileName) {
     Text = MADODBStream_ReadTextFileUTF8(FileName);
     MADODBStream_Debug_Print(Text);
 }
-*/
 
-/*
 function Test_MADODBStream_BinaryFile(FileName) {
     if (FileName == "") { return; }
     
-    var Buffer;
+    var Buffer = new Array();
     for (var Index = 0; Index < 256; Index++) {
-        Buffer = Buffer + String.fromCharCode(Index);
+        Buffer.push(Index);
     }
-    MADODBStream_WriteBinaryFile(FileName, Buffer);
+    MADODBStream_WriteBinaryFileFromArray(FileName, Buffer);
     
+    /*
     var Data;
     Data = MADODBStream_ReadBinaryFile(FileName, 0);
     
@@ -558,8 +582,10 @@ function Test_MADODBStream_BinaryFile(FileName) {
     }
     
     MADODBStream_Debug_Print(Text);
+    */
     
-    MADODBStream_AppendBinaryFile(FileName, Buffer);
+    MADODBStream_AppendBinaryFileFromArray(FileName, Buffer);
+    /*
     Data = MADODBStream_ReadBinaryFile(FileName, 0);
     
     Text = "";
@@ -576,8 +602,8 @@ function Test_MADODBStream_BinaryFile(FileName) {
     
     MADODBStream_Debug_Print("---");
     MADODBStream_Debug_Print(Text);
+    */
 }
-*/
 
 function MADODBStream_Debug_Print(Str) {
     WScript.Echo(Str);
