@@ -55,4 +55,22 @@
             Test_BinaryFile(GetSaveAsFileName());
         </script>
     </job>
+    <job id="Test_GetBinaryGetTextA">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript">
+            Test_GetBinaryGetTextA();
+        </script>
+    </job>
+    <job id="Test_GetBinaryGetTextW">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript">
+            Test_GetBinaryGetTextW();
+        </script>
+    </job>
+    <job id="Test_GetBinaryGetTextUTF8">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript">
+            Test_GetBinaryGetTextUTF8();
+        </script>
+    </job>
 </package>

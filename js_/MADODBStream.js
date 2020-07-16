@@ -25,7 +25,7 @@
 // - ADODB.Stream
 //
 
-var ADODBStream
+var ADODBStream;
 
 //
 // === TextFile ===
@@ -117,9 +117,9 @@ function MADODBStream_WriteTextFileUTF8(
     MADODBStream_WriteTextFile(FileName, Text, 0, "utf-8");
     
     if (!BOM) {
-        var Data;
-        Data = MADODBStream_ReadBinaryFile(FileName, 3);
-        MADODBStream_WriteBinaryFile(FileName, Data);
+        var Binary;
+        Binary = MADODBStream_ReadBinaryFile(FileName, 3);
+        MADODBStream_WriteBinaryFile(FileName, Binary, 0);
     }
 }
 
@@ -139,9 +139,9 @@ function MADODBStream_AppendTextFileUTF8(
     MADODBStream_WriteTextFile(FileName, Text, -1, "utf-8");
     
     if (!BOM) {
-        var Data;
-        Data = MADODBStream_ReadBinaryFile(FileName, 3);
-        MADODBStream_WriteBinaryFile(FileName, Data);
+        var Binary;
+        Binary = MADODBStream_ReadBinaryFile(FileName, 3);
+        MADODBStream_WriteBinaryFile(FileName, Binary, 0);
     }
 }
 
@@ -328,72 +328,55 @@ function MADODBStream_ReadBinaryFile(
 //   You can save to any valid local location, or any location you have
 //   access to via a UNC value.
 //
-// Buffer:
+// Binary:
 //   Required. A Variant that contains an array of bytes to be written.
 //
+// Position:
+//   Optional. Sets a Long value that specifies the offset, in number of
+//   bytes, of the current position from the beginning of the stream.
+//   The default is 0, which represents the first byte in the stream.
+//
 
-function MADODBStream_WriteBinaryFile(FileName, Buffer) {
-    MADODBStream_WriteBinaryFileT(FileName, Buffer, 0);
-}
-
-function MADODBStream_AppendBinaryFile(FileName, Buffer) {
-    MADODBStream_WriteBinaryFileT(FileName, Buffer, -1);
-}
-
-function MADODBStream_WriteBinaryFileT(
+function MADODBStream_WriteBinaryFile(
     FileName,
-    Buffer,
+    Binary,
     Position) {
     
     if (FileName == "") { return; }
     
-    WriteAndSaveToFile(FileName, Buffer, Position);
+    WriteAndSaveToFile(FileName, Binary, Position);
 }
 
-function MADODBStream_WriteBinaryFileFromString(FileName, Buffer) {
-    MADODBStream_WriteBinaryFileFromStringT(FileName, Buffer, 0);
+function MADODBStream_AppendBinaryFile(FileName, Binary) {
+    MADODBStream_WriteBinaryFile(FileName, Binary, -1);
 }
 
-function MADODBStream_AppendBinaryFileFromString(FileName, Buffer) {
-    MADODBStream_WriteBinaryFileFromStringT(FileName, Buffer, -1);
-}
-
-function MADODBStream_WriteBinaryFileFromStringT(
-    FileName,
-    Buffer,
-    Position) {
-    
+function MADODBStream_WriteBinaryFileFromStringB(FileName, StringB) {
     if (FileName == "") { return; }
-    
-    if (Position == 0) {
-        MADODBStream_WriteTextFileA(FileName, Buffer);
-    } else if (Position < 0) {
-        MADODBStream_AppendTextFileA(FileName, Buffer);
-    } else {
-        // To Do
+    MADODBStream_WriteTextFileA(FileName, StringB);
+}
+
+function MADODBStream_AppendBinaryFileFromStringB(FileName, StringB) {
+    if (FileName == "") { return; }
+    MADODBStream_AppendTextFileA(FileName, StringB);
+}
+
+function MADODBStream_WriteBinaryFileFromArrayB(FileName, ArrayB) {
+    var StringB = GetStringBFromArrayB(ArrayB);
+    MADODBStream_WriteBinaryFileFromStringB(FileName, StringB);
+}
+
+function MADODBStream_AppendBinaryFileFromArrayB(FileName, ArrayB) {
+    var StringB = GetStringBFromArrayB(ArrayB);
+    MADODBStream_AppendBinaryFileFromStringB(FileName, StringB);
+}
+
+function GetStringBFromArrayB(ArrayB) {
+    var StringB = "";
+    for (var Index = 0; Index < ArrayB.length; Index++) {
+        StringB = StringB + String.fromCharCode(ArrayB[Index]);
     }
-}
-
-function MADODBStream_WriteBinaryFileFromArray(FileName, Buffer) {
-    MADODBStream_WriteBinaryFileFromArrayT(FileName, Buffer, 0);
-}
-
-function MADODBStream_AppendBinaryFileFromArray(FileName, Buffer) {
-    MADODBStream_WriteBinaryFileFromArrayT(FileName, Buffer, -1);
-}
-
-function MADODBStream_WriteBinaryFileFromArrayT(
-    FileName,
-    Buffer,
-    Position) {
-    
-    if (FileName == "") { return; }
-    
-    var Buf = "";
-    for (var Index = 0; Index < Buffer.length; Index++) {
-        Buf = Buf + String.fromCharCode(Buffer[Index]);
-    }
-    MADODBStream_WriteBinaryFileFromStringT(FileName, Buf, Position);
+    return StringB;
 }
 
 //
@@ -449,7 +432,7 @@ function LoadFromFileAndRead(
 //   You can save to any valid local location, or any location you have
 //   access to via a UNC value.
 //
-// Buffer:
+// Binary:
 //   Required. A Variant that contains an array of bytes to be written.
 //
 // Position:
@@ -460,7 +443,7 @@ function LoadFromFileAndRead(
 
 function WriteAndSaveToFile(
     FileName,
-    Buffer,
+    Binary,
     Position_) {
     
     try {
@@ -479,13 +462,113 @@ function WriteAndSaveToFile(
                     Position = Size;
                 }
             }
-            Write(Buffer);
+            Write(Binary);
             SaveToFile(FileName, 2); //ADODB.adSaveCreateOverWrite
             Close();
         }
     } catch (e) {
         // nop
     }
+}
+
+//
+// --- Text / Binary ---
+//
+
+//
+// GetTextFromBinary
+// - Return a string value that contains the text in characters.
+//
+
+//
+// Binary:
+//   Required. A Variant that contains an array of bytes.
+//
+// Charset:
+//   Required. A String value that specifies the character set into
+//   which the contents of the Stream will be translated.
+//   The default value is Unicode.
+//   Allowed values are typical strings passed over the interface as
+//   Internet character set names (for example, "iso-8859-1", "Windows-1252",
+//   and so on).
+//   For a list of the character set names that are known by a system,
+//   see the subkeys of HKEY_CLASSES_ROOT\MIME\Database\Charset
+//   in the Windows Registry.
+//
+
+function GetTextFromBinary(Binary, Charset_) {
+    var Text = "";
+    try {
+        var ADODBStream = GetADODBStream();
+        with (ADODBStream) {
+            Open();
+            
+            Type = 1; //ADODB.adTypeBinary
+            Write(Binary);
+            
+            Position = 0;
+            Type = 2 //ADODB.adTypeText
+            Charset = Charset_;
+            Text = ReadText();
+            
+            Close();
+        }
+    } catch (e) {
+        Text = "";
+    }
+    return Text;
+}
+
+//
+// GetBinaryFromText
+// - Return a variant that contains an array of bytes.
+//
+
+//
+// Text:
+//   Required. A String value that contains the text in characters.
+//
+// Charset:
+//   Required. A String value that specifies the character set into
+//   which the contents of the Stream will be translated.
+//   The default value is Unicode.
+//   Allowed values are typical strings passed over the interface as
+//   Internet character set names (for example, "iso-8859-1", "Windows-1252",
+//   and so on).
+//   For a list of the character set names that are known by a system,
+//   see the subkeys of HKEY_CLASSES_ROOT\MIME\Database\Charset
+//   in the Windows Registry.
+//
+
+function GetBinaryFromText(Text, Charset_) {
+    var Binary;
+    try {
+        var ADODBStream = GetADODBStream();
+        with (ADODBStream) {
+            Open();
+            
+            Type = 2 //ADODB.adTypeText
+            Charset = Charset_;
+            WriteText(Text);
+            
+            Position = 0;
+            Type = 1; //ADODB.adTypeBinary
+            switch (Charset_) {
+            case "unicode":
+                Position = 2;
+                break;
+            case "utf-8":
+                Position = 3;
+                break;
+            }
+            Binary = Read();
+            
+            Close();
+        }
+    } catch (e) {
+        Binary = null;
+    }
+    return Binary;
 }
 
 //
@@ -559,51 +642,72 @@ function Test_MADODBStream_TextFileUTF8_withoutBOM(FileName) {
 function Test_MADODBStream_BinaryFile(FileName) {
     if (FileName == "") { return; }
     
-    var Buffer = new Array();
-    for (var Index = 0; Index < 256; Index++) {
-        Buffer.push(Index);
-    }
-    MADODBStream_WriteBinaryFileFromArray(FileName, Buffer);
+    var ArrayB;
+    var Binary;
     
-    /*
-    var Data;
-    Data = MADODBStream_ReadBinaryFile(FileName, 0);
+    ArrayB = GetTestArrayB();
+    MADODBStream_WriteBinaryFileFromArrayB(FileName, ArrayB);
+    Binary = MADODBStream_ReadBinaryFile(FileName, 0);
+    //MADODBStream_Debug_Print_Binary(Binary);
+    
+    ArrayB = GetTestArrayB();
+    MADODBStream_AppendBinaryFileFromArrayB(FileName, ArrayB);
+    Binary = MADODBStream_ReadBinaryFile(FileName, 0);
+    //MADODBStream_Debug_Print_Binary(Binary);
+}
+
+function GetTestArrayB() {
+    var ArrayB = new Array();
+    for (var Index = 0; Index < 256; Index++) {
+        ArrayB.push(Index);
+    }
+    return ArrayB;
+}
+
+function Test_GetBinaryGetTextA() {
+    Test_GetBinaryGetTextT("iso-8859-1");
+}
+
+function Test_GetBinaryGetTextW() {
+    Test_GetBinaryGetTextT("unicode");
+}
+
+function Test_GetBinaryGetTextUTF8() {
+    Test_GetBinaryGetTextT("utf-8");
+}
+
+function Test_GetBinaryGetTextT(Charset) {
+    var Text0;
+    Text0 = "abcdefghijklmnopqrstuvwxyz";
+    
+    var Binary;
+    Binary = GetBinaryFromText(Text0, Charset);
+    //MADODBStream_Debug_Print_Binary(Binary);
     
     var Text;
-    for (var Index1 = 0; Index1 < Data.length; Index1 += 16) {
-        for (var Index2 = Index1; Index2 < Index1 + 16; Index2++) {
-            Text = Text +
-                Right(
-                    "0" + Data.charAt(Index2).charCodeAt(0).toString(16),
-                    2) +
-                " ";
-        }
-        Text = Text + "\r\n"
-    }
-    
+    Text = GetTextFromBinary(Binary, Charset);
     MADODBStream_Debug_Print(Text);
-    */
-    
-    MADODBStream_AppendBinaryFileFromArray(FileName, Buffer);
-    /*
-    Data = MADODBStream_ReadBinaryFile(FileName, 0);
-    
-    Text = "";
-    for (var Index1 = 0; Index1 < Data.length; Index1 += 16) {
-        for (var Index2 = Index1; Index2 < Index1 + 16; Index2++) {
-            Text = Text +
-                Right(
-                    "0" + Data.charAt(Index2).charCodeAt(0).toString(16),
-                    2) +
-                " ";
-        }
-        Text = Text + "\r\n"
-    }
-    
-    MADODBStream_Debug_Print("---");
-    MADODBStream_Debug_Print(Text);
-    */
 }
+
+/*
+function MADODBStream_Debug_Print_Binary(Binary) {
+    var Text = "";
+    for (var Index1 = 0; Index1 < Binary.length; Index1 += 16) {
+        for (var Index2 = Index1; Index2 < Index1 + 16; Index2++) {
+            Text = Text +
+                Right(
+                    "0" + Binary.charAt(Index2).charCodeAt(0).toString(16),
+                    2) +
+                " ";
+        }
+        Text = Text + "\r\n"
+    }
+    
+    Debug_Print("-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
+    Debug_Print(Text);
+    Debug_Print("-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
+}
+*/
 
 function MADODBStream_Debug_Print(Str) {
     WScript.Echo(Str);
