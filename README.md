@@ -78,6 +78,16 @@ Microsoft XML, vX.X
 
 - [Regular Expression](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/6wzad2b2(v=vs.84))
 
+### MXMLDOM.js - Base64/Binary, Hex/Binary - Encode/Decode
+
+- [Base](js/MXMLDOM.js)
+
+#### Reference
+
+Microsoft XML, vX.X
+- [MSXML2.DOMDocument](https://docs.microsoft.com/en-us/previous-versions/windows/desktop/ms764730(v%3dvs.85))
+- [XDR Schema Data Types](https://docs.microsoft.com/en-us/previous-versions/ms256121(v=vs.85))
+
 ## Dialog Box
 
 ### MExcelApp.js - File/Folder Dialog Box
