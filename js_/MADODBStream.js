@@ -648,12 +648,12 @@ function Test_MADODBStream_BinaryFile(FileName) {
     ArrayB = GetTestArrayB();
     MADODBStream_WriteBinaryFileFromArrayB(FileName, ArrayB);
     Binary = MADODBStream_ReadBinaryFile(FileName, 0);
-    //MADODBStream_Debug_Print_Binary(Binary);
+    MADODBStream_Debug_Print_Binary(Binary);
     
     ArrayB = GetTestArrayB();
     MADODBStream_AppendBinaryFileFromArrayB(FileName, ArrayB);
     Binary = MADODBStream_ReadBinaryFile(FileName, 0);
-    //MADODBStream_Debug_Print_Binary(Binary);
+    MADODBStream_Debug_Print_Binary(Binary);
 }
 
 function GetTestArrayB() {
@@ -682,32 +682,36 @@ function Test_GetBinaryGetTextT(Charset) {
     
     var Binary;
     Binary = GetBinaryFromText(Text0, Charset);
-    //MADODBStream_Debug_Print_Binary(Binary);
+    MADODBStream_Debug_Print_Binary(Binary);
     
     var Text;
     Text = GetTextFromBinary(Binary, Charset);
     MADODBStream_Debug_Print(Text);
 }
 
-/*
 function MADODBStream_Debug_Print_Binary(Binary) {
-    var Text = "";
-    for (var Index1 = 0; Index1 < Binary.length; Index1 += 16) {
-        for (var Index2 = Index1; Index2 < Index1 + 16; Index2++) {
-            Text = Text +
-                Right(
-                    "0" + Binary.charAt(Index2).charCodeAt(0).toString(16),
-                    2) +
-                " ";
-        }
-        Text = Text + "\r\n"
+    var HexText;
+    var XMLDOM = new ActiveXObject("MSXML2.DOMDocument");
+    var Elem = XMLDOM.createElement("tmp");
+    with (Elem) {
+        dataType = "bin.hex";
+        nodeTypedValue = Binary;
+        HexText = text;
     }
     
-    Debug_Print("-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
-    Debug_Print(Text);
-    Debug_Print("-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
+    var Text = "";
+    for (var Index1 = 0; Index1 < HexText.length; Index1 += 32) {
+        for (var Index2 = Index1; 
+            Index2 < Math.min(Index1 + 31, HexText.length); Index2 += 2) {
+            Text = Text + HexText.substr(Index2, 2) + " ";
+        }
+        Text = Text + "\r\n";
+    }
+    
+    MADODBStream_Debug_Print("-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
+    MADODBStream_Debug_Print(Text);
+    MADODBStream_Debug_Print("-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
 }
-*/
 
 function MADODBStream_Debug_Print(Str) {
     WScript.Echo(Str);
