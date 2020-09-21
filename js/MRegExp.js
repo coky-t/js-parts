@@ -189,10 +189,10 @@ function Test_RegExp_Execute(
     Debug_Print("MultiLine: " + MultiLine.toString());
     Debug_Print("--- Execute ---");
     
-    Test_RegExp_Execute_Matches(Matches);
+    Debug_Print_Matches(Matches);
 }
 
-function Test_RegExp_Execute_Matches(
+function Debug_Print_Matches(
     Matches) {
     
     if (Matches == null) {
