@@ -3,8 +3,8 @@
     <job id="Test_RegExp_Test">
         <script language="jscript" src="MRegExp.js" />
         <script language="vbscript">
-            Function GetInputString()
-                GetInputString = InputBox("InputString")
+            Function GetSourceString()
+                GetSourceString = InputBox("SourceString")
             End Function
             Function GetPattern()
                 GetPattern = InputBox("Pattern")
@@ -18,7 +18,7 @@
         </script>
         <script language="jscript">
             Test_RegExp_Test(
-                GetInputString(),
+                GetSourceString(),
                 GetPattern(),
                 GetIgnoreCase(),
                 GetMultiLine());
@@ -27,8 +27,8 @@
     <job id="Test_RegExp_Replace">
         <script language="jscript" src="MRegExp.js" />
         <script language="vbscript">
-            Function GetInputString()
-                GetInputString = InputBox("InputString")
+            Function GetSourceString()
+                GetSourceString = InputBox("SourceString")
             End Function
             Function GetReplaceString()
                 GetReplaceString = InputBox("ReplaceString")
@@ -48,7 +48,7 @@
         </script>
         <script language="jscript">
             Test_RegExp_Replace(
-                GetInputString(),
+                GetSourceString(),
                 GetReplaceString(),
                 GetPattern(),
                 GetIgnoreCase(),
@@ -59,8 +59,8 @@
     <job id="Test_RegExp_Execute">
         <script language="jscript" src="MRegExp.js" />
         <script language="vbscript">
-            Function GetInputString()
-                GetInputString = InputBox("InputString")
+            Function GetSourceString()
+                GetSourceString = InputBox("SourceString")
             End Function
             Function GetPattern()
                 GetPattern = InputBox("Pattern")
@@ -77,7 +77,7 @@
         </script>
         <script language="jscript">
             Test_RegExp_Execute(
-                GetInputString(),
+                GetSourceString(),
                 GetPattern(),
                 GetIgnoreCase(),
                 GetGlobalMatch(),

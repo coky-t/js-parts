@@ -44,7 +44,7 @@
 //
 
 //
-// InputString:
+// SourceString:
 //   Required. The text string upon which the regular expression is executed.
 //
 // ReplaceString:
@@ -68,7 +68,7 @@
 //
 
 function RegExp_Execute(
-    InputString,
+    SourceString,
     Pattern,
     IgnoreCase,
     GlobalMatch,
@@ -81,11 +81,11 @@ function RegExp_Execute(
     
     var re = new RegExp(Pattern, flags);
     
-    return InputString.match(re);
+    return SourceString.match(re);
 }
 
 function RegExp_Replace(
-    InputString,
+    SourceString,
     ReplaceString,
     Pattern,
     IgnoreCase,
@@ -99,11 +99,11 @@ function RegExp_Replace(
     
     var re = new RegExp(Pattern, flags);
     
-    return InputString.replace(re, ReplaceString);
+    return SourceString.replace(re, ReplaceString);
 }
 
 function RegExp_Test(
-    InputString,
+    SourceString,
     Pattern,
     IgnoreCase,
     MultiLine) {
@@ -114,7 +114,7 @@ function RegExp_Test(
     
     var re = new RegExp(Pattern, flags);
     
-    return re.test(InputString);
+    return re.test(SourceString);
 }
 
 //
@@ -122,10 +122,10 @@ function RegExp_Test(
 //
 
 function btnTest_OnClick() {
-    var InputString;
-    InputString = textareaInputString.value;
-    if (InputString == "") {
-        alert("InputString: is blank.");
+    var SourceString;
+    SourceString = textareaSourceString.value;
+    if (SourceString == "") {
+        alert("SourceString: is blank.");
         return;
     }
     
@@ -144,16 +144,16 @@ function btnTest_OnClick() {
     
     var Result;
     Result =
-        RegExp_Test(InputString, Pattern, IgnoreCase, MultiLine);
+        RegExp_Test(SourceString, Pattern, IgnoreCase, MultiLine);
     
     tdResult.innerText = Result.toString();
 }
 
 function btnReplace_OnClick() {
-    var InputString;
-    InputString = textareaInputString.value;
-    if (InputString == "") {
-        alert("InputString: is blank.");
+    var SourceString;
+    SourceString = textareaSourceString.value;
+    if (SourceString == "") {
+        alert("SourceString: is blank.");
         return;
     }
     
@@ -183,7 +183,7 @@ function btnReplace_OnClick() {
     var Result;
     Result =
         RegExp_Replace(
-            InputString,
+            SourceString,
             ReplaceString,
             Pattern,
             IgnoreCase,
@@ -194,10 +194,10 @@ function btnReplace_OnClick() {
 }
 
 function btnExecute_OnClick() {
-    var InputString;
-    InputString = textareaInputString.value;
-    if (InputString == "") {
-        alert("InputString: is blank.");
+    var SourceString;
+    SourceString = textareaSourceString.value;
+    if (SourceString == "") {
+        alert("SourceString: is blank.");
         return;
     }
     
@@ -220,7 +220,7 @@ function btnExecute_OnClick() {
     var Matches;
     Matches =
         RegExp_Execute(
-            InputString,
+            SourceString,
             Pattern,
             IgnoreCase,
             GlobalMatch,
@@ -275,8 +275,8 @@ function Test_RegExp_Execute_Matches(
 </colgroup>
 
 <tr>
-<td>InputString:</td>
-<td><textarea id="textareaInputString" rows="10" cols="50" style="width:100%"></textarea></td>
+<td>SourceString:</td>
+<td><textarea id="textareaSourceString" rows="10" cols="50" style="width:100%"></textarea></td>
 </tr>
 
 <tr>

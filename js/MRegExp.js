@@ -37,7 +37,7 @@
 //
 
 //
-// InputString:
+// SourceString:
 //   Required. The text string upon which the regular expression is executed.
 //
 // ReplaceString:
@@ -61,7 +61,7 @@
 //
 
 function RegExp_Execute(
-    InputString,
+    SourceString,
     Pattern,
     IgnoreCase,
     GlobalMatch,
@@ -74,11 +74,11 @@ function RegExp_Execute(
     
     var re = new RegExp(Pattern, flags);
     
-    return InputString.match(re);
+    return SourceString.match(re);
 }
 
 function RegExp_Replace(
-    InputString,
+    SourceString,
     ReplaceString,
     Pattern,
     IgnoreCase,
@@ -92,11 +92,11 @@ function RegExp_Replace(
     
     var re = new RegExp(Pattern, flags);
     
-    return InputString.replace(re, ReplaceString);
+    return SourceString.replace(re, ReplaceString);
 }
 
 function RegExp_Test(
-    InputString,
+    SourceString,
     Pattern,
     IgnoreCase,
     MultiLine) {
@@ -107,23 +107,23 @@ function RegExp_Test(
     
     var re = new RegExp(Pattern, flags);
     
-    return re.test(InputString);
+    return re.test(SourceString);
 }
 
 //
 // --- Test ---
 //
 
-function Test_RegExp_Test(InputString, Pattern, IgnoreCase, MultiLine) {
-    if (InputString == "") { return; }
+function Test_RegExp_Test(SourceString, Pattern, IgnoreCase, MultiLine) {
+    if (SourceString == "") { return; }
     if (Pattern == "") { return; }
     
     var Result;
     Result =
-        RegExp_Test(InputString, Pattern, IgnoreCase, MultiLine);
+        RegExp_Test(SourceString, Pattern, IgnoreCase, MultiLine);
     
     Debug_Print("=== RegExp_Test ===");
-    Debug_Print("InputString: " + InputString);
+    Debug_Print("SourceString: " + SourceString);
     Debug_Print("Pattern: " + Pattern);
     Debug_Print("IgnoreCase: " + IgnoreCase.toString());
     Debug_Print("MultiLine: " + MultiLine.toString());
@@ -131,21 +131,21 @@ function Test_RegExp_Test(InputString, Pattern, IgnoreCase, MultiLine) {
 }
 
 function Test_RegExp_Replace(
-    InputString,
+    SourceString,
     ReplaceString,
     Pattern,
     IgnoreCase,
     GlobalMatch,
     MultiLine) {
     
-    if (InputString == "") { return; }
+    if (SourceString == "") { return; }
     if (ReplaceString == "") { return; }
     if (Pattern == "") { return; }
     
     var Result;
     Result =
         RegExp_Replace(
-            InputString,
+            SourceString,
             ReplaceString,
             Pattern,
             IgnoreCase,
@@ -153,7 +153,7 @@ function Test_RegExp_Replace(
             MultiLine);
     
     Debug_Print("=== RegExp_Replace ===");
-    Debug_Print("InputString: " + InputString);
+    Debug_Print("SourceString: " + SourceString);
     Debug_Print("ReplaceString: " + ReplaceString);
     Debug_Print("Pattern: " + Pattern);
     Debug_Print("IgnoreCase: " + IgnoreCase.toString());
@@ -163,26 +163,26 @@ function Test_RegExp_Replace(
 }
 
 function Test_RegExp_Execute(
-    InputString,
+    SourceString,
     Pattern,
     IgnoreCase,
     GlobalMatch,
     MultiLine) {
     
-    if (InputString == "") { return; }
+    if (SourceString == "") { return; }
     if (Pattern == "") { return; }
     
     var Matches;
     Matches =
         RegExp_Execute(
-            InputString,
+            SourceString,
             Pattern,
             IgnoreCase,
             GlobalMatch,
             MultiLine);
     
     Debug_Print("=== RegExp_Execute ===");
-    Debug_Print("InputString: " + InputString);
+    Debug_Print("SourceString: " + SourceString);
     Debug_Print("Pattern: " + Pattern);
     Debug_Print("IgnoreCase: " + IgnoreCase.toString());
     Debug_Print("GlobalMatch: " + GlobalMatch.toString());
