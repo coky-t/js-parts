@@ -78,6 +78,14 @@ Microsoft XML, vX.X
 
 - [Regular Expression](https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/6wzad2b2(v=vs.84))
 
+### MHTMLDocument.js - JSON - Parse
+
+- [Base](js/MHTMLDocument.js)
+
+#### Reference
+
+
+
 ### MXMLDOM.js - Base64/Binary, Hex/Binary - Encode/Decode
 
 - [Base](js/MXMLDOM.js)

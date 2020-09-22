@@ -1,0 +1,50 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_ParseJsonText">
+        <script language="jscript" src="MHTMLDocument.js" />
+        <script language="vbscript">
+            Function GetJsonText()
+                GetJsonText = InputBox("JsonText")
+            End Function
+        </script>
+        <script language="jscript">
+            Test_ParseJsonText(GetJsonText());
+        </script>
+    </job>
+    <job id="Test_ParseJsonText1">
+        <script language="jscript" src="MHTMLDocument.js" />
+        <script language="jscript">
+            Test_ParseJsonText1();
+        </script>
+    </job>
+    <job id="Test_ParseJsonText2">
+        <script language="jscript" src="MHTMLDocument.js" />
+        <script language="jscript">
+            Test_ParseJsonText2();
+        </script>
+    </job>
+    <job id="Test_ParseJsonText3">
+        <script language="jscript" src="MHTMLDocument.js" />
+        <script language="jscript">
+            Test_ParseJsonText3();
+        </script>
+    </job>
+    <job id="Test_ParseJsonText4">
+        <script language="jscript" src="MHTMLDocument.js" />
+        <script language="jscript">
+            Test_ParseJsonText4();
+        </script>
+    </job>
+    <job id="Test_ParseJsonText5">
+        <script language="jscript" src="MHTMLDocument.js" />
+        <script language="jscript">
+            Test_ParseJsonText5();
+        </script>
+    </job>
+    <job id="Test_ParseJsonText6">
+        <script language="jscript" src="MHTMLDocument.js" />
+        <script language="jscript">
+            Test_ParseJsonText6();
+        </script>
+    </job>
+</package>
