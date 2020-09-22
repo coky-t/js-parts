@@ -1,0 +1,557 @@
+<html>
+
+<head>
+<title>Test_MRegExpEx.js.hta</title>
+
+<meta http-equiv="msthemecompatible" content="yes">
+
+<hta:application innerborder="no" scroll="no" />
+
+<script language="jscript">
+<!--
+//
+// Copyright (c) 2020 Koki Takeyama
+//
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the "Software"),
+// to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense,
+// and/or sell copies of the Software, and to permit persons to whom the
+// Software is furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+// IN THE SOFTWARE.
+//
+
+//
+// === RegExp ===
+//
+
+//
+// RegExp_Execute
+// - Executes a regular expression search against a specified string.
+//
+// RegExp_Replace
+// - Replaces text found in a regular expression search.
+//
+// RegExp_Test
+// - Executes a regular expression search against a specified string
+//   and returns a Boolean value that indicates if a pattern match was found.
+//
+
+//
+// SourceString:
+//   Required. The text string upon which the regular expression is executed.
+//
+// ReplaceString:
+//   Required. The replacement text string.
+//
+// Pattern:
+//   Required. Regular string expression being searched for.
+//   https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/f97kw5ka(v=vs.84)
+//
+// IgnoreCase:
+//   Optional. The value is False if the search is case-sensitive,
+//   True if it is not. Default is False.
+//
+// GlobalMatch:
+//   Optional. The value is True if the search applies to the entire string,
+//   False if it does not. Default is False.
+//
+// MultiLine:
+//   Optional. The value is False if the search is single-line mode,
+//   True if it is multi-line mode. Default is False.
+//
+
+function RegExp_Execute(
+    SourceString,
+    Pattern,
+    IgnoreCase,
+    GlobalMatch,
+    MultiLine) {
+    
+    var flags = "";
+    if (IgnoreCase) { flags = flags + "i"; }
+    if (GlobalMatch) { flags = flags + "g"; }
+    if (MultiLine) { flags = flags + "m"; }
+    
+    var re = new RegExp(Pattern, flags);
+    
+    return SourceString.match(re);
+}
+
+function RegExp_Replace(
+    SourceString,
+    ReplaceString,
+    Pattern,
+    IgnoreCase,
+    GlobalMatch,
+    MultiLine) {
+    
+    var flags = "";
+    if (IgnoreCase) { flags = flags + "i"; }
+    if (GlobalMatch) { flags = flags + "g"; }
+    if (MultiLine) { flags = flags + "m"; }
+    
+    var re = new RegExp(Pattern, flags);
+    
+    return SourceString.replace(re, ReplaceString);
+}
+
+function RegExp_Test(
+    SourceString,
+    Pattern,
+    IgnoreCase,
+    MultiLine) {
+    
+    var flags = "";
+    if (IgnoreCase) { flags = flags + "i"; }
+    if (MultiLine) { flags = flags + "m"; }
+    
+    var re = new RegExp(Pattern, flags);
+    
+    return re.test(SourceString);
+}
+
+//
+// === RegExpEx ===
+//
+
+//
+// RegExp_ParamsList_Execute
+// RegExp_Params_Execute
+// - Executes a regular expression search against a specified string.
+//
+// RegExp_ParamsList_Replace
+// RegExp_Params_Replace
+// - Replaces text found in a regular expression search.
+//
+// RegExp_ParamsList_Test
+// RegExp_Params_Test
+// - Executes a regular expression search against a specified string
+//   and returns a Boolean value that indicates if a pattern match was found.
+//
+
+//
+// SourceString:
+//   Required. The text string upon which the regular expression is executed.
+//
+// ParametersListString:
+//   For Execute, Test:
+//     (Title)(Tab)Pattern(Tab)IgnoreCase(Tab)GlobalMatch(Tab)MultiLine(Newline)
+//   For Replace:
+//     ReplaceString(Tab)Pattern(Tab)IgnoreCase(Tab)GlobalMatch(Tab)MultiLine(Newline)
+//
+// ReplaceString:
+//   Required. The replacement text string.
+//
+// Pattern:
+//   Required. Regular string expression being searched for.
+//   https://docs.microsoft.com/en-us/previous-versions/windows/internet-explorer/ie-developer/scripting-articles/f97kw5ka(v=vs.84)
+//
+// IgnoreCase:
+//   Optional. The value is False if the search is case-sensitive,
+//   True if it is not. Default is False.
+//
+// GlobalMatch:
+//   Optional. The value is True if the search applies to the entire string,
+//   False if it does not. Default is False.
+//
+// MultiLine:
+//   Optional. The value is False if the search is single-line mode,
+//   True if it is multi-line mode. Default is False.
+//
+
+function RegExp_ParamsList_Execute(
+    SourceString,
+    ParametersListString) {
+    
+    if (SourceString == "") { return null; }
+    if (ParametersListString == "") { return null; }
+    
+    var MatchesCollection = new Array;
+    
+    var ParamsList = ParametersListString.split("\r\n");
+    for (var Index in ParamsList) {
+        var Params = ParamsList[Index];
+        if (Params != "") {
+            var RegExpMatches = RegExp_Params_Execute(SourceString, Params);
+            if (RegExpMatches != null) {
+                MatchesCollection.push(RegExpMatches);
+            }
+        }
+    }
+    
+    return MatchesCollection;
+}
+
+function RegExp_Params_Execute(
+    SourceString,
+    ParametersString) {
+    
+    if (SourceString == "") { return null; }
+    if (ParametersString == "") { return null; }
+    
+    var Params = ParametersString.split("\t");
+    
+    var LB = 0;
+    var UB = Params.length - 1;
+    
+    var Title = "";
+    var Pattern = "";
+    var IgnoreCase = false;
+    var GlobalMatch = false;
+    var MultiLine = false;
+    
+    Title = Params[LB];
+    if (LB + 1 <= UB) { Pattern = Params[LB + 1]; }
+    if (LB + 2 <= UB) { IgnoreCase = Boolean.valueOf(Params[LB + 2]); }
+    if (LB + 3 <= UB) { GlobalMatch = Boolean.valueOf(Params[LB + 3]); }
+    if (LB + 4 <= UB) { MultiLine = Boolean.valueOf(Params[LB + 4]); }
+    
+    var RegExpMatches = new Object;
+    RegExpMatches.Title = Title;
+    RegExpMatches.Matches = 
+        RegExp_Execute(
+            SourceString,
+            Pattern,
+            IgnoreCase,
+            GlobalMatch,
+            MultiLine);
+    
+    return RegExpMatches;
+}
+
+function RegExp_ParamsList_Replace(
+    SourceString,
+    ParametersListString) {
+    
+    if (SourceString == "") { return ""; }
+    if (ParametersListString == "") { return SourceString; }
+    
+    var ResultString = SourceString;
+    
+    var ParamsList = ParametersListString.split("\r\n");
+    for (var Index in ParamsList) {
+        var Params = ParamsList[Index];
+        ResultString = RegExp_Params_Replace(ResultString, Params)
+    }
+    
+    return ResultString;
+}
+
+function RegExp_Params_Replace(
+    SourceString,
+    ParametersString) {
+    
+    if (SourceString == "") { return ""; }
+    if (ParametersString == "") { return SourceString; }
+    
+    var Params = ParametersString.split("\t");
+    
+    var LB = 0;
+    var UB = Params.length -1;
+    
+    var ReplaceString = "";
+    var Pattern = "";
+    var IgnoreCase = false;
+    var GlobalMatch = false;
+    var MultiLine = false;
+    
+    ReplaceString = Params[LB];
+    if (LB + 1 <= UB) { Pattern = Params[LB + 1]; }
+    if (LB + 2 <= UB) { IgnoreCase = Boolean.valueOf(Params[LB + 2]); }
+    if (LB + 3 <= UB) { GlobalMatch = Boolean.valueOf(Params[LB + 3]); }
+    if (LB + 4 <= UB) { MultiLine = Boolean.valueOf(Params[LB + 4]); }
+    
+    return RegExp_Replace(
+            SourceString,
+            ReplaceString,
+            Pattern,
+            IgnoreCase,
+            GlobalMatch,
+            MultiLine);
+}
+
+function RegExp_ParamsList_Test(
+    SourceString,
+    ParametersListString) {
+    
+    if (SourceString == "") { return ""; }
+    if (ParametersListString == "") { return ""; }
+    
+    var ResultString = "";
+    
+    var ParamsList = ParametersListString.split("\r\n");
+    for (var Index in ParamsList) {
+        var Params = ParamsList[Index];
+        
+        var Result = RegExp_Params_Test(SourceString, Params);
+        if (Result != "") {
+            ResultString = ResultString + Result + "\r\n";
+        }
+    }
+    
+    return ResultString;
+}
+
+function RegExp_Params_Test(
+    SourceString,
+    ParametersString) {
+    
+    if (SourceString == "") { return ""; }
+    if (ParametersString == "") { return ""; }
+    
+    var ResultString = "";
+    
+    var Params = ParametersString.split("\t");
+    
+    var LB = 0;
+    var UB = Params.length -1;
+    
+    var Title = "";
+    var Pattern = "";
+    var IgnoreCase = false;
+    //var GlobalMatch = false;
+    var MultiLine = false;
+    
+    Title = Params[LB];
+    if (LB + 1 <= UB) { Pattern = Params[LB + 1]; }
+    if (LB + 2 <= UB) { IgnoreCase = Boolean.valueOf(Params[LB + 2]); }
+    //if (LB + 3 <= UB) { GlobalMatch = Boolean.valueOf(Params[LB + 3]); }
+    if (LB + 4 <= UB) { MultiLine = Boolean.valueOf(Params[LB + 4]); }
+    
+    return Title + "\t" +
+        RegExp_Test(SourceString, Pattern, IgnoreCase, MultiLine);
+}
+
+//
+// --- Test ---
+//
+
+function btnTest_OnClick() {
+    var SourceString;
+    SourceString = textareaSourceString.innerText;
+    if (SourceString == "") {
+        alert("SourceString: is blank.");
+        return;
+    }
+    
+    var Patterns;
+    Patterns = textareaPatterns.innerText;
+    if (Patterns == "") {
+        alert("Pattern: is blank.");
+        return;
+    }
+    
+    var Result;
+    Result = RegExp_ParamsList_Test(SourceString, Patterns);
+    
+    tdResult.innerText = Result;
+}
+
+function btnTestTrue_OnClick() {
+    var SourceString;
+    SourceString = textareaSourceString.innerText;
+    if (SourceString == "") {
+        alert("SourceString: is blank.");
+        return;
+    }
+    
+    var Patterns;
+    Patterns = textareaPatterns.innerText;
+    if (Patterns == "") {
+        alert("Pattern: is blank.");
+        return;
+    }
+    
+    var ResultsList;
+    ResultsList = RegExp_ParamsList_Test(SourceString, Patterns);
+    
+    var Results;
+    Results = ResultsList.split("\r\n");
+    
+    var OutputString = "";
+    
+    for (var Index in Results) {
+        if (Results[Index] != "") {
+            var Result;
+            Result = Results[Index].split("\t");
+            if (eval(Result[1])) {
+                OutputString = OutputString + Results[Index] + "\r\n";
+            }
+        }
+    }
+    
+    if (OutputString == "") {
+        OutputString = "None";
+    }
+    
+    tdResult.innerText = OutputString;
+}
+
+function btnReplace_OnClick() {
+    var SourceString;
+    SourceString = textareaSourceString.innerText;
+    if (SourceString == "") {
+        alert("SourceString: is blank.");
+        return;
+    }
+    
+    var Patterns;
+    Patterns = textareaPatterns.innerText;
+    if (Patterns == "") {
+        alert("Patterns: is blank.");
+        return;
+    }
+    
+    var Result;
+    Result = RegExp_ParamsList_Replace(SourceString, Patterns);
+    
+    tdResult.innerText = Result;
+}
+
+function btnExecute_OnClick() {
+    var SourceString;
+    SourceString = textareaSourceString.innerText;
+    if (SourceString == "") {
+        alert("SourceString: is blank.");
+        return;
+    }
+    
+    var Patterns;
+    Patterns = textareaPatterns.innerText;
+    if (Patterns == "") {
+        alert("Pattern: is blank.");
+        return;
+    }
+    
+    var REMCollection;
+    REMCollection = RegExp_ParamsList_Execute(SourceString, Patterns);
+    
+    Debug_Print_RegExpMatchesCollection(REMCollection);
+}
+
+function Debug_Print_RegExpMatchesCollection(
+    RegExpMatchesCollection) {
+    
+    if (RegExpMatchesCollection == null) {
+        tdResult.innerText = "RegExpMatchesCollection: null";
+    } else if (RegExpMatchesCollection.length == 0) {
+        tdResult.innerText = "RegExpMatchesCollection: No item";
+    } else {
+        var Html = "";
+        for (var Index in RegExpMatchesCollection) {
+            var RegExpMatches = RegExpMatchesCollection[Index];
+            Html = Html + GetHtml_From_RegExpMatches(RegExpMatches);
+        }
+        tdResult.innerHTML = Html;
+    }
+}
+
+function GetHtml_From_RegExpMatches(RegExpMatches) {
+    if (RegExpMatches == null) {
+        return "RegExpMatches: null";
+    } else {
+        var Html =
+            "<dl>" +
+            "<dt>" + RegExpMatches.Title + "</dt>" +
+            "<dd>" +
+            GetHtml_From_Matches(RegExpMatches.Matches) +
+            "</dd>" +
+            "</dl>";
+        return Html;
+    }
+}
+
+function GetHtml_From_Matches(
+    Matches) {
+    
+    if (Matches == null) {
+        return "Matches: null";
+    } else if (Matches.length == 0) {
+        return "Matches: No item";
+    } else {
+        //nop
+    }
+    
+    var Html;
+    Html = "<table>";
+    Html = Html + "<tr>";
+    Html = Html + "<th>No.</th>";
+    Html = Html + "<th>Value</th>";
+    Html = Html + "</tr>";
+    
+    for (var Index = 0; Index < Matches.length; Index++) {
+        Html = Html + "<tr>";
+        Html = Html + "<td>" + Index.toString() + "</td>";
+        Html = Html + "<td>" + Matches[Index] + "</td>";
+        Html = Html + "</tr>";
+    }
+    
+    Html = Html + "</table>";
+    
+    return Html;
+}
+-->
+</script>
+
+</head>
+
+<body style="margin:0">
+
+<table width="100%">
+
+<colgroup>
+<col width="100pt"></col>
+<col></col>
+</colgroup>
+
+<tr>
+<td>SourceString:</td>
+<td><textarea id="textareaSourceString" rows="10" cols="50" style="width:100%"></textarea></td>
+</tr>
+
+<tr>
+<td>Patterns:</td>
+<td>Text, Execute: Title(Tab)Pattern(Tab)IgnoreCase(Tab)GlobalMatch(Tab)MultiLine(Newline)</td>
+</tr>
+
+<tr>
+<td>Patterns:</td>
+<td>Replace: ReplaceString(Tab)Pattern(Tab)IgnoreCase(Tab)GlobalMatch(Tab)MultiLine(Newline)</td>
+</tr>
+
+<tr>
+<td>Patterns:</td>
+<td><textarea id="textareaPatterns" rows="10" cols="50" style="width:100%"></textarea></td>
+</tr>
+
+<tr>
+<td></td>
+<td>
+<button id="btnTest" onclick="btnTest_OnClick();">Test (All)</button>
+<button id="btnTestTrue" onclick="btnTestTrue_OnClick();">Test (True only)</button>
+<button id="btnReplace" onclick="btnReplace_OnClick();">Replace</button>
+<button id="btnExecute" onclick="btnExecute_OnClick();">Execute</button>
+</td>
+</tr>
+
+<tr>
+<td>Result:</td>
+<td id="tdResult"></td>
+</tr>
+
+</table>
+
+</body>
+
+</html>
