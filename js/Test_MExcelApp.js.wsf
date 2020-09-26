@@ -2,18 +2,24 @@
 <package>
     <job id="Test_GetOpenFileName">
         <script language="jscript" src="MExcelApp.js" />
+        <script language="jscript" src="Test_MExcelApp.js" />
+        <script language="jscript" src="DebugPrint.js" />
         <script language="jscript">
             Test_GetOpenFileName();
         </script>
     </job>
     <job id="Test_GetSaveAsFileName">
         <script language="jscript" src="MExcelApp.js" />
+        <script language="jscript" src="Test_MExcelApp.js" />
+        <script language="jscript" src="DebugPrint.js" />
         <script language="jscript">
             Test_GetSaveAsFileName();
         </script>
     </job>
     <job id="Test_GetFolderName">
         <script language="jscript" src="MExcelApp.js" />
+        <script language="jscript" src="Test_MExcelApp.js" />
+        <script language="jscript" src="DebugPrint.js" />
         <script language="jscript">
             Test_GetFolderName();
         </script>

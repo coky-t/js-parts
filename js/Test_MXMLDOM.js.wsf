@@ -2,6 +2,10 @@
 <package>
     <job id="Test_HexAndBase64">
         <script language="jscript" src="MXMLDOM.js" />
+        <script language="jscript" src="Test_MXMLDOM.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript" src="DebugPrintBinary.js" />
+        <script language="jscript" src="TestBinary.js" />
         <script language="jscript">
             Test_HexAndBase64();
         </script>

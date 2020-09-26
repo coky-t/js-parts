@@ -100,28 +100,3 @@ function OpenAndSendAndResponseText(
         return "";
     }
 }
-
-//
-// --- Test ---
-//
-
-function Test_HttpGet(Url) {
-    if (Url == "") { return; }
-    
-    var Text;
-    Text = HttpGet(Url, "");
-    Debug_Print(Text);
-}
-
-function Test_HttpPost(Url, Body) {
-    if (Url == "") { return; }
-    if (Body == "") { return; }
-    
-    var Text;
-    Text = HttpPost(Url, Body);
-    Debug_Print(Text);
-}
-
-function Debug_Print(Str) {
-    WScript.Echo(Str);
-}

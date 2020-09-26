@@ -472,6 +472,62 @@ function WriteAndSaveToFile(
 }
 
 //
+// === Text / Binary ===
+//
+
+//
+// GetTextWFromBinary
+// - Return a string value (Unicode) that contains the text in characters.
+//
+// GetTextAFromBinary
+// - Return a string value (ASCII) that contains the text in characters.
+//
+// GetTextUTF8FromBinary
+// - Return a string value (UTF-8) that contains the text in characters.
+//
+
+//
+// Binary:
+//   Required. A Variant that contains an array of bytes.
+//
+
+function GetTextWFromBinary(Binary) {
+    return GetTextFromBinary(Binary, "unicode");
+}
+
+function GetTextAFromBinary(Binary) {
+    return GetTextFromBinary(Binary, "iso-8859-1");
+}
+
+function GetTextUTF8FromBinary(Binary) {
+    return GetTextFromBinary(Binary, "utf-8");
+}
+
+//
+// GetBinaryFromTextW
+// GetBinaryFromTextA
+// GetBinaryFromTextUTF8
+// - Return a variant that contains an array of bytes.
+//
+
+//
+// Text:
+//   Required. A String value that contains the text in characters.
+//
+
+function GetBinaryFromTextW(Text) {
+    return GetBinaryFromText(Text, "unicode");
+}
+
+function GetBinaryFromTextA(Text) {
+    return GetBinaryFromText(Text, "iso-8859-1");
+}
+
+function GetBinaryFromTextUTF8(Text) {
+    return GetBinaryFromText(Text, "utf-8");
+}
+
+//
 // --- Text / Binary ---
 //
 
@@ -569,150 +625,4 @@ function GetBinaryFromText(Text, Charset_) {
         Binary = null;
     }
     return Binary;
-}
-
-//
-// --- Test ---
-//
-
-function Test_TextFileW(FileName) {
-    if (FileName == "") { return; }
-    
-    var Text;
-    
-    Text = "WriteTextFileW\r\n";
-    WriteTextFileW(FileName, Text);
-    Text = ReadTextFileW(FileName);
-    Debug_Print(Text);
-    
-    Text = "AppendTextFileW\r\n";
-    AppendTextFileW(FileName, Text);
-    Text = ReadTextFileW(FileName);
-    Debug_Print(Text);
-}
-
-function Test_TextFileA(FileName) {
-    if (FileName == "") { return; }
-    
-    var Text;
-    
-    Text = "WriteTextFileA\r\n";
-    WriteTextFileA(FileName, Text);
-    Text = ReadTextFileA(FileName);
-    Debug_Print(Text);
-    
-    Text = "AppendTextFileA\r\n";
-    AppendTextFileA(FileName, Text);
-    Text = ReadTextFileA(FileName);
-    Debug_Print(Text);
-}
-
-function Test_TextFileUTF8(FileName) {
-    if (FileName == "") { return; }
-    
-    var Text;
-    
-    Text = "WriteTextFileUTF8\r\n";
-    WriteTextFileUTF8(FileName, Text, true);
-    Text = ReadTextFileUTF8(FileName);
-    Debug_Print(Text);
-    
-    Text = "AppendTextFileUTF8\r\n";
-    AppendTextFileUTF8(FileName, Text, true);
-    Text = ReadTextFileUTF8(FileName);
-    Debug_Print(Text);
-}
-
-function Test_TextFileUTF8_withoutBOM(FileName) {
-    if (FileName == "") { return; }
-    
-    var Text;
-    
-    Text = "WriteTextFileUTF8 (w/o BOM)\r\n";
-    WriteTextFileUTF8(FileName, Text, false);
-    Text = ReadTextFileUTF8(FileName);
-    Debug_Print(Text);
-    
-    Text = "AppendTextFileUTF8 (w/o BOM)\r\n";
-    AppendTextFileUTF8(FileName, Text, false);
-    Text = ReadTextFileUTF8(FileName);
-    Debug_Print(Text);
-}
-
-function Test_BinaryFile(FileName) {
-    if (FileName == "") { return; }
-    
-    var ArrayB;
-    var Binary;
-    
-    ArrayB = GetTestArrayB();
-    WriteBinaryFileFromArrayB(FileName, ArrayB);
-    Binary = ReadBinaryFile(FileName, 0);
-    Debug_Print_Binary(Binary);
-    
-    ArrayB = GetTestArrayB();
-    AppendBinaryFileFromArrayB(FileName, ArrayB);
-    Binary = ReadBinaryFile(FileName, 0);
-    Debug_Print_Binary(Binary);
-}
-
-function GetTestArrayB() {
-    var ArrayB = new Array();
-    for (var Index = 0; Index < 256; Index++) {
-        ArrayB.push(Index);
-    }
-    return ArrayB;
-}
-
-function Test_GetBinaryGetTextA() {
-    Test_GetBinaryGetTextT("iso-8859-1");
-}
-
-function Test_GetBinaryGetTextW() {
-    Test_GetBinaryGetTextT("unicode");
-}
-
-function Test_GetBinaryGetTextUTF8() {
-    Test_GetBinaryGetTextT("utf-8");
-}
-
-function Test_GetBinaryGetTextT(Charset) {
-    var Text0;
-    Text0 = "abcdefghijklmnopqrstuvwxyz";
-    
-    var Binary;
-    Binary = GetBinaryFromText(Text0, Charset);
-    Debug_Print_Binary(Binary);
-    
-    var Text;
-    Text = GetTextFromBinary(Binary, Charset);
-    Debug_Print(Text);
-}
-
-function Debug_Print_Binary(Binary) {
-    var HexText;
-    var XMLDOM = new ActiveXObject("MSXML2.DOMDocument");
-    var Elem = XMLDOM.createElement("tmp");
-    with (Elem) {
-        dataType = "bin.hex";
-        nodeTypedValue = Binary;
-        HexText = text;
-    }
-    
-    var Text = "";
-    for (var Index1 = 0; Index1 < HexText.length; Index1 += 32) {
-        for (var Index2 = Index1; 
-            Index2 < Math.min(Index1 + 31, HexText.length); Index2 += 2) {
-            Text = Text + HexText.substr(Index2, 2) + " ";
-        }
-        Text = Text + "\r\n";
-    }
-    
-    Debug_Print("-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
-    Debug_Print(Text);
-    Debug_Print("-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
-}
-
-function Debug_Print(Str) {
-    WScript.Echo(Str);
 }

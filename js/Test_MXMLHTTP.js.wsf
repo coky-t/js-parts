@@ -2,27 +2,18 @@
 <package>
     <job id="Test_HttpGet">
         <script language="jscript" src="MXMLHTTP.js" />
-        <script language="vbscript">
-            Function GetUrl()
-                GetUrl = InputBox("Url")
-            End Function
-        </script>
+        <script language="jscript" src="Test_MXMLHTTP.js" />
+        <script language="jscript" src="DebugPrint.js" />
         <script language="jscript">
-            Test_HttpGet(GetUrl());
+            Test_HttpGet();
         </script>
     </job>
     <job id="Test_HttpPost">
         <script language="jscript" src="MXMLHTTP.js" />
-        <script language="vbscript">
-            Function GetUrl()
-                GetUrl = InputBox("Url")
-            End Function
-            Function GetBody()
-                GetBody = InputBox("Body")
-            End Function
-        </script>
+        <script language="jscript" src="Test_MXMLHTTP.js" />
+        <script language="jscript" src="DebugPrint.js" />
         <script language="jscript">
-            Test_HttpPost(GetUrl(), GetBody());
+            Test_HttpPost();
         </script>
     </job>
 </package>

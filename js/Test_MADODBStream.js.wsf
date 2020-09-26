@@ -2,73 +2,69 @@
 <package>
     <job id="Test_TextFileW">
         <script language="jscript" src="MADODBStream.js" />
-        <script language="vbscript">
-            Function GetSaveAsFileName()
-                GetSaveAsFileName = InputBox("SaveAsFileName")
-            End Function
-        </script>
+        <script language="jscript" src="Test_MADODBStream.js" />
+        <script language="jscript" src="DebugPrint.js" />
         <script language="jscript">
-            Test_TextFileW(GetSaveAsFileName());
+            Test_TextFileW();
         </script>
     </job>
     <job id="Test_TextFileA">
         <script language="jscript" src="MADODBStream.js" />
-        <script language="vbscript">
-            Function GetSaveAsFileName()
-                GetSaveAsFileName = InputBox("SaveAsFileName")
-            End Function
-        </script>
+        <script language="jscript" src="Test_MADODBStream.js" />
+        <script language="jscript" src="DebugPrint.js" />
         <script language="jscript">
-            Test_TextFileA(GetSaveAsFileName());
+            Test_TextFileA();
         </script>
     </job>
     <job id="Test_TextFileUTF8">
         <script language="jscript" src="MADODBStream.js" />
-        <script language="vbscript">
-            Function GetSaveAsFileName()
-                GetSaveAsFileName = InputBox("SaveAsFileName")
-            End Function
-        </script>
+        <script language="jscript" src="Test_MADODBStream.js" />
+        <script language="jscript" src="DebugPrint.js" />
         <script language="jscript">
-            Test_TextFileUTF8(GetSaveAsFileName());
+            Test_TextFileUTF8();
         </script>
     </job>
     <job id="Test_TextFileUTF8_withoutBOM">
         <script language="jscript" src="MADODBStream.js" />
-        <script language="vbscript">
-            Function GetSaveAsFileName()
-                GetSaveAsFileName = InputBox("SaveAsFileName")
-            End Function
-        </script>
+        <script language="jscript" src="Test_MADODBStream.js" />
+        <script language="jscript" src="DebugPrint.js" />
         <script language="jscript">
-            Test_TextFileUTF8_withoutBOM(GetSaveAsFileName());
+            Test_TextFileUTF8_withoutBOM();
         </script>
     </job>
     <job id="Test_BinaryFile">
         <script language="jscript" src="MADODBStream.js" />
-        <script language="vbscript">
-            Function GetSaveAsFileName()
-                GetSaveAsFileName = InputBox("SaveAsFileName")
-            End Function
-        </script>
+        <script language="jscript" src="Test_MADODBStream.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript" src="DebugPrintBinary.js" />
+        <script language="jscript" src="TestBinary.js" />
         <script language="jscript">
-            Test_BinaryFile(GetSaveAsFileName());
-        </script>
-    </job>
-    <job id="Test_GetBinaryGetTextA">
-        <script language="jscript" src="MADODBStream.js" />
-        <script language="jscript">
-            Test_GetBinaryGetTextA();
+            Test_BinaryFile();
         </script>
     </job>
     <job id="Test_GetBinaryGetTextW">
         <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="Test_MADODBStream.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript" src="DebugPrintBinary.js" />
         <script language="jscript">
             Test_GetBinaryGetTextW();
         </script>
     </job>
+    <job id="Test_GetBinaryGetTextA">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="Test_MADODBStream.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript" src="DebugPrintBinary.js" />
+        <script language="jscript">
+            Test_GetBinaryGetTextA();
+        </script>
+    </job>
     <job id="Test_GetBinaryGetTextUTF8">
         <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="Test_MADODBStream.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript" src="DebugPrintBinary.js" />
         <script language="jscript">
             Test_GetBinaryGetTextUTF8();
         </script>

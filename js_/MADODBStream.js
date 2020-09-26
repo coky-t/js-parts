@@ -472,6 +472,62 @@ function WriteAndSaveToFile(
 }
 
 //
+// === Text / Binary ===
+//
+
+//
+// GetTextWFromBinary
+// - Return a string value (Unicode) that contains the text in characters.
+//
+// GetTextAFromBinary
+// - Return a string value (ASCII) that contains the text in characters.
+//
+// GetTextUTF8FromBinary
+// - Return a string value (UTF-8) that contains the text in characters.
+//
+
+//
+// Binary:
+//   Required. A Variant that contains an array of bytes.
+//
+
+function GetTextWFromBinary(Binary) {
+    return GetTextFromBinary(Binary, "unicode");
+}
+
+function GetTextAFromBinary(Binary) {
+    return GetTextFromBinary(Binary, "iso-8859-1");
+}
+
+function GetTextUTF8FromBinary(Binary) {
+    return GetTextFromBinary(Binary, "utf-8");
+}
+
+//
+// GetBinaryFromTextW
+// GetBinaryFromTextA
+// GetBinaryFromTextUTF8
+// - Return a variant that contains an array of bytes.
+//
+
+//
+// Text:
+//   Required. A String value that contains the text in characters.
+//
+
+function GetBinaryFromTextW(Text) {
+    return GetBinaryFromText(Text, "unicode");
+}
+
+function GetBinaryFromTextA(Text) {
+    return GetBinaryFromText(Text, "iso-8859-1");
+}
+
+function GetBinaryFromTextUTF8(Text) {
+    return GetBinaryFromText(Text, "utf-8");
+}
+
+//
 // --- Text / Binary ---
 //
 
@@ -569,150 +625,4 @@ function GetBinaryFromText(Text, Charset_) {
         Binary = null;
     }
     return Binary;
-}
-
-//
-// --- Test ---
-//
-
-function Test_MADODBStream_TextFileW(FileName) {
-    if (FileName == "") { return; }
-    
-    var Text;
-    
-    Text = "WriteTextFileW\r\n";
-    MADODBStream_WriteTextFileW(FileName, Text);
-    Text = MADODBStream_ReadTextFileW(FileName);
-    MADODBStream_Debug_Print(Text);
-    
-    Text = "AppendTextFileW\r\n";
-    MADODBStream_AppendTextFileW(FileName, Text);
-    Text = MADODBStream_ReadTextFileW(FileName);
-    MADODBStream_Debug_Print(Text);
-}
-
-function Test_MADODBStream_TextFileA(FileName) {
-    if (FileName == "") { return; }
-    
-    var Text;
-    
-    Text = "WriteTextFileA\r\n";
-    MADODBStream_WriteTextFileA(FileName, Text);
-    Text = MADODBStream_ReadTextFileA(FileName);
-    MADODBStream_Debug_Print(Text);
-    
-    Text = "AppendTextFileA\r\n";
-    MADODBStream_AppendTextFileA(FileName, Text);
-    Text = MADODBStream_ReadTextFileA(FileName);
-    MADODBStream_Debug_Print(Text);
-}
-
-function Test_MADODBStream_TextFileUTF8(FileName) {
-    if (FileName == "") { return; }
-    
-    var Text;
-    
-    Text = "WriteTextFileUTF8\r\n";
-    MADODBStream_WriteTextFileUTF8(FileName, Text, true);
-    Text = MADODBStream_ReadTextFileUTF8(FileName);
-    MADODBStream_Debug_Print(Text);
-    
-    Text = "AppendTextFileUTF8\r\n";
-    MADODBStream_AppendTextFileUTF8(FileName, Text, true);
-    Text = MADODBStream_ReadTextFileUTF8(FileName);
-    MADODBStream_Debug_Print(Text);
-}
-
-function Test_MADODBStream_TextFileUTF8_withoutBOM(FileName) {
-    if (FileName == "") { return; }
-    
-    var Text;
-    
-    Text = "WriteTextFileUTF8 (w/o BOM)\r\n";
-    MADODBStream_WriteTextFileUTF8(FileName, Text, false);
-    Text = MADODBStream_ReadTextFileUTF8(FileName);
-    MADODBStream_Debug_Print(Text);
-    
-    Text = "AppendTextFileUTF8 (w/o BOM)\r\n";
-    MADODBStream_AppendTextFileUTF8(FileName, Text, false);
-    Text = MADODBStream_ReadTextFileUTF8(FileName);
-    MADODBStream_Debug_Print(Text);
-}
-
-function Test_MADODBStream_BinaryFile(FileName) {
-    if (FileName == "") { return; }
-    
-    var ArrayB;
-    var Binary;
-    
-    ArrayB = GetTestArrayB();
-    MADODBStream_WriteBinaryFileFromArrayB(FileName, ArrayB);
-    Binary = MADODBStream_ReadBinaryFile(FileName, 0);
-    MADODBStream_Debug_Print_Binary(Binary);
-    
-    ArrayB = GetTestArrayB();
-    MADODBStream_AppendBinaryFileFromArrayB(FileName, ArrayB);
-    Binary = MADODBStream_ReadBinaryFile(FileName, 0);
-    MADODBStream_Debug_Print_Binary(Binary);
-}
-
-function GetTestArrayB() {
-    var ArrayB = new Array();
-    for (var Index = 0; Index < 256; Index++) {
-        ArrayB.push(Index);
-    }
-    return ArrayB;
-}
-
-function Test_GetBinaryGetTextA() {
-    Test_GetBinaryGetTextT("iso-8859-1");
-}
-
-function Test_GetBinaryGetTextW() {
-    Test_GetBinaryGetTextT("unicode");
-}
-
-function Test_GetBinaryGetTextUTF8() {
-    Test_GetBinaryGetTextT("utf-8");
-}
-
-function Test_GetBinaryGetTextT(Charset) {
-    var Text0;
-    Text0 = "abcdefghijklmnopqrstuvwxyz";
-    
-    var Binary;
-    Binary = GetBinaryFromText(Text0, Charset);
-    MADODBStream_Debug_Print_Binary(Binary);
-    
-    var Text;
-    Text = GetTextFromBinary(Binary, Charset);
-    MADODBStream_Debug_Print(Text);
-}
-
-function MADODBStream_Debug_Print_Binary(Binary) {
-    var HexText;
-    var XMLDOM = new ActiveXObject("MSXML2.DOMDocument");
-    var Elem = XMLDOM.createElement("tmp");
-    with (Elem) {
-        dataType = "bin.hex";
-        nodeTypedValue = Binary;
-        HexText = text;
-    }
-    
-    var Text = "";
-    for (var Index1 = 0; Index1 < HexText.length; Index1 += 32) {
-        for (var Index2 = Index1; 
-            Index2 < Math.min(Index1 + 31, HexText.length); Index2 += 2) {
-            Text = Text + HexText.substr(Index2, 2) + " ";
-        }
-        Text = Text + "\r\n";
-    }
-    
-    MADODBStream_Debug_Print("-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
-    MADODBStream_Debug_Print(Text);
-    MADODBStream_Debug_Print("-- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --");
-}
-
-function MADODBStream_Debug_Print(Str) {
-    WScript.Echo(Str);
 }

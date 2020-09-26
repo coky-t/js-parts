@@ -1,25 +1,19 @@
 <?XML version="1.0" standalone="yes" ?>
 <package>
-    <job id="Test_MFileSystem_TextFileW">
+    <job id="Test_TextFileW">
         <script language="jscript" src="MFileSystem.js" />
-        <script language="vbscript">
-            Function GetSaveAsFileName()
-                GetSaveAsFileName = InputBox("SaveAsFileName")
-            End Function
-        </script>
+        <script language="jscript" src="Test_MFileSystem.js" />
+        <script language="jscript" src="DebugPrint.js" />
         <script language="jscript">
-            Test_MFileSystem_TextFileW(GetSaveAsFileName());
+            Test_TextFileW();
         </script>
     </job>
-    <job id="Test_MFileSystem_TextFileA">
+    <job id="Test_TextFileA">
         <script language="jscript" src="MFileSystem.js" />
-        <script language="vbscript">
-            Function GetSaveAsFileName()
-                GetSaveAsFileName = InputBox("SaveAsFileName")
-            End Function
-        </script>
+        <script language="jscript" src="Test_MFileSystem.js" />
+        <script language="jscript" src="DebugPrint.js" />
         <script language="jscript">
-            Test_MFileSystem_TextFileA(GetSaveAsFileName());
+            Test_TextFileA();
         </script>
     </job>
 </package>

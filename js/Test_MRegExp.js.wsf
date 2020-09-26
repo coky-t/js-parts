@@ -2,86 +2,27 @@
 <package>
     <job id="Test_RegExp_Test">
         <script language="jscript" src="MRegExp.js" />
-        <script language="vbscript">
-            Function GetSourceString()
-                GetSourceString = InputBox("SourceString")
-            End Function
-            Function GetPattern()
-                GetPattern = InputBox("Pattern")
-            End Function
-            Function GetIgnoreCase()
-                GetIgnoreCase = (MsgBox("IgnoreCase", vbYesNo) = vbYes)
-            End Function
-            Function GetMultiLine()
-                GetMultiLine = (MsgBox("MultiLine", vbYesNo) = vbYes)
-            End Function
-        </script>
+        <script language="jscript" src="Test_MRegExp.js" />
+        <script language="jscript" src="DebugPrint.js" />
         <script language="jscript">
-            Test_RegExp_Test(
-                GetSourceString(),
-                GetPattern(),
-                GetIgnoreCase(),
-                GetMultiLine());
+            Test_RegExp_Test();
         </script>
     </job>
     <job id="Test_RegExp_Replace">
         <script language="jscript" src="MRegExp.js" />
-        <script language="vbscript">
-            Function GetSourceString()
-                GetSourceString = InputBox("SourceString")
-            End Function
-            Function GetReplaceString()
-                GetReplaceString = InputBox("ReplaceString")
-            End Function
-            Function GetPattern()
-                GetPattern = InputBox("Pattern")
-            End Function
-            Function GetIgnoreCase()
-                GetIgnoreCase = (MsgBox("IgnoreCase", vbYesNo) = vbYes)
-            End Function
-            Function GetGlobalMatch()
-                GetGlobalMatch = (MsgBox("GlobalMatch", vbYesNo) = vbYes)
-            End Function
-            Function GetMultiLine()
-                GetMultiLine = (MsgBox("MultiLine", vbYesNo) = vbYes)
-            End Function
-        </script>
+        <script language="jscript" src="Test_MRegExp.js" />
+        <script language="jscript" src="DebugPrint.js" />
         <script language="jscript">
-            Test_RegExp_Replace(
-                GetSourceString(),
-                GetReplaceString(),
-                GetPattern(),
-                GetIgnoreCase(),
-                GetGlobalMatch(),
-                GetMultiLine());
+            Test_RegExp_Replace();
         </script>
     </job>
     <job id="Test_RegExp_Execute">
         <script language="jscript" src="MRegExp.js" />
-        <script language="vbscript">
-            Function GetSourceString()
-                GetSourceString = InputBox("SourceString")
-            End Function
-            Function GetPattern()
-                GetPattern = InputBox("Pattern")
-            End Function
-            Function GetIgnoreCase()
-                GetIgnoreCase = (MsgBox("IgnoreCase", vbYesNo) = vbYes)
-            End Function
-            Function GetGlobalMatch()
-                GetGlobalMatch = (MsgBox("GlobalMatch", vbYesNo) = vbYes)
-            End Function
-            Function GetMultiLine()
-                GetMultiLine = (MsgBox("MultiLine", vbYesNo) = vbYes)
-            End Function
-        </script>
+        <script language="jscript" src="Test_MRegExp.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript" src="DebugPrintMatches.js" />
         <script language="jscript">
-            Test_RegExp_Execute(
-                GetSourceString(),
-                GetPattern(),
-                GetIgnoreCase(),
-                GetGlobalMatch(),
-                GetMultiLine());
+            Test_RegExp_Execute();
         </script>
     </job>
 </package>

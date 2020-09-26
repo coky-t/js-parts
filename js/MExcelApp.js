@@ -168,29 +168,3 @@ function GetFolderName(Title_) {
     }
     return FolderName;
 }
-
-//
-// --- Test ---
-//
-
-function Test_GetOpenFileName() {
-    var FileName;
-    FileName = GetOpenFileName("", 0, "");
-    Debug_Print(FileName);
-}
-
-function Test_GetSaveAsFileName() {
-    var FileName;
-    FileName = GetSaveAsFileName("", "", 0, "");
-    Debug_Print(FileName);
-}
-
-function Test_GetFolderName() {
-    var FolderName;
-    FolderName = GetFolderName("");
-    Debug_Print(FolderName);
-}
-
-function Debug_Print(Str) {
-    WScript.Echo(Str);
-}
