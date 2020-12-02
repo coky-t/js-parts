@@ -1,0 +1,23 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_GetMatchingLines_Apache20">
+        <script language="jscript" src="SpdxLicenseTemplateText.js" />
+        <script language="jscript" src="SpdxLicenseText.js" />
+        <script language="jscript" src="MRegExp.js" />
+        <script language="jscript" src="Test_SpdxLicenseTemplateText.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_GetMatchingLines_Apache20();
+        </script>
+    </job>
+    <job id="Test_GetMatchingLines_MIT">
+        <script language="jscript" src="SpdxLicenseTemplateText.js" />
+        <script language="jscript" src="SpdxLicenseText.js" />
+        <script language="jscript" src="MRegExp.js" />
+        <script language="jscript" src="Test_SpdxLicenseTemplateText.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_GetMatchingLines_MIT();
+        </script>
+    </job>
+</package>

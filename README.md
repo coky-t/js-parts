@@ -113,3 +113,14 @@ Microsoft Excel X.X Object Library
 ### SpdxLicenseText.js - RegExp Matching Pattern Generator
 
 - [Base](js/SpdxLicenseText.js)
+- [HTA](js.hta/Test_SpdxLicenseText.js.hta)
+- [HTML](docs/js.html/Test_SpdxLicenseText.js.html)
+- [HTML (github.io)](https://coky-t.github.io/js-parts/js.html/Test_SpdxLicenseText.js.html)
+
+### SpdxLicenseTemplateText.js - RegExp Matching Pattern Generator
+
+- [Base](js/SpdxLicenseTempleteText.js)
+- [HTA](js.hta/Test_SpdxLicenseTempleteText.js.hta)
+- [HTML](docs/js.html/Test_SpdxLicenseTempleteText.js.html)
+- [HTML (github.io)](https://coky-t.github.io/js-parts/js.html/Test_SpdxLicenseTempleteText.js.html)
+
