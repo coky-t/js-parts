@@ -185,7 +185,7 @@ function Debug_Print_RegExpMatches(RegExpMatches) {
     if (RegExpMatches == null) {
         Debug_Print("RegExpMatches: null");
     } else {
-        Debug_Print("Title: " + RegExpMatches.Title);
+        Debug_Print("PatternName: " + RegExpMatches.PatternName);
         Debug_Print_Matches(RegExpMatches.Matches);
     }
 }

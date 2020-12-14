@@ -45,7 +45,7 @@
 //
 // ParametersListString:
 //   For Execute, Test:
-//     (Title)(Tab)Pattern(Tab)IgnoreCase(Tab)GlobalMatch(Tab)MultiLine(Newline)
+//     PatternName(Tab)Pattern(Tab)IgnoreCase(Tab)GlobalMatch(Tab)MultiLine(Newline)
 //   For Replace:
 //     ReplaceString(Tab)Pattern(Tab)IgnoreCase(Tab)GlobalMatch(Tab)MultiLine(Newline)
 //
@@ -104,20 +104,20 @@ function RegExp_Params_Execute(
     var LB = 0;
     var UB = Params.length - 1;
     
-    var Title = "";
+    var PatternName = "";
     var Pattern = "";
     var IgnoreCase = false;
     var GlobalMatch = false;
     var MultiLine = false;
     
-    Title = Params[LB];
+    PatternName = Params[LB];
     if (LB + 1 <= UB) { Pattern = Params[LB + 1]; }
     if (LB + 2 <= UB) { IgnoreCase = eval(Params[LB + 2]); }
     if (LB + 3 <= UB) { GlobalMatch = eval(Params[LB + 3]); }
     if (LB + 4 <= UB) { MultiLine = eval(Params[LB + 4]); }
     
     var RegExpMatches = new Object;
-    RegExpMatches.Title = Title;
+    RegExpMatches.PatternName = PatternName;
     RegExpMatches.Matches = 
         RegExp_Execute(
             SourceString,
@@ -216,18 +216,18 @@ function RegExp_Params_Test(
     var LB = 0;
     var UB = Params.length -1;
     
-    var Title = "";
+    var PatternName = "";
     var Pattern = "";
     var IgnoreCase = false;
     //var GlobalMatch = false;
     var MultiLine = false;
     
-    Title = Params[LB];
+    PatternName = Params[LB];
     if (LB + 1 <= UB) { Pattern = Params[LB + 1]; }
     if (LB + 2 <= UB) { IgnoreCase = eval(Params[LB + 2]); }
     //if (LB + 3 <= UB) { GlobalMatch = eval(Params[LB + 3]); }
     if (LB + 4 <= UB) { MultiLine = eval(Params[LB + 4]); }
     
-    return Title + "\t" +
+    return PatternName + "\t" +
         RegExp_Test(SourceString, Pattern, IgnoreCase, MultiLine);
 }
