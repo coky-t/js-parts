@@ -1,0 +1,53 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_CRegExps_Test">
+        <script language="jscript" src="MRegExps.js" />
+        <script language="jscript" src="Test_MRegExps.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CRegExps_Test();
+        </script>
+    </job>
+    <job id="Test_CRegExp_Test">
+        <script language="jscript" src="MRegExps.js" />
+        <script language="jscript" src="Test_MRegExps.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CRegExp_Test();
+        </script>
+    </job>
+    <job id="Test_CRegExps_Replace">
+        <script language="jscript" src="MRegExps.js" />
+        <script language="jscript" src="Test_MRegExps.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CRegExps_Replace();
+        </script>
+    </job>
+    <job id="Test_CRegExp_Replace">
+        <script language="jscript" src="MRegExps.js" />
+        <script language="jscript" src="Test_MRegExps.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CRegExp_Replace();
+        </script>
+    </job>
+    <job id="Test_CRegExps_Execute">
+        <script language="jscript" src="MRegExps.js" />
+        <script language="jscript" src="Test_MRegExps.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript" src="DebugPrintMatches.js" />
+        <script language="jscript">
+            Test_CRegExps_Execute();
+        </script>
+    </job>
+    <job id="Test_CRegExp_Execute">
+        <script language="jscript" src="MRegExps.js" />
+        <script language="jscript" src="Test_MRegExps.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript" src="DebugPrintMatches.js" />
+        <script language="jscript">
+            Test_CRegExp_Execute();
+        </script>
+    </job>
+</package>
