@@ -1,0 +1,13 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_FilterFiles">
+        <script language="jscript" src="MFiles.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="MFolder.js" />
+        <script language="jscript" src="Test_MFiles.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_FilterFiles();
+        </script>
+    </job>
+</package>
