@@ -1,0 +1,63 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_CFile_Binary">
+        <script language="jscript" src="CFile.js" />
+        <script language="jscript" src="Test_CFile.js" />
+        <script language="jscript" src="TestBinary.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript" src="DebugPrintBinary.js" />
+        <script language="jscript">
+            Test_CFile_Binary();
+        </script>
+    </job>
+    <job id="Test_CFile_File">
+        <script language="jscript" src="CFile.js" />
+        <script language="jscript" src="Test_CFile.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CFile_File();
+        </script>
+    </job>
+    <job id="Test_CFile_Path">
+        <script language="jscript" src="CFile.js" />
+        <script language="jscript" src="Test_CFile.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CFile_Path();
+        </script>
+    </job>
+    <job id="Test_CFile_TextA">
+        <script language="jscript" src="CFile.js" />
+        <script language="jscript" src="Test_CFile.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CFile_TextA();
+        </script>
+    </job>
+    <job id="Test_CFile_TextB">
+        <script language="jscript" src="CFile.js" />
+        <script language="jscript" src="Test_CFile.js" />
+        <script language="jscript" src="TestBinary.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript" src="DebugPrintBinary.js" />
+        <script language="jscript">
+            Test_CFile_TextB();
+        </script>
+    </job>
+    <job id="Test_CFile_TextUTF8">
+        <script language="jscript" src="CFile.js" />
+        <script language="jscript" src="Test_CFile.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CFile_TextUTF8();
+        </script>
+    </job>
+    <job id="Test_CFile_TextW">
+        <script language="jscript" src="CFile.js" />
+        <script language="jscript" src="Test_CFile.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CFile_TextW();
+        </script>
+    </job>
+</package>

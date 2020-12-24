@@ -20,6 +20,24 @@
 // IN THE SOFTWARE.
 //
 
+function GetTestBinary() {
+    var HexText = GetTestHexText();
+    
+    with (new ActiveXObject("MSXML2.DOMDocument").createElement("tmp")) {
+        dataType = "bin.hex";
+        text = HexText;
+        return nodeTypedValue;
+    }
+}
+
+function GetTestStringB() {
+    var StringB = "";
+    for (var Index = 0; Index < 256; Index++) {
+        StringB = StringB + String.fromCharCode(Index);
+    }
+    return StringB;
+}
+
 function GetTestArrayB() {
     var ArrayB = new Array();
     for (var Index = 0; Index < 256; Index++) {
