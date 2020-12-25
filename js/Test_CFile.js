@@ -94,14 +94,15 @@ function Test_CFile_File_Core(FileName) {
     }
     with (new CFile) {
         setFile(File);
+        Debug_Print("-----");
         Debug_Print("Attributes: " + getAttributes());
-        // BaseName
+        Debug_Print("BaseName: " + getBaseName());
         Debug_Print("DateCreated: " + getDateCreated());
         Debug_Print("DateLastAccessed: " + getDateLastAccessed());
         Debug_Print("DateLastModified: " + getDateLastModified());
         Debug_Print("Drive.Path: " + getDrive().Path);
         Debug_Print("DriveName: " + getDriveName());
-        // ExtensionName
+        Debug_Print("ExtensionName: " + getExtensionName());
         Debug_Print("Name: " + getName());
         Debug_Print("ParentFolder.Path: " + getParentFolder().Path);
         Debug_Print("ParentFolderName: " + getParentFolderName());
@@ -115,21 +116,22 @@ function Test_CFile_File_Core(FileName) {
 function Test_CFile_Path_Core(FileName) {
     with (new CFile) {
         setPath(FileName);
-        // Attributes
+        Debug_Print("-----");
+        Debug_Print("Attributes: " + getAttributes());
         Debug_Print("BaseName: " + getBaseName());
-        // DateCreated
-        // DateLastAccessed
-        // DateLastModified
+        Debug_Print("DateCreated: " + getDateCreated());
+        Debug_Print("DateLastAccessed: " + getDateLastAccessed());
+        Debug_Print("DateLastModified: " + getDateLastModified());
         Debug_Print("Drive.Path: " + getDrive().Path);
         Debug_Print("DriveName: " + getDriveName());
         Debug_Print("ExtensionName: " + getExtensionName());
         Debug_Print("Name: " + getName());
         Debug_Print("ParentFolder.Path: " + getParentFolder().Path);
         Debug_Print("ParentFolderName: " + getParentFolderName());
-        // ShortName
-        // ShortPath
-        // Size
-        // TypeName
+        Debug_Print("ShortName: " + getShortName());
+        Debug_Print("ShortPath: " + getShortPath());
+        Debug_Print("Size: " + getSize());
+        Debug_Print("TypeName: " + getTypeName());
     }
 }
 

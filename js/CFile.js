@@ -259,11 +259,11 @@ getExtensionName: function() {
 //
 
 getFile: function() {
-    if (this.m_File == null) {
-        if (this.m_Path == "") { return null; }
-        this.m_File = this.getFileSystemObject().GetFile(this.m_Path);
+    if (this.m_File != null) {
+        return this.m_File;
+    } else if (this.m_Path != "") {
+        return this.getFileSystemObject().GetFile(this.m_Path);
     }
-    return this.m_File;
 },
 
 setFile: function(File_) {
@@ -273,7 +273,7 @@ setFile: function(File_) {
 
 //
 // Name
-// - Sets or returns the name of a specified file or folder.
+// - Sets or returns the name of a specified file.
 //
 // Reference:
 // https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/name-property-filesystemobject-object
@@ -290,7 +290,7 @@ getName: function() {
 
 setName: function(Name_) {
     this.Reset();
-    this.getFile().Name = Name_;
+    this.m_Path = getFileSystemObject().GetAbsolutePathName(Name_);
 },
 
 //
@@ -341,11 +341,11 @@ getParentFolderName: function() {
 //
 
 getPath: function() {
-    if (this.m_Path == "") {
-        if (this.m_File == null) { return null; }
-        this.m_Path = this.m_File.Path;
+    if (this.m_File != null) {
+        return this.m_File.Path;
+    } else if (this.m_Path != "") {
+        return this.m_Path;
     }
-    return this.m_Path;
 },
 
 setPath: function(Path_) {
@@ -694,7 +694,7 @@ Build: function(ParentFolderName, FileName) {
 
 //
 // Copy
-// - Copies a specified file or folder from one location to another.
+// - Copies a specified file from one location to another.
 //
 // Reference:
 // https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/copy-method-visual-basic-for-applications
@@ -793,7 +793,7 @@ Exists: function() {
 
 //
 // Move
-// - Moves a specified file or folder from one location to another.
+// - Moves a specified file from one location to another.
 //
 // Reference:
 // https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/move-method-filesystemobject-object
@@ -805,8 +805,9 @@ Move: function(Destination) {
         this.m_File.Move(Destination);
     } else if (this.m_Path != "") {
         this.getFileSystemObject().MoveFile(this.m_Path, Destination);
+        this.m_Path =
+            this.getFileSystemObject().GetAbsolutePathName(Destination);
     }
-    this.m_Path = Destination;
 },
 
 //
