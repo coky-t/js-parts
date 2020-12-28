@@ -713,6 +713,20 @@ Copy: function(
 },
 
 //
+// Create
+// - Creates a specified file.
+//
+// Reference:
+// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/createtextfile-method
+//
+
+Create: function() {
+    with (this.getFileSystemObject().CreateTextFile(this.getPath())) {
+        Close();
+    }
+},
+
+//
 // CreateTextFile
 // - Creates a specified file name and returns a TextStream object
 // that can be used to read from or write to the file.
@@ -790,6 +804,22 @@ Exists: function() {
 //    Title) {
 //    
 //},
+
+//
+// GetTempName
+// - Returns a randomly generated temporary file name that is useful
+//   for performing operations that require a temporary file.
+//
+// Reference:
+// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/gettempname-method
+//
+
+GetTempName: function() {
+    this.Reset();
+    with (this.getFileSystemObject()) {
+        m_Path = GetAbsolutePathName(GetTempName());
+    }
+},
 
 //
 // Move
