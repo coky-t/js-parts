@@ -1,0 +1,59 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_CFolder_Folder">
+        <script language="jscript" src="CFolder.js" />
+        <script language="jscript" src="Test_CFolder.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CFolder_Folder();
+        </script>
+    </job>
+    <job id="Test_CFolder_Files">
+        <script language="jscript" src="CFolder.js" />
+        <script language="jscript" src="Test_CFolder.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CFolder_Files();
+        </script>
+    </job>
+    <job id="Test_CFolder_FilesAll">
+        <script language="jscript" src="CFolder.js" />
+        <script language="jscript" src="Test_CFolder.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CFolder_FilesAll();
+        </script>
+    </job>
+    <job id="Test_CFolder_Path">
+        <script language="jscript" src="CFolder.js" />
+        <script language="jscript" src="Test_CFolder.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CFolder_Path();
+        </script>
+    </job>
+    <job id="Test_CFolder_SubFolders">
+        <script language="jscript" src="CFolder.js" />
+        <script language="jscript" src="Test_CFolder.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CFolder_SubFolders();
+        </script>
+    </job>
+    <job id="Test_CFolder_SubFoldersAll">
+        <script language="jscript" src="CFolder.js" />
+        <script language="jscript" src="Test_CFolder.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CFolder_SubFoldersAll();
+        </script>
+    </job>
+    <job id="Test_CFolder_TempFolder">
+        <script language="jscript" src="CFolder.js" />
+        <script language="jscript" src="Test_CFolder.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CFolder_TempFolder();
+        </script>
+    </job>
+</package>
