@@ -1,0 +1,10 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_CProgressTimer">
+        <script language="jscript" src="CProgressTimer.js" />
+        <script language="jscript" src="Test_CProgressTimer.js" />
+        <script language="jscript">
+            Test_CProgressTimer();
+        </script>
+    </job>
+</package>
