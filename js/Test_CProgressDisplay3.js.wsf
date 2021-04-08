@@ -1,0 +1,45 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_CProgressDisplay1">
+        <script language="jscript" src="CProgressDisplay3.js" />
+        <script language="jscript" src="Test_CProgressDisplay3.js" />
+        <script language="jscript">
+            Test_CProgressDisplay1();
+        </script>
+    </job>
+    <job id="Test_CProgressDisplay2">
+        <script language="jscript" src="CProgressDisplay3.js" />
+        <script language="jscript" src="Test_CProgressDisplay3.js" />
+        <script language="jscript">
+            Test_CProgressDisplay2();
+        </script>
+    </job>
+    <job id="Test_CProgressDisplay3">
+        <script language="jscript" src="CProgressDisplay3.js" />
+        <script language="jscript" src="Test_CProgressDisplay3.js" />
+        <script language="jscript">
+            Test_CProgressDisplay3();
+        </script>
+    </job>
+    <job id="Test_CProgressDisplay4">
+        <script language="jscript" src="CProgressDisplay3.js" />
+        <script language="jscript" src="Test_CProgressDisplay3.js" />
+        <script language="jscript">
+            Test_CProgressDisplay4();
+        </script>
+    </job>
+    <job id="Test_CProgressDisplay5">
+        <script language="jscript" src="CProgressDisplay3.js" />
+        <script language="jscript" src="Test_CProgressDisplay3.js" />
+        <script language="jscript">
+            Test_CProgressDisplay5();
+        </script>
+    </job>
+    <job id="Test_CProgressDisplay6">
+        <script language="jscript" src="CProgressDisplay3.js" />
+        <script language="jscript" src="Test_CProgressDisplay3.js" />
+        <script language="jscript">
+            Test_CProgressDisplay6();
+        </script>
+    </job>
+</package>
