@@ -71,8 +71,10 @@ GetPercent: function() {
 },
 
 Display: function(Indicator, Percent) {
+    var Control = "\r";
+    if (this.Counter >= this.CounterEnd) { Control = "\r\n"; }
     WScript.StdOut.Write(
-        this.Title + Indicator + Percent + this.Comment + "\r");
+        this.Title + Indicator + Percent + this.Comment + Control);
 }
 
 }; // CProgressDisplay.prototype

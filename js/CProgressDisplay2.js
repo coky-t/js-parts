@@ -82,8 +82,10 @@ Display: function(Indicator) {
         WScript.StdOut.WriteLine(this.Ruler);
         this.bRulerAlready = true;
     }
+    var Control = "\r";
+    if (this.Counter >= this.CounterEnd) { Control = "\r\n"; }
     WScript.StdOut.Write(
-        this.Title + Indicator + this.Comment + "\r");
+        this.Title + Indicator + this.Comment + Control);
 }
 
-}; // CProgressDisplay.prototype
+}; // CProgressDisplay2.prototype

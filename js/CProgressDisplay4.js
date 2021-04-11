@@ -127,8 +127,10 @@ Display: function(Indicator, Times) {
         WScript.StdOut.WriteLine(this.Ruler);
         this.bRulerAlready = true;
     }
+    var Control = "\r";
+    if (this.Counter >= this.CounterEnd) { Control = "\r\n"; }
     WScript.StdOut.Write(
-        this.Title + Indicator + this.Comment + Times + "\r");
+        this.Title + Indicator + this.Comment + Times + Control);
 },
 
 formatTime: function(Seconds) {
@@ -156,4 +158,4 @@ right: function(str, count) {
     return str.slice(-(count));
 }
 
-}; // CProgressDisplay.prototype
+}; // CProgressDisplay4.prototype
