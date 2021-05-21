@@ -1,0 +1,75 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_GetBinStringFromByte">
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitString.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_GetBinStringFromByte();
+        </script>
+    </job>
+    <job id="Test_GetBinStringFromInteger">
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitString.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_GetBinStringFromInteger();
+        </script>
+    </job>
+    <job id="Test_GetBinStringFromLong">
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitString.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_GetBinStringFromLong();
+        </script>
+    </job>
+    <job id="Test_GetOctStringFromByte">
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitString.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_GetOctStringFromByte();
+        </script>
+    </job>
+    <job id="Test_GetOctStringFromInteger">
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitString.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_GetOctStringFromInteger();
+        </script>
+    </job>
+    <job id="Test_GetOctStringFromLong">
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitString.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_GetOctStringFromLong();
+        </script>
+    </job>
+    <job id="Test_GetHexStringFromByte">
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitString.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_GetHexStringFromByte();
+        </script>
+    </job>
+    <job id="Test_GetHexStringFromInteger">
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitString.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_GetHexStringFromInteger();
+        </script>
+    </job>
+    <job id="Test_GetHexStringFromLong">
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitString.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_GetHexStringFromLong();
+        </script>
+    </job>
+</package>
