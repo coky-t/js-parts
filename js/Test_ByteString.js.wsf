@@ -1,0 +1,43 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_GetStringB_LEFromInteger">
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="Test_ByteString.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_GetStringB_LEFromInteger();
+        </script>
+    </job>
+    <job id="Test_GetStringB_BEFromInteger">
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="Test_ByteString.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_GetStringB_BEFromInteger();
+        </script>
+    </job>
+    <job id="Test_GetStringB_LEFromLong">
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="Test_ByteString.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_GetStringB_LEFromLong();
+        </script>
+    </job>
+    <job id="Test_GetStringB_BEFromLong">
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="Test_ByteString.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_GetStringB_BEFromLong();
+        </script>
+    </job>
+</package>
