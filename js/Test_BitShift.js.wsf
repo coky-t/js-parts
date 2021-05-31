@@ -54,6 +54,87 @@
             Test_LeftShiftLongFFFFFFFF();
         </script>
     </job>
+    <job id="Test_RightArithmeticShiftByte80">
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitShift.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_RightArithmeticShiftByte80();
+        </script>
+    </job>
+    <job id="Test_RightArithmeticShiftByte7F">
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitShift.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_RightArithmeticShiftByte7F();
+        </script>
+    </job>
+    <job id="Test_RightArithmeticShiftByteBF">
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitShift.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_RightArithmeticShiftByteBF();
+        </script>
+    </job>
+    <job id="Test_RightArithmeticShiftInteger8000">
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitShift.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_RightArithmeticShiftInteger8000();
+        </script>
+    </job>
+    <job id="Test_RightArithmeticShiftInteger7FFF">
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitShift.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_RightArithmeticShiftInteger7FFF();
+        </script>
+    </job>
+    <job id="Test_RightArithmeticShiftIntegerBFFF">
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitShift.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_RightArithmeticShiftIntegerBFFF();
+        </script>
+    </job>
+    <job id="Test_RightArithmeticShiftLong80000000">
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitShift.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_RightArithmeticShiftLong80000000();
+        </script>
+    </job>
+    <job id="Test_RightArithmeticShiftLong7FFFFFFF">
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitShift.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_RightArithmeticShiftLong7FFFFFFF();
+        </script>
+    </job>
+    <job id="Test_RightArithmeticShiftLongBFFFFFFF">
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="Test_BitShift.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_RightArithmeticShiftLongBFFFFFFF();
+        </script>
+    </job>
     <job id="Test_RightShiftByte80">
         <script language="jscript" src="BitShift.js" />
         <script language="jscript" src="BitString.js" />

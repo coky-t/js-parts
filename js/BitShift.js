@@ -30,80 +30,193 @@
 //
 
 function LeftShiftByte(Value, Count) {
+    var Cnt;
     if (Count < 0) {
-        return RightShiftByte(Value, Math.abs(Count));
-    } else if (Count == 0) {
-        return Value;
-    } else if (Count > 7) {
-        return 0;
+        Cnt = (Count % 8) + 8;
+    } else if (Count >= 8) {
+        Cnt = Count % 8;
+    } else {
+        Cnt = Count;
     }
     
-    return ((Value << Count) & 0xFF) - ((Value < 0) ? 256 : 0);
+    if (Cnt == 0) {
+        return Value;
+    }
+    
+    return ((Value << Cnt) & 0xFF) - ((Value < 0) ? 256 : 0);
 }
 
 function LeftShiftInteger(Value, Count) {
+    var Cnt;
     if (Count < 0) {
-        return RightShiftInteger(Value, Math.abs(Count));
-    } else if (Count == 0) {
-        return Value;
-    } else if (Count > 15) {
-        return 0;
+        Cnt = (Count % 16) + 16;
+    } else if (Count >= 16) {
+        Cnt = Count % 16;
+    } else {
+        Cnt = Count;
     }
     
-    return ((Value << Count) & 0xFFFF) - ((Value < 0) ? 65536 : 0);
+    if (Cnt == 0) {
+        return Value;
+    }
+    
+    return ((Value << Cnt) & 0xFFFF) - ((Value < 0) ? 65536 : 0);
 }
 
 function LeftShiftLong(Value, Count) {
+    var Cnt;
     if (Count < 0) {
-        return RightShiftLong(Value, Math.abs(Count));
-    } else if (Count == 0) {
-        return Value;
-    } else if (Count > 31) {
-        return 0;
+        Cnt = (Count % 32) + 32;
+    } else if (Count >= 32) {
+        Cnt = Count % 32;
+    } else {
+        Cnt = Count;
     }
     
-    return Value << Count;
+    if (Cnt == 0) {
+        return Value;
+    }
+    
+    var Temp = Value << Cnt;
+    if (Temp < 0) {
+        return (Value < 0) ? Temp : Temp + 4294967296;
+    } else {
+        return (Value < 0) ? Temp - 4294967296 : Temp;
+    }
 }
 
 //
-// Right Arithmetic Shift - To Do
+// Right Arithmetic Shift
+//
+
+function RightArithmeticShiftByte(Value, Count) {
+    var Cnt;
+    if (Count < 0) {
+        Cnt = (Count % 8) + 8;
+    } else if (Count >= 8) {
+        Cnt = Count % 8;
+    } else {
+        Cnt = Count;
+    }
+    
+    if (Cnt == 0) {
+        return Value;
+    }
+    
+    var Temp;
+    if ((Value & 0x80) == 0x80) {
+        Temp = ((Value | 0xFFFFFF00) >> Cnt) & 0xFF;
+    } else {
+        Temp = (Value & 0xFF) >> Cnt;
+    }
+    
+    return Temp - ((Value < 0) ? 256 : 0);
+}
+
+function RightArithmeticShiftInteger(Value, Count) {
+    var Cnt;
+    if (Count < 0) {
+        Cnt = (Count % 16) + 16;
+    } else if (Count >= 16) {
+        Cnt = Count % 16;
+    } else {
+        Cnt = Count;
+    }
+    
+    if (Cnt == 0) {
+        return Value;
+    }
+    
+    var Temp;
+    if ((Value & 0x8000) == 0x8000) {
+        Temp = ((Value | 0xFFFF0000) >> Cnt) & 0xFFFF;
+    } else {
+        Temp = (Value & 0xFFFF) >> Cnt;
+    }
+    
+    return Temp - ((Value < 0) ? 65536 : 0);
+}
+
+function RightArithmeticShiftLong(Value, Count) {
+    var Cnt;
+    if (Count < 0) {
+        Cnt = (Count % 32) + 32;
+    } else if (Count >= 32) {
+        Cnt = Count % 32;
+    } else {
+        Cnt = Count;
+    }
+    
+    if (Cnt == 0) {
+        return Value;
+    }
+    
+    var Temp = Value >> Cnt;
+    if (Temp < 0) {
+        return (Value < 0) ? Temp : Temp + 4294967296;
+    } else {
+        return (Value < 0) ? Temp - 4294967296 : Temp;
+    }
+}
+
+//
 // Right Logical Shift
 //
 
 function RightShiftByte(Value, Count) {
+    var Cnt;
     if (Count < 0) {
-        return LeftShiftByte(Value, Math.abs(Count));
-    } else if (Count == 0) {
-        return Value;
-    } else if (Count > 7) {
-        return 0;
+        Cnt = (Count % 8) + 8;
+    } else if (Count >= 8) {
+        Cnt = Count % 8;
+    } else {
+        Cnt = Count;
     }
     
-    return ((Value & 0xFF) >> Count) - ((Value < 0) ? 256 : 0);
+    if (Cnt == 0) {
+        return Value;
+    }
+    
+    return ((Value & 0xFF) >> Cnt) - ((Value < 0) ? 256 : 0);
 }
 
 function RightShiftInteger(Value, Count) {
+    var Cnt;
     if (Count < 0) {
-        return LeftShiftInteger(Value, Math.abs(Count));
-    } else if (Count == 0) {
-        return Value;
-    } else if (Count > 15) {
-        return 0;
+        Cnt = (Count % 16) + 16;
+    } else if (Count >= 16) {
+        Cnt = Count % 16;
+    } else {
+        Cnt = Count;
     }
     
-    return ((Value & 0xFFFF) >> Count) - ((Value < 0) ? 65536 : 0);
+    if (Cnt == 0) {
+        return Value;
+    }
+    
+    return ((Value & 0xFFFF) >> Cnt) - ((Value < 0) ? 65536 : 0);
 }
 
 function RightShiftLong(Value, Count) {
+    var Cnt;
     if (Count < 0) {
-        return LeftShiftInteger(Value, Math.abs(Count));
-    } else if (Count == 0) {
-        return Value;
-    } else if (Count > 31) {
-        return 0;
+        Cnt = (Count % 32) + 32;
+    } else if (Count >= 32) {
+        Cnt = Count % 32;
+    } else {
+        Cnt = Count;
     }
     
-    return Value >>> Count;
+    if (Cnt == 0) {
+        return Value;
+    }
+    
+    var Temp = Value >>> Cnt;
+    if (Temp < 0) {
+        return (Value < 0) ? Temp : Temp + 4294967296;
+    } else {
+        return (Value < 0) ? Temp - 4294967296 : Temp;
+    }
 }
 
 //
@@ -111,39 +224,59 @@ function RightShiftLong(Value, Count) {
 //
 
 function LeftRotateByte(Value, Count) {
+    var Cnt;
     if (Count < 0) {
-        return RightRotateByte(Value, Math.abs(Count));
-    } else if (Count == 0) {
-        return Value;
-    } else if (Count > 7) {
-        return LeftRotateByte(Value, Count % 8);
+        Cnt = (Count % 8) + 8;
+    } else if (Count >= 8) {
+        Cnt = Count % 8;
+    } else {
+        Cnt = Count;
     }
     
-    return LeftShiftByte(Value, Count) | RightShiftByte(Value, 8 - Count);
+    if (Cnt == 0) {
+        return Value;
+    }
+    
+    return LeftShiftByte(Value, Cnt) | RightShiftByte(Value, 8 - Cnt);
 }
 
 function LeftRotateInteger(Value, Count) {
+    var Cnt;
     if (Count < 0) {
-        return RightRotateInteger(Value, Math.abs(Count));
-    } else if (Count == 0) {
-        return Value;
-    } else if (Count > 15) {
-        return LeftRotateInteger(Value, Count % 16);
+        Cnt = (Count % 16) + 16;
+    } else if (Count >= 16) {
+        Cnt = Count % 16;
+    } else {
+        Cnt = Count;
     }
     
-    return LeftShiftInteger(Value, Count) | RightShiftInteger(Value, 16 - Count);
+    if (Cnt == 0) {
+        return Value;
+    }
+    
+    return LeftShiftInteger(Value, Cnt) | RightShiftInteger(Value, 16 - Cnt);
 }
 
 function LeftRotateLong(Value, Count) {
+    var Cnt;
     if (Count < 0) {
-        return RightRotateLong(Value, Math.abs(Count));
-    } else if (Count == 0) {
-        return Value;
-    } else if (Count > 31) {
-        return LeftRotateLong(Value, Count % 32);
+        Cnt = (Count % 32) + 32;
+    } else if (Count >= 32) {
+        Cnt = Count % 32;
+    } else {
+        Cnt = Count;
     }
     
-    return LeftShiftLong(Value, Count) | RightShiftLong(Value, 32 - Count);
+    if (Cnt == 0) {
+        return Value;
+    }
+    
+    var Temp = LeftShiftLong(Value, Cnt) | RightShiftLong(Value, 32 - Cnt);
+    if (Temp < 0) {
+        return (Value < 0) ? Temp : Temp + 4294967296;
+    } else {
+        return (Value < 0) ? Temp - 4294967296 : Temp;
+    }
 }
 
 //
@@ -151,37 +284,57 @@ function LeftRotateLong(Value, Count) {
 //
 
 function RightRotateByte(Value, Count) {
+    var Cnt;
     if (Count < 0) {
-        return LeftRotateByte(Value, Math.abs(Count));
-    } else if (Count == 0) {
-        return Value;
-    } else if (Count > 7) {
-        return RightRotateByte(Value, Count % 8);
+        Cnt = (Count % 8) + 8;
+    } else if (Count >= 8) {
+        Cnt = Count % 8;
+    } else {
+        Cnt = Count;
     }
     
-    return RightShiftByte(Value, Count) | LeftShiftByte(Value, 8 - Count);
+    if (Cnt == 0) {
+        return Value;
+    }
+    
+    return RightShiftByte(Value, Cnt) | LeftShiftByte(Value, 8 - Cnt);
 }
 
 function RightRotateInteger(Value, Count) {
+    var Cnt;
     if (Count < 0) {
-        return LeftRotateInteger(Value, Math.abs(Count));
-    } else if (Count == 0) {
-        return Value;
-    } else if (Count > 15) {
-        return RightRotateInteger(Value, Count % 16);
+        Cnt = (Count % 16) + 16;
+    } else if (Count >= 16) {
+        Cnt = Count % 16;
+    } else {
+        Cnt = Count;
     }
     
-    return RightShiftInteger(Value, Count) | LeftShiftInteger(Value, 16 - Count);
+    if (Cnt == 0) {
+        return Value;
+    }
+    
+    return RightShiftInteger(Value, Cnt) | LeftShiftInteger(Value, 16 - Cnt);
 }
 
 function RightRotateLong(Value, Count) {
+    var Cnt;
     if (Count < 0) {
-        return LeftRotateLong(Value, Math.abs(Count));
-    } else if (Count == 0) {
-        return Value;
-    } else if (Count > 31) {
-        return RightRotateLong(Value, Count % 32);
+        Cnt = (Count % 32) + 32;
+    } else if (Count >= 32) {
+        Cnt = Count % 32;
+    } else {
+        Cnt = Count;
     }
     
-    return RightShiftLong(Value, Count) | LeftShiftLong(Value, 32 - Count);
+    if (Cnt == 0) {
+        return Value;
+    }
+    
+    var Temp = RightShiftLong(Value, Cnt) | LeftShiftLong(Value, 32 - Cnt);
+    if (Temp < 0) {
+        return (Value < 0) ? Temp : Temp + 4294967296;
+    } else {
+        return (Value < 0) ? Temp - 4294967296 : Temp;
+    }
 }

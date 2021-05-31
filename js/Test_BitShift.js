@@ -54,6 +54,51 @@ function Test_LeftShiftLongFFFFFFFF() {
     Test_LeftShiftLongX(0xFFFFFFFF);
 }
 
+function Test_RightArithmeticShiftByte80() {
+    Test_RightArithmeticShiftByteX(-128);
+    Test_RightArithmeticShiftByteX(0x80);
+}
+
+function Test_RightArithmeticShiftByte7F() {
+    Test_RightArithmeticShiftByteX(-129);
+    Test_RightArithmeticShiftByteX(0x7F);
+}
+
+function Test_RightArithmeticShiftByteBF() {
+    Test_RightArithmeticShiftByteX(-65);
+    Test_RightArithmeticShiftByteX(0xBF);
+}
+
+function Test_RightArithmeticShiftInteger8000() {
+    Test_RightArithmeticShiftIntegerX(-32768);
+    Test_RightArithmeticShiftIntegerX(0x8000);
+}
+
+function Test_RightArithmeticShiftInteger7FFF() {
+    Test_RightArithmeticShiftIntegerX(-32769);
+    Test_RightArithmeticShiftIntegerX(0x7FFF);
+}
+
+function Test_RightArithmeticShiftIntegerBFFF() {
+    Test_RightArithmeticShiftIntegerX(-16385);
+    Test_RightArithmeticShiftIntegerX(0xBFFF);
+}
+
+function Test_RightArithmeticShiftLong80000000() {
+    Test_RightArithmeticShiftLongX(-2147483648);
+    Test_RightArithmeticShiftLongX(0x80000000);
+}
+
+function Test_RightArithmeticShiftLong7FFFFFFF() {
+    Test_RightArithmeticShiftLongX(-2147483649);
+    Test_RightArithmeticShiftLongX(0x7FFFFFFF);
+}
+
+function Test_RightArithmeticShiftLongBFFFFFFF() {
+    Test_RightArithmeticShiftLongX(-1073741825);
+    Test_RightArithmeticShiftLongX(0xBFFFFFFF);
+}
+
 function Test_RightShiftByte80() {
     Test_RightShiftByteX(-128);
     Test_RightShiftByteX(0x80);
@@ -150,84 +195,105 @@ function Test_RightRotateLongFFFF0000() {
 
 function Test_LeftShiftByteX(Value) {
     Debug_Print("--- " + Value.toString() + " ---");
-    for (var Count = 0; Count <= 8; Count++) {
+    for (var Count = -1; Count <= 8; Count++) {
         Test_LeftShiftByte_Core(Value, Count);
     }
 }
 
 function Test_LeftShiftIntegerX(Value) {
     Debug_Print("--- " + Value.toString() + " ---");
-    for (var Count = 0; Count <= 16; Count++) {
+    for (var Count = -1; Count <= 16; Count++) {
         Test_LeftShiftInteger_Core(Value, Count);
     }
 }
 
 function Test_LeftShiftLongX(Value) {
     Debug_Print("--- " + Value.toString() + " ---");
-    for (var Count = 0; Count <= 32; Count++) {
+    for (var Count = -1; Count <= 32; Count++) {
         Test_LeftShiftLong_Core(Value, Count);
+    }
+}
+
+function Test_RightArithmeticShiftByteX(Value) {
+    Debug_Print("--- " + Value.toString() + " ---");
+    for (var Count = -1; Count <= 8; Count++) {
+        Test_RightArithmeticShiftByte_Core(Value, Count);
+    }
+}
+
+function Test_RightArithmeticShiftIntegerX(Value) {
+    Debug_Print("--- " + Value.toString() + " ---");
+    for (var Count = -1; Count <= 16; Count++) {
+        Test_RightArithmeticShiftInteger_Core(Value, Count);
+    }
+}
+
+function Test_RightArithmeticShiftLongX(Value) {
+    Debug_Print("--- " + Value.toString() + " ---");
+    for (var Count = -1; Count <= 32; Count++) {
+        Test_RightArithmeticShiftLong_Core(Value, Count);
     }
 }
 
 function Test_RightShiftByteX(Value) {
     Debug_Print("--- " + Value.toString() + " ---");
-    for (var Count = 0; Count <= 8; Count++) {
+    for (var Count = -1; Count <= 8; Count++) {
         Test_RightShiftByte_Core(Value, Count);
     }
 }
 
 function Test_RightShiftIntegerX(Value) {
     Debug_Print("--- " + Value.toString() + " ---");
-    for (var Count = 0; Count <= 16; Count++) {
+    for (var Count = -1; Count <= 16; Count++) {
         Test_RightShiftInteger_Core(Value, Count);
     }
 }
 
 function Test_RightShiftLongX(Value) {
     Debug_Print("--- " + Value.toString() + " ---");
-    for (var Count = 0; Count <= 32; Count++) {
+    for (var Count = -1; Count <= 32; Count++) {
         Test_RightShiftLong_Core(Value, Count);
     }
 }
 
 function Test_LeftRotateByteX(Value) {
     Debug_Print("--- " + Value.toString() + " ---");
-    for (var Count = 0; Count <= 8; Count++) {
+    for (var Count = -1; Count <= 8; Count++) {
         Test_LeftRotateByte_Core(Value, Count);
     }
 }
 
 function Test_LeftRotateIntegerX(Value) {
     Debug_Print("--- " + Value.toString() + " ---");
-    for (var Count = 0; Count <= 16; Count++) {
+    for (var Count = -1; Count <= 16; Count++) {
         Test_LeftRotateInteger_Core(Value, Count);
     }
 }
 
 function Test_LeftRotateLongX(Value) {
     Debug_Print("--- " + Value.toString() + " ---");
-    for (var Count = 0; Count <= 32; Count++) {
+    for (var Count = -1; Count <= 32; Count++) {
         Test_LeftRotateLong_Core(Value, Count);
     }
 }
 
 function Test_RightRotateByteX(Value) {
     Debug_Print("--- " + Value.toString() + " ---");
-    for (var Count = 0; Count <= 8; Count++) {
+    for (var Count = -1; Count <= 8; Count++) {
         Test_RightRotateByte_Core(Value, Count);
     }
 }
 
 function Test_RightRotateIntegerX(Value) {
     Debug_Print("--- " + Value.toString() + " ---");
-    for (var Count = 0; Count <= 16; Count++) {
+    for (var Count = -1; Count <= 16; Count++) {
         Test_RightRotateInteger_Core(Value, Count);
     }
 }
 
 function Test_RightRotateLongX(Value) {
     Debug_Print("--- " + Value.toString() + " ---");
-    for (var Count = 0; Count <= 32; Count++) {
+    for (var Count = -1; Count <= 32; Count++) {
         Test_RightRotateLong_Core(Value, Count);
     }
 }
@@ -249,6 +315,21 @@ function Test_LeftShiftInteger_Core(Value, Count) {
 function Test_LeftShiftLong_Core(Value, Count) {
     var Result = LeftShiftLong(Value, Count);
     DebugPrintBinOpLong(Value, "<<", Count, Result);
+}
+
+function Test_RightArithmeticShiftByte_Core(Value, Count) {
+    var Result = RightArithmeticShiftByte(Value, Count);
+    DebugPrintBinOpByte(Value, ">>", Count, Result);
+}
+
+function Test_RightArithmeticShiftInteger_Core(Value, Count) {
+    var Result = RightArithmeticShiftInteger(Value, Count);
+    DebugPrintBinOpInteger(Value, ">>", Count, Result);
+}
+
+function Test_RightArithmeticShiftLong_Core(Value, Count) {
+    var Result = RightArithmeticShiftLong(Value, Count);
+    DebugPrintBinOpLong(Value, ">>", Count, Result);
 }
 
 function Test_RightShiftByte_Core(Value, Count) {
