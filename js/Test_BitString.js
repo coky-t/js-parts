@@ -28,15 +28,9 @@ function Test_GetBinStringFromByte() {
     Test_GetBinStringFromByte_Core(-1);
     Test_GetBinStringFromByte_Core(-128);
     Test_GetBinStringFromByte_Core(-255);
-    Test_GetBinStringFromByte_Core(0x0);
-    Test_GetBinStringFromByte_Core(0x1);
-    Test_GetBinStringFromByte_Core(0x2);
-    Test_GetBinStringFromByte_Core(0x4);
-    Test_GetBinStringFromByte_Core(0x8);
-    Test_GetBinStringFromByte_Core(0x10);
-    Test_GetBinStringFromByte_Core(0x20);
-    Test_GetBinStringFromByte_Core(0x40);
-    Test_GetBinStringFromByte_Core(0x80);
+    for(var Index = 0; Index <= 7; Index++) {
+        Test_GetBinStringFromByte_Core(Math.pow(2, Index));
+    }
     Test_GetBinStringFromByte_Core(0xF0);
     Test_GetBinStringFromByte_Core(0xFF);
 }
@@ -45,14 +39,9 @@ function Test_GetBinStringFromInteger() {
     Test_GetBinStringFromInteger_Core(-1);
     Test_GetBinStringFromInteger_Core(-32768);
     Test_GetBinStringFromInteger_Core(-65535);
-    Test_GetBinStringFromInteger_Core(0x0);
-    Test_GetBinStringFromInteger_Core(0x1);
-    Test_GetBinStringFromInteger_Core(0x8);
-    Test_GetBinStringFromInteger_Core(0x10);
-    Test_GetBinStringFromInteger_Core(0x80);
-    Test_GetBinStringFromInteger_Core(0x100);
-    Test_GetBinStringFromInteger_Core(0x800);
-    Test_GetBinStringFromInteger_Core(0x1000);
+    for(var Index = 0; Index <= 14; Index++) {
+        Test_GetBinStringFromInteger_Core(Math.pow(2, Index));
+    }
     Test_GetBinStringFromInteger_Core(0x8000);
     Test_GetBinStringFromInteger_Core(0xF000);
     Test_GetBinStringFromInteger_Core(0xFF00);
@@ -64,22 +53,9 @@ function Test_GetBinStringFromLong() {
     Test_GetBinStringFromLong_Core(-1);
     Test_GetBinStringFromLong_Core(-2147483648);
     Test_GetBinStringFromLong_Core(-4294967295);
-    Test_GetBinStringFromLong_Core(0x0);
-    Test_GetBinStringFromLong_Core(0x1);
-    Test_GetBinStringFromLong_Core(0x8);
-    Test_GetBinStringFromLong_Core(0x10);
-    Test_GetBinStringFromLong_Core(0x80);
-    Test_GetBinStringFromLong_Core(0x100);
-    Test_GetBinStringFromLong_Core(0x800);
-    Test_GetBinStringFromLong_Core(0x1000);
-    Test_GetBinStringFromLong_Core(0x8000);
-    Test_GetBinStringFromLong_Core(0x10000);
-    Test_GetBinStringFromLong_Core(0x80000);
-    Test_GetBinStringFromLong_Core(0x100000);
-    Test_GetBinStringFromLong_Core(0x800000);
-    Test_GetBinStringFromLong_Core(0x1000000);
-    Test_GetBinStringFromLong_Core(0x8000000);
-    Test_GetBinStringFromLong_Core(0x10000000);
+    for(var Index = 0; Index <= 30; Index++) {
+        Test_GetBinStringFromLong_Core(Math.pow(2, Index));
+    }
     Test_GetBinStringFromLong_Core(0x80000000);
     Test_GetBinStringFromLong_Core(0xF0000000);
     Test_GetBinStringFromLong_Core(0xFF000000);
@@ -95,15 +71,9 @@ function Test_GetOctStringFromByte() {
     Test_GetOctStringFromByte_Core(-1);
     Test_GetOctStringFromByte_Core(-128);
     Test_GetOctStringFromByte_Core(-255);
-    Test_GetOctStringFromByte_Core(0x0);
-    Test_GetOctStringFromByte_Core(0x1);
-    Test_GetOctStringFromByte_Core(0x2);
-    Test_GetOctStringFromByte_Core(0x4);
-    Test_GetOctStringFromByte_Core(0x8);
-    Test_GetOctStringFromByte_Core(0x10);
-    Test_GetOctStringFromByte_Core(0x20);
-    Test_GetOctStringFromByte_Core(0x40);
-    Test_GetOctStringFromByte_Core(0x80);
+    for(var Index = 0; Index <= 7; Index++) {
+        Test_GetOctStringFromByte_Core(Math.pow(2, Index));
+    }
     Test_GetOctStringFromByte_Core(0xF0);
     Test_GetOctStringFromByte_Core(0xFF);
 }
@@ -112,14 +82,9 @@ function Test_GetOctStringFromInteger() {
     Test_GetOctStringFromInteger_Core(-1);
     Test_GetOctStringFromInteger_Core(-32768);
     Test_GetOctStringFromInteger_Core(-65535);
-    Test_GetOctStringFromInteger_Core(0x0);
-    Test_GetOctStringFromInteger_Core(0x1);
-    Test_GetOctStringFromInteger_Core(0x8);
-    Test_GetOctStringFromInteger_Core(0x10);
-    Test_GetOctStringFromInteger_Core(0x80);
-    Test_GetOctStringFromInteger_Core(0x100);
-    Test_GetOctStringFromInteger_Core(0x800);
-    Test_GetOctStringFromInteger_Core(0x1000);
+    for(var Index = 0; Index <= 14; Index++) {
+        Test_GetOctStringFromInteger_Core(Math.pow(2, Index));
+    }
     Test_GetOctStringFromInteger_Core(0x8000);
     Test_GetOctStringFromInteger_Core(0xF000);
     Test_GetOctStringFromInteger_Core(0xFF00);
@@ -131,22 +96,9 @@ function Test_GetOctStringFromLong() {
     Test_GetOctStringFromLong_Core(-1);
     Test_GetOctStringFromLong_Core(-2147483648);
     Test_GetOctStringFromLong_Core(-4294967295);
-    Test_GetOctStringFromLong_Core(0x0);
-    Test_GetOctStringFromLong_Core(0x1);
-    Test_GetOctStringFromLong_Core(0x8);
-    Test_GetOctStringFromLong_Core(0x10);
-    Test_GetOctStringFromLong_Core(0x80);
-    Test_GetOctStringFromLong_Core(0x100);
-    Test_GetOctStringFromLong_Core(0x800);
-    Test_GetOctStringFromLong_Core(0x1000);
-    Test_GetOctStringFromLong_Core(0x8000);
-    Test_GetOctStringFromLong_Core(0x10000);
-    Test_GetOctStringFromLong_Core(0x80000);
-    Test_GetOctStringFromLong_Core(0x100000);
-    Test_GetOctStringFromLong_Core(0x800000);
-    Test_GetOctStringFromLong_Core(0x1000000);
-    Test_GetOctStringFromLong_Core(0x8000000);
-    Test_GetOctStringFromLong_Core(0x10000000);
+    for(var Index = 0; Index <= 30; Index++) {
+        Test_GetOctStringFromLong_Core(Math.pow(2, Index));
+    }
     Test_GetOctStringFromLong_Core(0x80000000);
     Test_GetOctStringFromLong_Core(0xF0000000);
     Test_GetOctStringFromLong_Core(0xFF000000);
@@ -162,15 +114,9 @@ function Test_GetHexStringFromByte() {
     Test_GetHexStringFromByte_Core(-1);
     Test_GetHexStringFromByte_Core(-128);
     Test_GetHexStringFromByte_Core(-255);
-    Test_GetHexStringFromByte_Core(0x0);
-    Test_GetHexStringFromByte_Core(0x1);
-    Test_GetHexStringFromByte_Core(0x2);
-    Test_GetHexStringFromByte_Core(0x4);
-    Test_GetHexStringFromByte_Core(0x8);
-    Test_GetHexStringFromByte_Core(0x10);
-    Test_GetHexStringFromByte_Core(0x20);
-    Test_GetHexStringFromByte_Core(0x40);
-    Test_GetHexStringFromByte_Core(0x80);
+    for(var Index = 0; Index <= 7; Index++) {
+        Test_GetHexStringFromByte_Core(Math.pow(2, Index));
+    }
     Test_GetHexStringFromByte_Core(0xF0);
     Test_GetHexStringFromByte_Core(0xFF);
 }
@@ -179,14 +125,9 @@ function Test_GetHexStringFromInteger() {
     Test_GetHexStringFromInteger_Core(-1);
     Test_GetHexStringFromInteger_Core(-32768);
     Test_GetHexStringFromInteger_Core(-65535);
-    Test_GetHexStringFromInteger_Core(0x0);
-    Test_GetHexStringFromInteger_Core(0x1);
-    Test_GetHexStringFromInteger_Core(0x8);
-    Test_GetHexStringFromInteger_Core(0x10);
-    Test_GetHexStringFromInteger_Core(0x80);
-    Test_GetHexStringFromInteger_Core(0x100);
-    Test_GetHexStringFromInteger_Core(0x800);
-    Test_GetHexStringFromInteger_Core(0x1000);
+    for(var Index = 0; Index <= 14; Index++) {
+        Test_GetHexStringFromInteger_Core(Math.pow(2, Index));
+    }
     Test_GetHexStringFromInteger_Core(0x8000);
     Test_GetHexStringFromInteger_Core(0xF000);
     Test_GetHexStringFromInteger_Core(0xFF00);
@@ -198,22 +139,9 @@ function Test_GetHexStringFromLong() {
     Test_GetHexStringFromLong_Core(-1);
     Test_GetHexStringFromLong_Core(-2147483648);
     Test_GetHexStringFromLong_Core(-4294967295);
-    Test_GetHexStringFromLong_Core(0x0);
-    Test_GetHexStringFromLong_Core(0x1);
-    Test_GetHexStringFromLong_Core(0x8);
-    Test_GetHexStringFromLong_Core(0x10);
-    Test_GetHexStringFromLong_Core(0x80);
-    Test_GetHexStringFromLong_Core(0x100);
-    Test_GetHexStringFromLong_Core(0x800);
-    Test_GetHexStringFromLong_Core(0x1000);
-    Test_GetHexStringFromLong_Core(0x8000);
-    Test_GetHexStringFromLong_Core(0x10000);
-    Test_GetHexStringFromLong_Core(0x80000);
-    Test_GetHexStringFromLong_Core(0x100000);
-    Test_GetHexStringFromLong_Core(0x800000);
-    Test_GetHexStringFromLong_Core(0x1000000);
-    Test_GetHexStringFromLong_Core(0x8000000);
-    Test_GetHexStringFromLong_Core(0x10000000);
+    for(var Index = 0; Index <= 30; Index++) {
+        Test_GetHexStringFromLong_Core(Math.pow(2, Index));
+    }
     Test_GetHexStringFromLong_Core(0x80000000);
     Test_GetHexStringFromLong_Core(0xF0000000);
     Test_GetHexStringFromLong_Core(0xFF000000);

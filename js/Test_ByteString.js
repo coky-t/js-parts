@@ -28,14 +28,9 @@ function Test_GetStringB_LEFromInteger() {
     Test_GetStringB_LEFromInteger_Core(-1);
     Test_GetStringB_LEFromInteger_Core(-32768);
     Test_GetStringB_LEFromInteger_Core(-65535);
-    Test_GetStringB_LEFromInteger_Core(0x0);
-    Test_GetStringB_LEFromInteger_Core(0x1);
-    Test_GetStringB_LEFromInteger_Core(0x8);
-    Test_GetStringB_LEFromInteger_Core(0x10);
-    Test_GetStringB_LEFromInteger_Core(0x80);
-    Test_GetStringB_LEFromInteger_Core(0x100);
-    Test_GetStringB_LEFromInteger_Core(0x800);
-    Test_GetStringB_LEFromInteger_Core(0x1000);
+    for(var Index = 0; Index <= 14; Index++) {
+        Test_GetStringB_LEFromInteger_Core(Math.pow(2, Index));
+    }
     Test_GetStringB_LEFromInteger_Core(0x8000);
     Test_GetStringB_LEFromInteger_Core(0xF000);
     Test_GetStringB_LEFromInteger_Core(0xFF00);
@@ -47,14 +42,9 @@ function Test_GetStringB_BEFromInteger() {
     Test_GetStringB_BEFromInteger_Core(-1);
     Test_GetStringB_BEFromInteger_Core(-32768);
     Test_GetStringB_BEFromInteger_Core(-65535);
-    Test_GetStringB_BEFromInteger_Core(0x0);
-    Test_GetStringB_BEFromInteger_Core(0x1);
-    Test_GetStringB_BEFromInteger_Core(0x8);
-    Test_GetStringB_BEFromInteger_Core(0x10);
-    Test_GetStringB_BEFromInteger_Core(0x80);
-    Test_GetStringB_BEFromInteger_Core(0x100);
-    Test_GetStringB_BEFromInteger_Core(0x800);
-    Test_GetStringB_BEFromInteger_Core(0x1000);
+    for(var Index = 0; Index <= 14; Index++) {
+        Test_GetStringB_BEFromInteger_Core(Math.pow(2, Index));
+    }
     Test_GetStringB_BEFromInteger_Core(0x8000);
     Test_GetStringB_BEFromInteger_Core(0xF000);
     Test_GetStringB_BEFromInteger_Core(0xFF00);
@@ -66,22 +56,9 @@ function Test_GetStringB_LEFromLong() {
     Test_GetStringB_LEFromLong_Core(-1);
     Test_GetStringB_LEFromLong_Core(-2147483648);
     Test_GetStringB_LEFromLong_Core(-4294967295);
-    Test_GetStringB_LEFromLong_Core(0x0);
-    Test_GetStringB_LEFromLong_Core(0x1);
-    Test_GetStringB_LEFromLong_Core(0x8);
-    Test_GetStringB_LEFromLong_Core(0x10);
-    Test_GetStringB_LEFromLong_Core(0x80);
-    Test_GetStringB_LEFromLong_Core(0x100);
-    Test_GetStringB_LEFromLong_Core(0x800);
-    Test_GetStringB_LEFromLong_Core(0x1000);
-    Test_GetStringB_LEFromLong_Core(0x8000);
-    Test_GetStringB_LEFromLong_Core(0x10000);
-    Test_GetStringB_LEFromLong_Core(0x80000);
-    Test_GetStringB_LEFromLong_Core(0x100000);
-    Test_GetStringB_LEFromLong_Core(0x800000);
-    Test_GetStringB_LEFromLong_Core(0x1000000);
-    Test_GetStringB_LEFromLong_Core(0x8000000);
-    Test_GetStringB_LEFromLong_Core(0x10000000);
+    for(var Index = 0; Index <= 30; Index++) {
+        Test_GetStringB_LEFromLong_Core(Math.pow(2, Index));
+    }
     Test_GetStringB_LEFromLong_Core(0x80000000);
     Test_GetStringB_LEFromLong_Core(0xF0000000);
     Test_GetStringB_LEFromLong_Core(0xFF000000);
@@ -97,22 +74,9 @@ function Test_GetStringB_BEFromLong() {
     Test_GetStringB_BEFromLong_Core(-1);
     Test_GetStringB_BEFromLong_Core(-2147483648);
     Test_GetStringB_BEFromLong_Core(-4294967295);
-    Test_GetStringB_BEFromLong_Core(0x0);
-    Test_GetStringB_BEFromLong_Core(0x1);
-    Test_GetStringB_BEFromLong_Core(0x8);
-    Test_GetStringB_BEFromLong_Core(0x10);
-    Test_GetStringB_BEFromLong_Core(0x80);
-    Test_GetStringB_BEFromLong_Core(0x100);
-    Test_GetStringB_BEFromLong_Core(0x800);
-    Test_GetStringB_BEFromLong_Core(0x1000);
-    Test_GetStringB_BEFromLong_Core(0x8000);
-    Test_GetStringB_BEFromLong_Core(0x10000);
-    Test_GetStringB_BEFromLong_Core(0x80000);
-    Test_GetStringB_BEFromLong_Core(0x100000);
-    Test_GetStringB_BEFromLong_Core(0x800000);
-    Test_GetStringB_BEFromLong_Core(0x1000000);
-    Test_GetStringB_BEFromLong_Core(0x8000000);
-    Test_GetStringB_BEFromLong_Core(0x10000000);
+    for(var Index = 0; Index <= 30; Index++) {
+        Test_GetStringB_BEFromLong_Core(Math.pow(2, Index));
+    }
     Test_GetStringB_BEFromLong_Core(0x80000000);
     Test_GetStringB_BEFromLong_Core(0xF0000000);
     Test_GetStringB_BEFromLong_Core(0xFF000000);
