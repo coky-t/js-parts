@@ -158,64 +158,136 @@ function Test_GetHexStringFromLong() {
 //
 
 function Test_GetBinStringFromByte_Core(Value) {
+    var BinString;
+    BinString = GetBinStringFromByte(Value, true);
+    
+    var Result;
+    Result = GetByteFromBinString(BinString);
+    
     Debug_Print(
-        Value.toString() + 
+        Value.toString() +
         "(" + Value.toString(16).toUpperCase() + ")" + " = " +
-        GetBinStringFromByte(Value, true));
+        BinString + " = " +
+        Result.toString() +
+        "(" + Result.toString(16).toUpperCase() + ")");
 }
 
 function Test_GetBinStringFromInteger_Core(Value) {
+    var BinString;
+    BinString = GetBinStringFromInteger(Value, true);
+    
+    var Result;
+    Result = GetIntegerFromBinString(BinString);
+    
     Debug_Print(
-        Value.toString() + 
+        Value.toString() +
         "(" + Value.toString(16).toUpperCase() + ")" + " = " +
-        GetBinStringFromInteger(Value, true));
+        BinString + " = " +
+        Result.toString() +
+        "(" + Result.toString(16).toUpperCase() + ")");
 }
 
 function Test_GetBinStringFromLong_Core(Value) {
+    var BinString;
+    BinString = GetBinStringFromLong(Value, true);
+    
+    var Result;
+    Result = GetLongFromBinString(BinString);
+    
     Debug_Print(
-        Value.toString() + 
+        Value.toString() +
         "(" + Value.toString(16).toUpperCase() + ")" + " = " +
-        GetBinStringFromLong(Value, true));
+        BinString + " = " +
+        Result.toString() +
+        "(" + Result.toString(16).toUpperCase() + ")");
 }
 
 function Test_GetOctStringFromByte_Core(Value) {
+    var OctString;
+    OctString = GetOctStringFromByte(Value, true);
+    
+    var Result;
+    Result = GetByteFromOctString(OctString);
+    
     Debug_Print(
-        Value.toString() + 
+        Value.toString() +
         "(" + Value.toString(16).toUpperCase() + ")" + " = " +
-        GetOctStringFromByte(Value, true));
+        OctString + " = " +
+        Result.toString() +
+        "(" + Result.toString(16).toUpperCase() + ")");
 }
 
 function Test_GetOctStringFromInteger_Core(Value) {
+    var OctString;
+    OctString = GetOctStringFromInteger(Value, true);
+    
+    var Result;
+    Result = GetIntegerFromOctString(OctString);
+    
     Debug_Print(
-        Value.toString() + 
+        Value.toString() +
         "(" + Value.toString(16).toUpperCase() + ")" + " = " +
-        GetOctStringFromInteger(Value, true));
+        OctString + " = " +
+        Result.toString() +
+        "(" + Result.toString(16).toUpperCase() + ")");
 }
 
 function Test_GetOctStringFromLong_Core(Value) {
+    var OctString;
+    OctString = GetOctStringFromLong(Value, true);
+    
+    var Result;
+    Result = GetLongFromOctString(OctString);
+    
     Debug_Print(
-        Value.toString() + 
+        Value.toString() +
         "(" + Value.toString(16).toUpperCase() + ")" + " = " +
-        GetOctStringFromLong(Value, true));
+        OctString + " = " +
+        Result.toString() +
+        "(" + Result.toString(16).toUpperCase() + ")");
 }
 
 function Test_GetHexStringFromByte_Core(Value) {
+    var HexString;
+    HexString = GetHexStringFromByte(Value, true);
+    
+    var Result;
+    Result = GetByteFromHexString(HexString);
+    
     Debug_Print(
-        Value.toString() + 
+        Value.toString() +
         "(" + Value.toString(16).toUpperCase() + ")" + " = " +
-        GetHexStringFromByte(Value, true));
+        HexString + " = " +
+        Result.toString() +
+        "(" + Result.toString(16).toUpperCase() + ")");
 }
 
 function Test_GetHexStringFromInteger_Core(Value) {
+    var HexString;
+    HexString = GetHexStringFromInteger(Value, true);
+    
+    var Result;
+    Result = GetIntegerFromHexString(HexString);
+    
     Debug_Print(
-        Value.toString() + 
+        Value.toString() +
         "(" + Value.toString(16).toUpperCase() + ")" + " = " +
-        GetHexStringFromInteger(Value, true));
+        HexString + " = " +
+        Result.toString() +
+        "(" + Result.toString(16).toUpperCase() + ")");
 }
 
 function Test_GetHexStringFromLong_Core(Value) {
+    var HexString;
+    HexString = GetHexStringFromLong(Value, true);
+    
+    var Result;
+    Result = GetLongFromHexString(HexString);
+    
     Debug_Print(
-        Value.toString() + 
+        Value.toString() +
         "(" + Value.toString(16).toUpperCase() + ")" + " = " +
-        GetHexStringFromLong(Value, true));
+        HexString + " = " +
+        Result.toString() +
+        "(" + Result.toString(16).toUpperCase() + ")");
 }

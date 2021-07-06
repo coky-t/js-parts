@@ -138,3 +138,39 @@ function GetHexStringFromLong(Value, ZeroPadding) {
         return GetNumString(Value, 16, ZeroPadding ? 8 : 0);
     }
 }
+
+function GetByteFromBinString(BinString) {
+    return parseInt(BinString, 2);
+}
+
+function GetIntegerFromBinString(BinString) {
+    return parseInt(BinString, 2);
+}
+
+function GetLongFromBinString(BinString) {
+    return parseInt(BinString, 2);
+}
+
+function GetByteFromOctString(OctString) {
+    return parseInt(OctString, 8);
+}
+
+function GetIntegerFromOctString(OctString) {
+    return parseInt(OctString, 8);
+}
+
+function GetLongFromOctString(OctString) {
+    return parseInt(OctString, 8);
+}
+
+function GetByteFromHexString(HexString) {
+    return parseInt(HexString, 16);
+}
+
+function GetIntegerFromHexString(HexString) {
+    return parseInt(HexString, 16);
+}
+
+function GetLongFromHexString(HexString) {
+    return parseInt(HexString, 16);
+}
