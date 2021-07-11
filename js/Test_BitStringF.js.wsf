@@ -1,0 +1,135 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_GetBinStringFromSingle">
+        <script language="jscript" src="BitStringF.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="Test_BitStringF.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+             Test_GetBinStringFromSingle();
+        </script>
+    </job>
+    <job id="Test_GetBinStringFromDouble">
+        <script language="jscript" src="BitStringF.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="Test_BitStringF.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+             Test_GetBinStringFromDouble();
+        </script>
+    </job>
+    <job id="Test_GetSingleFromBinString">
+        <script language="jscript" src="BitStringF.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="Test_BitStringF.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+             Test_GetSingleFromBinString();
+        </script>
+    </job>
+    <job id="Test_GetDoubleFromBinString">
+        <script language="jscript" src="BitStringF.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="Test_BitStringF.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+             Test_GetDoubleFromBinString();
+        </script>
+    </job>
+    <job id="Test_GetOctStringFromSingle">
+        <script language="jscript" src="BitStringF.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="Test_BitStringF.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+             Test_GetOctStringFromSingle();
+        </script>
+    </job>
+    <job id="Test_GetOctStringFromDouble">
+        <script language="jscript" src="BitStringF.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="Test_BitStringF.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+             Test_GetOctStringFromDouble();
+        </script>
+    </job>
+    <job id="Test_GetSingleFromOctString">
+        <script language="jscript" src="BitStringF.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="Test_BitStringF.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+             Test_GetSingleFromOctString();
+        </script>
+    </job>
+    <job id="Test_GetDoubleFromOctString">
+        <script language="jscript" src="BitStringF.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="Test_BitStringF.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+             Test_GetDoubleFromOctString();
+        </script>
+    </job>
+    <job id="Test_GetHexStringFromSingle">
+        <script language="jscript" src="BitStringF.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="Test_BitStringF.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+             Test_GetHexStringFromSingle();
+        </script>
+    </job>
+    <job id="Test_GetHexStringFromDouble">
+        <script language="jscript" src="BitStringF.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="Test_BitStringF.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+             Test_GetHexStringFromDouble();
+        </script>
+    </job>
+    <job id="Test_GetSingleFromHexString">
+        <script language="jscript" src="BitStringF.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="Test_BitStringF.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+             Test_GetSingleFromHexString();
+        </script>
+    </job>
+    <job id="Test_GetDoubleFromHexString">
+        <script language="jscript" src="BitStringF.js" />
+        <script language="jscript" src="BitString.js" />
+        <script language="jscript" src="ByteString.js" />
+        <script language="jscript" src="BitShift.js" />
+        <script language="jscript" src="Test_BitStringF.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+             Test_GetDoubleFromHexString();
+        </script>
+    </job>
+</package>
