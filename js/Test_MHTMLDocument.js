@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Koki Takeyama
+// Copyright (c) 2020,2022 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -62,7 +62,16 @@ function Test_ParseJsonText_Core(JsonText) {
     var JsonObject;
     JsonObject = ParseJsonText(JsonText);
     
+    if (IsJsonArray(JsonObject)) {
+        Debug_Print("=== Array ===");
+    } else {
+        Debug_Print("=== Object ===");
+    }
     Debug_Print_JsonObject(JsonObject);
+    
+    Debug_Print("===");
+    Debug_Print(GetJsonText(JsonObject));
+    Debug_Print("===");
 }
 
 function Debug_Print_JsonObject(JsonObject) {
@@ -75,8 +84,14 @@ function Debug_Print_JsonObject(JsonObject) {
     for(var Index = 0; Index < KeysLength; Index++) {
         var Key = GetJsonKeysItem(Keys, Index);
         if (IsJsonItemObject(JsonObject, Key)) {
-            Debug_Print(Key + " ---");
-            Debug_Print_JsonObject(GetJsonItemObject(JsonObject, Key));
+            var JsonItemObject;
+            JsonItemObject = GetJsonItemObject(JsonObject, Key);
+            if (IsJsonArray(JsonItemObject)) {
+                Debug_Print(Key + " --- Array ---");
+            } else {
+                Debug_Print(Key + " --- Object ---");
+            }
+            Debug_Print_JsonObject(JsonItemObject);
             Debug_Print(Key + " ---");
         } else {
             var Value = GetJsonItemValue(JsonObject, Key);

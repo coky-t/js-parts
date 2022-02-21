@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Koki Takeyama
+// Copyright (c) 2020,2022 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -41,6 +41,7 @@ function GetHTMLDocumentForJson() {
     if (HTMLDocument == null) {
         HTMLDocument = new ActiveXObject("htmlfile");
         with (HTMLDocument) {
+            write("<meta http-equiv='x-ua-compatible' content='IE=11'/>");
             write(
                 "<script>document.ParseJsonText=function (JsonText) { " +
                 "return eval('(' + JsonText + ')'); }</script>");
@@ -55,6 +56,14 @@ function GetHTMLDocumentForJson() {
             write(
                 "<script>document.GetLength=function (obj) { " +
                 "return obj.length; }</script>");
+            write(
+                "<script>document.IsJsonArray=function (obj) { " +
+                "return Object.prototype.toString.call(obj) === " +
+                "'[object Array]'; }</script>");
+            write(
+                "<script>document.GetJsonText=function (obj) { " +
+                "return document.parentWindow.JSON.stringify(obj); }" +
+                "</script>");
         }
     }
     return HTMLDocument;
@@ -191,4 +200,33 @@ function GetJsonItemObject(
     
     //return GetHTMLDocumentForJson().GetItem(JsonObject, Key);
     return JsonObject[Key];
+}
+
+//
+// IsJsonArray
+// - Returns whether JSON object is Array.
+//
+
+//
+// JsonObject:
+//   Required. The name of a JSON object
+//
+
+function IsJsonArray(JsonObject) {
+    //return GetHTMLDocumentForJson().IsJsonArray(JsonObject);
+    return Object.prototype.toString.call(JsonObject) === '[object Array]';
+}
+
+//
+// GetJsonText
+// - Returns string expression that identifies JSON data.
+//
+
+//
+// JsonObject:
+//   Required. The name of a JSON object
+//
+
+function GetJsonText(JsonObject) {
+    return GetHTMLDocumentForJson().GetJsonText(JsonObject);
 }
