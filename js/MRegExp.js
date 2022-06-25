@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Koki Takeyama
+// Copyright (c) 2020,2022 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -108,4 +108,28 @@ function RegExp_Test(
     var re = new RegExp(Pattern, flags);
     
     return re.test(SourceString);
+}
+
+function RegExp_MatchedValue(
+    SourceString,
+    Pattern,
+    IgnoreCase,
+    MultiLine) {
+    
+    var Matches;
+    Matches =
+        RegExp_Execute(
+            SourceString,
+            Pattern,
+            IgnoreCase,
+            false,
+            MultiLine);
+    
+    if (Matches == null) {
+        return "";
+    } else if (Matches.length == 0) {
+        return "";
+    }
+    
+    return Matches[0];
 }

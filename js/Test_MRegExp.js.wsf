@@ -25,4 +25,12 @@
             Test_RegExp_Execute();
         </script>
     </job>
+    <job id="Test_RegExp_MatchedValue">
+        <script language="jscript" src="MRegExp.js" />
+        <script language="jscript" src="Test_MRegExp.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_RegExp_MatchedValue();
+        </script>
+    </job>
 </package>

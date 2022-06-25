@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Koki Takeyama
+// Copyright (c) 2020,2022 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -35,6 +35,10 @@ function Test_RegExp_Replace() {
 
 function Test_RegExp_Execute() {
     Test_RegExp_Execute_Core("abc 123 xyz #$%", "([a-z]+)", true, true, true);
+}
+
+function Test_RegExp_MatchedValue() {
+    Test_RegExp_MatchedValue_Core("abc 123 xyz #$%", "([a-z]+)", true, true);
 }
 
 //
@@ -112,4 +116,26 @@ function Test_RegExp_Execute_Core(
     Debug_Print("--- Execute ---");
     
     Debug_Print_Matches(Matches);
+}
+
+function Test_RegExp_MatchedValue_Core(
+    SourceString,
+    Pattern,
+    IgnoreCase,
+    MultiLine) {
+    
+    var Result;
+    Result =
+        RegExp_MatchedValue(
+            SourceString,
+            Pattern,
+            IgnoreCase,
+            MultiLine);
+    
+    Debug_Print("=== RegExp_MatchedValue ===");
+    Debug_Print("SourceString: " + SourceString);
+    Debug_Print("Pattern: " + Pattern);
+    Debug_Print("IgnoreCase: " + IgnoreCase.toString());
+    Debug_Print("MultiLine: " + MultiLine.toString());
+    Debug_Print("MatchedValue - result: " + Result);
 }
