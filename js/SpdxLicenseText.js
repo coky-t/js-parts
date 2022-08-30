@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Koki Takeyama
+// Copyright (c) 2020,2022 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -116,19 +116,19 @@ function RegExpReplaceWords(SourceString) {
     
     var PatternAndReplaceStringArray;
     PatternAndReplaceStringArray = new Array(
-        "sub\W*licen[sc]e",
+        "sub\\W*licen[sc]e",
         "acknowledge?ment", "analog(?:ue)?", "analy[zs]e",
         "art[ie]fact", "authori[zs]ation", "authori[zs]ed",
         "calib(?:er|re)", "cancell?ed", "capitali[zs]ations",
         "catalog(?:ue)?", "categori[zs]e", "cent(?:er|re)",
-        "copyright\W+(?:hold|own)er", "emphasi[zs]ed",
+        "copyright\\W+(?:hold|own)er", "emphasi[zs]ed",
         "favou?r", "favou?rite", "fulfill?",
         "fulfill?ment", "initiali[zs]e", "judge?ment",
         "labell?ing", "labou?r", "licen[sc]e",
         "maximi[zs]e", "modell?ed", "modell?ing",
-        "non\W*commercial", "offen[sc]e", "optimi[zs]e",
+        "non\\W*commercial", "offen[sc]e", "optimi[zs]e",
         "organi[zs]ation", "organi[zs]e",
-        "per\s*cent", "practi[cs]e", "program(?:me)?",
+        "per\\s*cent", "practi[cs]e", "program(?:me)?",
         "reali[zs]e", "recogni[zs]e", "signall?ing",
         "utili[zs]ation", "whil(?:e|st)", "wilfull?");
     
