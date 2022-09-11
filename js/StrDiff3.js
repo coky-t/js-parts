@@ -311,7 +311,7 @@ function ShortestEditScriptCore(Str1, Str2, EditChar1, EditChar2) {
                     TempSES = "";
                 } else {
                     TempIndex2 = Index2[Len1 + Index0 - 1] + 1;
-                    TempSES =;
+                    TempSES =
                         SES[Len1 + Index0 - 1] + EditChar2 +
                         Str2.substr(TempIndex2 - 1, 1);
                 }
@@ -411,6 +411,7 @@ function ShortestEditScriptCore(Str1, Str2, EditChar1, EditChar2) {
             }
             
             while ((TempIndex2 - Index0 < Len1) && (TempIndex2 < Len2) &&
+                (Str1.substr(TempIndex2 - Index0, 1) ==
                 Str2.substr(TempIndex2, 1))) {
                 
                 TempSES = TempSES + " " + Str2.substr(TempIndex2, 1);
