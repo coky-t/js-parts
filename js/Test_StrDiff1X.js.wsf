@@ -1,0 +1,43 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_StrDiff_1">
+        <script language="jscript" src="StrDiff1X.js" />
+        <script language="jscript" src="Test_StrDiff.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_StrDiff_1();
+        </script>
+    </job>
+    <job id="Test_StrDiff_2">
+        <script language="jscript" src="StrDiff1X.js" />
+        <script language="jscript" src="Test_StrDiff.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_StrDiff_2();
+        </script>
+    </job>
+    <job id="Test_StrDiff_3">
+        <script language="jscript" src="StrDiff1X.js" />
+        <script language="jscript" src="Test_StrDiff.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_StrDiff_3();
+        </script>
+    </job>
+    <job id="Test_StrDiff_4">
+        <script language="jscript" src="StrDiff1X.js" />
+        <script language="jscript" src="Test_StrDiff.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_StrDiff_4();
+        </script>
+    </job>
+    <job id="Test_StrDiff_5">
+        <script language="jscript" src="StrDiff1X.js" />
+        <script language="jscript" src="Test_StrDiff.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_StrDiff_5();
+        </script>
+    </job>
+</package>
