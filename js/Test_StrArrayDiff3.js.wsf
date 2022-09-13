@@ -1,0 +1,43 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_StrArrayDiff_1">
+        <script language="jscript" src="StrArrayDiff3.js" />
+        <script language="jscript" src="Test_StrArrayDiff.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_StrArrayDiff_1();
+        </script>
+    </job>
+    <job id="Test_StrArrayDiff_2">
+        <script language="jscript" src="StrArrayDiff3.js" />
+        <script language="jscript" src="Test_StrArrayDiff.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_StrArrayDiff_2();
+        </script>
+    </job>
+    <job id="Test_StrArrayDiff_3">
+        <script language="jscript" src="StrArrayDiff3.js" />
+        <script language="jscript" src="Test_StrArrayDiff.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_StrArrayDiff_3();
+        </script>
+    </job>
+    <job id="Test_StrArrayDiff_4">
+        <script language="jscript" src="StrArrayDiff3.js" />
+        <script language="jscript" src="Test_StrArrayDiff.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_StrArrayDiff_4();
+        </script>
+    </job>
+    <job id="Test_StrArrayDiff_5">
+        <script language="jscript" src="StrArrayDiff3.js" />
+        <script language="jscript" src="Test_StrArrayDiff.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_StrArrayDiff_5();
+        </script>
+    </job>
+</package>
