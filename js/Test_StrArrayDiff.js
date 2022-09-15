@@ -78,21 +78,21 @@ function Test_StrArrayDiff_Core(Str1, Str2) {
     for (var Index3 = 0; Index3 < SES.length; Index3++) {
         switch (SES.substr(Index3, 1)) {
         case "-":
-            SES1 = SES1 + "-" + Str1.substr(Index1, 1)
-            SES3 = SES3 + "-" + Str1.substr(Index1, 1)
-            Index1 = Index1 + 1
+            SES1 = SES1 + "-" + Str1.substr(Index1, 1);
+            SES3 = SES3 + "-" + Str1.substr(Index1, 1);
+            Index1 = Index1 + 1;
             break;
         case "+":
-            SES2 = SES2 + "+" + Str2.substr(Index2, 1)
-            SES3 = SES3 + "+" + Str2.substr(Index2, 1)
-            Index2 = Index2 + 1
+            SES2 = SES2 + "+" + Str2.substr(Index2, 1);
+            SES3 = SES3 + "+" + Str2.substr(Index2, 1);
+            Index2 = Index2 + 1;
             break;
         case " ":
-            SES1 = SES1 + " " + Str1.substr(Index1, 1)
-            SES2 = SES2 + " " + Str2.substr(Index2, 1)
-            SES3 = SES3 + " " + Str1.substr(Index1, 1)
-            Index1 = Index1 + 1
-            Index2 = Index2 + 1
+            SES1 = SES1 + " " + Str1.substr(Index1, 1);
+            SES2 = SES2 + " " + Str2.substr(Index2, 1);
+            SES3 = SES3 + " " + Str1.substr(Index1, 1);
+            Index1 = Index1 + 1;
+            Index2 = Index2 + 1;
             break;
         }
     }
