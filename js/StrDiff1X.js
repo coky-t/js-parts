@@ -240,7 +240,7 @@ function ShortestEditScriptCore(Str1, Str2, EditChar1, EditChar2) {
             SES[0] = SES[0] + EditChar1 + Str1.substr(Index1Temp - 1, 1);
         }
         DiagonalSES = "";
-        for (Index1Temp = 1; Index1Temp <= Index1; Index1Temp++) {
+        for (Index1Temp = 1; Index1Temp <= Index1 - 1; Index1Temp++) {
             DiagonalSES =
                 DiagonalSES + EditChar1 + Str1.substr(Index1Temp - 1, 1);
         }
