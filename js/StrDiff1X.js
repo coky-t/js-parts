@@ -214,8 +214,7 @@ function ShortestEditScriptCore(Str1, Str2, EditChar1, EditChar2) {
     SES[0] = "";
     for(var Index2 = 1; Index2 <= Len2; Index2++) {
         Cost[Index2] = Index2;
-        SES[Index2] =
-            SES[0][Index2 - 1] + EditChar2 + Str2.substr(Index2 - 1, 1);
+        SES[Index2] = SES[Index2 - 1] + EditChar2 + Str2.substr(Index2 - 1, 1);
     }
     
     var DiagonalCost;
