@@ -326,7 +326,7 @@ function ShortestEditScriptCore(Str1, Str2, EditChar1, EditChar2) {
             while ((TempIndex2 - Index0 < Len1) && (TempIndex2 < Len2) &&
                 (Str1[TempIndex2 - Index0] == Str2[TempIndex2])) {
                 
-                TempSES = TempSES + " " + Str2[TempIndex2];
+                TempSES = TempSES + " ";
                 TempIndex2++;
             }
             
@@ -353,7 +353,7 @@ function ShortestEditScriptCore(Str1, Str2, EditChar1, EditChar2) {
             while ((TempIndex2 - Index0 < Len1) && (TempIndex2 < Len2) &&
                 (Str1[TempIndex2 - Index0] == Str2[TempIndex2])) {
                 
-                TempSES = TempSES + " " + Str2[TempIndex2];
+                TempSES = TempSES + " ";
                 TempIndex2++;
             }
             
@@ -385,7 +385,7 @@ function ShortestEditScriptCore(Str1, Str2, EditChar1, EditChar2) {
             while ((TempIndex2 - Index0 < Len1) && (TempIndex2 < Len2) &&
                 (Str1[TempIndex2 - Index0] == Str2[TempIndex2])) {
                 
-                TempSES = TempSES + " " + Str2[TempIndex2];
+                TempSES = TempSES + " ";
                 TempIndex2++;
             }
             
