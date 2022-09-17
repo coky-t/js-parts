@@ -60,6 +60,27 @@ function GetMatchingPattern(LicenseText) {
     return TempString;
 }
 
+function GetSimpleMatchingPattern(LicenseText) {
+    var TempString;
+    TempString = LicenseText.toLowerCase();
+    
+    // 3. Whitespace
+    // 5. Punctuation
+    // 5.1.1 Guideline: Punctuation
+    // 5.1.2 Guideline: Hyphens, Dashes
+    // 5.1.3 Guideline: Quotes
+    // 6. Code Comment Indicators
+    TempString = RegExpReplace(TempString, "\\W*", "\\W+");
+    
+    // 8. Varietal Word Spelling
+    TempString = RegExpReplaceWords(TempString);
+    
+    // 13. HTTP Protocol
+    TempString = RegExpReplace(TempString, "https?", "https?");
+    
+    return TempString;
+}
+
 //
 // 8. Varietal Word Spelling
 //

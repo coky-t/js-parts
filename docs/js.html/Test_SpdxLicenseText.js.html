@@ -67,6 +67,27 @@ function GetMatchingPattern(LicenseText) {
     return TempString;
 }
 
+function GetSimpleMatchingPattern(LicenseText) {
+    var TempString;
+    TempString = LicenseText.toLowerCase();
+    
+    // 3. Whitespace
+    // 5. Punctuation
+    // 5.1.1 Guideline: Punctuation
+    // 5.1.2 Guideline: Hyphens, Dashes
+    // 5.1.3 Guideline: Quotes
+    // 6. Code Comment Indicators
+    TempString = RegExpReplace(TempString, "\\W*", "\\W+");
+    
+    // 8. Varietal Word Spelling
+    TempString = RegExpReplaceWords(TempString);
+    
+    // 13. HTTP Protocol
+    TempString = RegExpReplace(TempString, "https?", "https?");
+    
+    return TempString;
+}
+
 //
 // 8. Varietal Word Spelling
 //
@@ -172,7 +193,7 @@ function RegExpReplace(
 // --- Test ---
 //
 
-function btnReplace_OnClick() {
+function btnReplaceNormal_OnClick() {
     var SourceString;
     SourceString = textareaSourceString.value;
     if (SourceString == "") {
@@ -182,6 +203,20 @@ function btnReplace_OnClick() {
     
     var Result;
     Result = GetMatchingPattern(SourceString);
+    
+    textareaResult.innerText = Result;
+}
+
+function btnReplaceSimple_OnClick() {
+    var SourceString;
+    SourceString = textareaSourceString.value;
+    if (SourceString == "") {
+        alert("SourceString: is blank.");
+        return;
+    }
+    
+    var Result;
+    Result = GetSimpleMatchingPattern(SourceString);
     
     textareaResult.innerText = Result;
 }
@@ -207,7 +242,8 @@ function btnReplace_OnClick() {
 <tr>
 <td></td>
 <td>
-<button id="btnReplace" onclick="btnReplace_OnClick();">Replace</button>
+<button id="btnReplaceNormal" onclick="btnReplaceNormal_OnClick();">Replace(Normal)</button>
+<button id="btnReplaceSimple" onclick="btnReplaceSimple_OnClick();">Replace(Simple)</button>
 </td>
 </tr>
 

@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Koki Takeyama
+// Copyright (c) 2020,2022 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -164,14 +164,24 @@ function Test_GetMatchingPattern_Core(Text) {
     var MatchingPattern;
     MatchingPattern = GetMatchingPattern(Text);
     
+    var SimpleMatchingPattern;
+    SimpleMatchingPattern = GetSimpleMatchingPattern(Text);
+    
     Debug_Print("--- Text ---");
     Debug_Print(Text);
     Debug_Print("--- MatchingPattern ---");
     Debug_Print(MatchingPattern);
+    Debug_Print("--- SimpleMatchingPattern ---");
+    Debug_Print(SimpleMatchingPattern);
 }
 
 function Test_GetMatchingPattern_Word(Word) {
     var MatchingPattern;
     MatchingPattern = GetMatchingPattern(Word);
-    Debug_Print(Word + " : " + MatchingPattern);
+    
+    var SimpleMatchingPattern;
+    SimpleMatchingPattern = GetSimpleMatchingPattern(Word);
+    
+    Debug_Print(
+        Word + " : " + MatchingPattern + " : " + SimpleMatchingPattern);
 }
