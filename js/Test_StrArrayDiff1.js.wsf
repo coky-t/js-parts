@@ -57,4 +57,15 @@
             Test_StrArrayDiff_Word_1();
         </script>
     </job>
+    <job id="Test_StrArrayDiff_SpdxLicenseText_EditDistance">
+        <script language="jscript" src="StrArrayDiff1.js" />
+        <script language="jscript" src="Test_StrArrayDiff_SpdxLicText.js" />
+        <script language="jscript" src="MRegExp.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="CProgressTimer.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_StrArrayDiff_SpdxLicenseText_EditDistance();
+        </script>
+    </job>
 </package>
