@@ -1,0 +1,21 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_SaveSpdxTextFile">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="Test_SpdxTextFile.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_SaveSpdxTextFile();
+        </script>
+    </job>
+    <job id="Test_SaveSpdxTemplateFile">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="Test_SpdxTextFile.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_SaveSpdxTemplateFile();
+        </script>
+    </job>
+</package>
