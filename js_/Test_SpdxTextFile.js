@@ -71,7 +71,7 @@ function Test_SaveSpdxTextFile_Core(
         OutputText = OutputText +
             "<pre name=\"" +
             File.Name.substring(0, File.Name.length - ".txt".length) +
-            "\">" + FileText + "</pre>\r\n";
+            "\">" + ReplaceChars(FileText) + "</pre>\r\n";
     }
     
     MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, false);
