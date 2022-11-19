@@ -18,4 +18,22 @@
             Test_SaveSpdxTemplateFile();
         </script>
     </job>
+    <job id="Test_SaveSpdxTextLinesFile">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="Test_SpdxTextFile.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_SaveSpdxTextLinesFile();
+        </script>
+    </job>
+    <job id="Test_SaveSpdxTemplateLinesFile">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="Test_SpdxTextFile.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_SaveSpdxTemplateLinesFile();
+        </script>
+    </job>
 </package>

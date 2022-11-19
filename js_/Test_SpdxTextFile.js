@@ -48,6 +48,30 @@ function Test_SaveSpdxTemplateFile() {
         OutputFilePath, SpdxTextDirPath);
 }
 
+function Test_SaveSpdxTextLinesFile() {
+    var OutputFilePath;
+    OutputFilePath = "C:\\work\\data\\spdx-text-lines.txt";
+    
+    // https://github.com/spdx/license-list-data/tree/v3.18/text
+    var SpdxTextDirPath;
+    SpdxTextDirPath = "C:\\work\\data\\spdx-license-text";
+    
+    Test_SaveSpdxTextLinesFile_Core(
+        OutputFilePath, SpdxTextDirPath);
+}
+
+function Test_SaveSpdxTemplateLinesFile() {
+    var OutputFilePath;
+    OutputFilePath = "C:\\work\\data\\spdx-template-lines.txt";
+    
+    // https://github.com/spdx/license-list-data/tree/v3.18/template
+    var SpdxTextDirPath;
+    SpdxTextDirPath = "C:\\work\\data\\spdx-license-template";
+    
+    Test_SaveSpdxTemplateLinesFile_Core(
+        OutputFilePath, SpdxTextDirPath);
+}
+
 //
 // --- Test Core ---
 //
@@ -98,6 +122,83 @@ function Test_SaveSpdxTemplateFile_Core(
             "<pre name=\"" +
             File.Name.substring(0, File.Name.length - ".template.txt".length) +
             "\">" + ReplaceChars(FileText) + "</pre>\r\n"
+    }
+    
+    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, false);
+    Debug_Print("... Done.");
+}
+
+function Test_SaveSpdxTextLinesFile_Core(
+    OutputFilePath, DirPath) {
+    
+    var OutputText = "";
+    
+    var Folder;
+    Folder = GetFileSystemObject().GetFolder(DirPath);
+    
+    var Files = new Enumerator(Folder.Files);
+    for (; !Files.atEnd(); Files.moveNext()) {
+        var File = Files.item();
+        
+        Debug_Print(File.Name);
+        
+        var FileText;
+        FileText = MADODBStream_ReadTextFileUTF8(File.Path);
+        
+        var Lines;
+        Lines = FileText.replace(/\r\n/g, "\n").split("\n");
+        
+        var Count;
+        Count = 1
+        for (var Index in Lines) {
+            if (Lines[Index] != "") {
+                OutputText = OutputText +
+                    "<pre name=\"" +
+                    File.Name.substring(0, File.Name.length - ".txt".length) +
+                    "_" + ("00" + Count.toString()).slice(-3) +
+                    "\">" + ReplaceChars(Lines[Index]) + "</pre>\r\n";
+                Count += 1;
+            }
+        }
+    }
+    
+    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, false);
+    Debug_Print("... Done.");
+}
+
+function Test_SaveSpdxTemplateLinesFile_Core(
+    OutputFilePath, DirPath) {
+    
+    var OutputText = "";
+    
+    var Folder;
+    Folder = GetFileSystemObject().GetFolder(DirPath);
+    
+    var Files = new Enumerator(Folder.Files);
+    for (; !Files.atEnd(); Files.moveNext()) {
+        var File = Files.item();
+        
+        Debug_Print(File.Name);
+        
+        var FileText;
+        FileText = MADODBStream_ReadTextFileUTF8(File.Path);
+        
+        var Lines;
+        Lines = FileText.replace(/\r\n/g, "\n").split("\n");
+        
+        var Count;
+        Count = 1
+        for (var Index in Lines) {
+            if (Lines[Index] != "") {
+                OutputText = OutputText +
+                    "<pre name=\"" +
+                    File.Name.substring(0, 
+                        File.Name.length - ".template.txt".length) +
+                    "_" + ("00" + Count.toString()).slice(-3) +
+                    "\">" + ReplaceChars(Lines[Index]) + "</pre>\r\n";
+                Count += 1;
+            }
+        }
     }
     
     MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, false);
