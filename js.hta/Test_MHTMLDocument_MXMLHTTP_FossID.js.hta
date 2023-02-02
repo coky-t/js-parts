@@ -1,0 +1,379 @@
+<html>
+
+<head>
+<title>Test_MHTMLDocument_MXMLHTTP_FossID.js.hta</title>
+
+<meta http-equiv="msthemecompatible" content="yes">
+
+<hta:application innerborder="no" scroll="no" />
+
+<script language="jscript">
+<!--
+//
+// Copyright (c) 2020,2022,2023 Koki Takeyama
+//
+// Permission is hereby granted, free of charge, to any person obtaining
+// a copy of this software and associated documentation files (the "Software"),
+// to deal in the Software without restriction, including without limitation
+// the rights to use, copy, modify, merge, publish, distribute, sublicense,
+// and/or sell copies of the Software, and to permit persons to whom the
+// Software is furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included
+// in all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+// FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+// IN THE SOFTWARE.
+//
+
+//
+// Microsoft HTML Object Library
+// - MSHTML.HTMLDocument
+// - htmlfile
+//
+
+var HTMLDocument;
+
+//
+// --- MSHTML.HTMLDocument ---
+//
+
+//
+// GetHTMLDocumentForJson
+// - Returns a MSHTML.HTMLDocument object.
+//
+
+function GetHTMLDocumentForJson() {
+    if (HTMLDocument == null) {
+        HTMLDocument = new ActiveXObject("htmlfile");
+        with (HTMLDocument) {
+            write("<meta http-equiv='x-ua-compatible' content='IE=11'/>");
+            write(
+                "<script>document.GetJsonText=function (obj) { " +
+                "return document.parentWindow.JSON.stringify(obj); }" +
+                "</script>");
+        }
+    }
+    return HTMLDocument;
+}
+
+//
+// === Json ===
+//
+
+//
+// GetJsonText
+// - Returns string expression that identifies JSON data.
+//
+
+//
+// JsonObject:
+//   Required. The name of a JSON object
+//
+
+function GetJsonText(JsonObject) {
+    return GetHTMLDocumentForJson().GetJsonText(JsonObject);
+}
+
+//
+// Microsoft XML, vX.X
+// - MSXML2.XMLHTTP
+//
+
+//
+// === HttpRequest ===
+//
+
+//
+// HttpPost
+// - Sends an HTTP POST request to the server and receives a response.
+//
+
+//
+// Url:
+//   Required. The requested URL. This can be either
+//   an absolute URL, such as "http://Myserver/Mypath/Myfile.asp",
+//   or a relative URL, such as "../MyPath/MyFile.asp".
+//
+// Body:
+//   Optional. The body of the message being sent with the request.
+//
+
+function HttpPost(Url, Body) {
+    return OpenAndSendAndResponseText("POST", Url, Body);
+}
+
+//
+// --- HttpRequest ---
+//
+
+//
+// OpenAndSendAndResponseText
+// - Sends an HTTP request to the server and receives a response.
+//
+
+//
+// Method:
+//   Required. The HTTP method used to open the connection,
+//   such as GET, POST, PUT, or PROPFIND. For XMLHTTP,
+//   this parameter is not case-sensitive.
+//   The verbs TRACE and TRACK are not allowed
+//   when IXMLHTTPRequest is hosted in the browser.
+//
+// Url:
+//   Required. The requested URL. This can be either
+//   an absolute URL, such as "http://Myserver/Mypath/Myfile.asp",
+//   or a relative URL, such as "../MyPath/MyFile.asp".
+//
+// Body:
+//   Optional. The body of the message being sent with the request.
+//
+
+function OpenAndSendAndResponseText(
+    Method,
+    Url,
+    Body) {
+    
+    try {
+        with (new ActiveXObject("MSXML2.XMLHTTP")) {
+            Open(Method, Url, false);
+            Send(Body);
+            if (Status == 200) {
+                return responseText;
+            } else {
+                return "";
+            }
+        }
+    } catch (e) {
+        return "";
+    }
+}
+
+//
+// --- Test ---
+//
+
+function btnPost_OnClick() {
+    var url = inputURL.value;
+    if (url == "") {
+        alert("url: is blank.");
+        return;
+    }
+    
+    var group = inputGroup.value;
+    if (group == "") {
+        alert("group: is blank.");
+        return;
+    }
+    
+    var action = inputAction.value;
+    if (action == "") {
+        alert("action: is blank.");
+        return;
+    }
+    
+    var username = inputUsername.value;
+    if (username == "") {
+        alert("username: is blank.");
+        return;
+    }
+    
+    var key = inputKey.value;
+    if (key == "") {
+        alert("key: is blank.");
+        return;
+    }
+    
+    var json_obj = {};
+    json_obj["group"] = group;
+    json_obj["action"] = action;
+    json_obj["data"] = {};
+    json_obj["data"]["username"] = username;
+    json_obj["data"]["key"] = key;
+    
+    var param1name = inputParam1Name.value;
+    var param1value = inputParam1Value.valuep;
+    if (param1name != "") {
+        json_obj["data"][param1name] = param1value;
+    }
+    
+    var param1name = inputParam1Name.value;
+    var param1value = inputParam1Value.valuep;
+    if (param1name != "") {
+        json_obj["data"][param1name] = param1value;
+    }
+    
+    var param2name = inputParam2Name.value;
+    var param2value = inputParam2Value.valuep;
+    if (param2name != "") {
+        json_obj["data"][param2name] = param2value;
+    }
+    
+    var param3name = inputParam3Name.value;
+    var param3value = inputParam3Value.valuep;
+    if (param3name != "") {
+        json_obj["data"][param3name] = param3value;
+    }
+    
+    var param4name = inputParam4Name.value;
+    var param4value = inputParam4Value.valuep;
+    if (param4name != "") {
+        json_obj["data"][param4name] = param4value;
+    }
+    
+    var param5name = inputParam5Name.value;
+    var param5value = inputParam5Value.valuep;
+    if (param5name != "") {
+        json_obj["data"][param5name] = param5value;
+    }
+    
+    var param6name = inputParam6Name.value;
+    var param6value = inputParam6Value.valuep;
+    if (param6name != "") {
+        json_obj["data"][param6name] = param6value;
+    }
+    
+    var param7name = inputParam7Name.value;
+    var param7value = inputParam7Value.valuep;
+    if (param7name != "") {
+        json_obj["data"][param7name] = param7value;
+    }
+    
+    var param8name = inputParam8Name.value;
+    var param8value = inputParam8Value.valuep;
+    if (param8name != "") {
+        json_obj["data"][param8name] = param8value;
+    }
+    
+    var param9name = inputParam9Name.value;
+    var param9value = inputParam9Value.valuep;
+    if (param9name != "") {
+        json_obj["data"][param9name] = param9value;
+    }
+    
+    var param10name = inputParam10Name.value;
+    var param10value = inputParam10Value.valuep;
+    if (param10name != "") {
+        json_obj["data"][param10name] = param10value;
+    }
+    
+    var json_text = GetHTMLDocumentForJson().GetJsonText(json_obj);
+    
+    textareaRequest.innerText = json_text;
+    
+    textareaResponse.innerText = HttpPost(url, json_text);
+}
+-->
+</script>
+
+</head>
+
+<body style="margin:0">
+
+<table width="100%">
+
+<colgroup>
+<col width="100pt"></col>
+<col></col>
+</colgroup>
+
+<tr>
+<td>url:</td>
+<td><input id="inputURL" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td>group:</td>
+<td><input id="inputGroup" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td>action:</td>
+<td><input id="inputAction" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td>username:</td>
+<td><input id="inputUsername" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td>key:</td>
+<td><input id="inputKey" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td><input id="inputParam1Name" style="width:100%" /></td>
+<td><input id="inputParam1Value" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td><input id="inputParam2Name" style="width:100%" /></td>
+<td><input id="inputParam2Value" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td><input id="inputParam3Name" style="width:100%" /></td>
+<td><input id="inputParam3Value" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td><input id="inputParam4Name" style="width:100%" /></td>
+<td><input id="inputParam4Value" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td><input id="inputParam5Name" style="width:100%" /></td>
+<td><input id="inputParam5Value" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td><input id="inputParam6Name" style="width:100%" /></td>
+<td><input id="inputParam6Value" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td><input id="inputParam7Name" style="width:100%" /></td>
+<td><input id="inputParam7Value" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td><input id="inputParam8Name" style="width:100%" /></td>
+<td><input id="inputParam8Value" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td><input id="inputParam9Name" style="width:100%" /></td>
+<td><input id="inputParam9Value" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td><input id="inputParam10Name" style="width:100%" /></td>
+<td><input id="inputParam10Value" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td></td>
+<td><button id="btnPost" onclick="btnPost_OnClick();">Post</button></td>
+</tr>
+
+<tr>
+<td>Request:</td>
+<td><textarea id="textareaRequest" rows="10" cols="50" style="width:100%"></textarea></td>
+</tr>
+
+<tr>
+<td>Response:</td>
+<td><textarea id="textareaResponse" rows="10" cols="50" style="width:100%"></textarea></td>
+</tr>
+
+</table>
+
+</body>
+
+</html>
