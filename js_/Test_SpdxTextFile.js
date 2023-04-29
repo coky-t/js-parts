@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2022 Koki Takeyama
+// Copyright (c) 2022,2023 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -28,7 +28,7 @@ function Test_SaveSpdxTextFile() {
     var OutputFilePath;
     OutputFilePath = "C:\\work\\data\\spdx-text.txt";
     
-    // https://github.com/spdx/license-list-data/tree/v3.18/text
+    // https://github.com/spdx/license-list-data/tree/vX.XX/text
     var SpdxTextDirPath;
     SpdxTextDirPath = "C:\\work\\data\\spdx-license-text";
     
@@ -40,7 +40,7 @@ function Test_SaveSpdxTemplateFile() {
     var OutputFilePath;
     OutputFilePath = "C:\\work\\data\\spdx-template.txt";
     
-    // https://github.com/spdx/license-list-data/tree/v3.18/template
+    // https://github.com/spdx/license-list-data/tree/vX.XX/template
     var SpdxTextDirPath;
     SpdxTextDirPath = "C:\\work\\data\\spdx-license-template";
     
@@ -52,7 +52,7 @@ function Test_SaveSpdxTextLinesFile() {
     var OutputFilePath;
     OutputFilePath = "C:\\work\\data\\spdx-text-lines.txt";
     
-    // https://github.com/spdx/license-list-data/tree/v3.18/text
+    // https://github.com/spdx/license-list-data/tree/vX.XX/text
     var SpdxTextDirPath;
     SpdxTextDirPath = "C:\\work\\data\\spdx-license-text";
     
@@ -64,12 +64,24 @@ function Test_SaveSpdxTemplateLinesFile() {
     var OutputFilePath;
     OutputFilePath = "C:\\work\\data\\spdx-template-lines.txt";
     
-    // https://github.com/spdx/license-list-data/tree/v3.18/template
+    // https://github.com/spdx/license-list-data/tree/vX.XX/template
     var SpdxTextDirPath;
     SpdxTextDirPath = "C:\\work\\data\\spdx-license-template";
     
     Test_SaveSpdxTemplateLinesFile_Core(
         OutputFilePath, SpdxTextDirPath);
+}
+
+function Test_SaveSpdxTemplateToTextFiles() {
+    var OutputDirPath;
+    OutputDirPath = "C:\\work\\data\\spdx-license-template-to-text";
+    
+    // https://github.com/spdx/license-list-data/tree/vX.XX/template
+    var SpdxTextDirPath
+    SpdxTextDirPath = "C:\\work\\data\\spdx-license-template";
+    
+    Test_SaveSpdxTemplateToTextFiles_Core(
+        OutputDirPath, SpdxTextDirPath);
 }
 
 //
@@ -216,4 +228,45 @@ function ReplaceChars(Str) {
     //Temp = Temp.replace(/\n/g, "<br>");
     
     return Temp;
+}
+
+function Test_SaveSpdxTemplateToTextFiles_Core(
+    OutputDirPath, DirPath) {
+    
+    var Folder;
+    Folder = GetFileSystemObject().GetFolder(DirPath);
+    
+    var Files = new Enumerator(Folder.Files);
+    for (; !Files.atEnd(); Files.moveNext()) {
+        var File = Files.item();
+        
+        Debug_Print(File.Name);
+        
+        var InputFilePath;
+        InputFilePath = File.Path;
+        
+        var OutputFileName;
+        OutputFileName = File.Name.substring(0, 
+            File.Name.length - ".template.txt".length) + ".txt";
+        
+        var OutputFilePath;
+        OutputFilePath =
+            GetFileSystemObject().BuildPath(OutputDirPath, OutputFileName);
+        
+        Test_SaveSpdxTemplateToTextFile_Core(OutputFilePath, InputFilePath);
+    }
+    
+    Debug_Print("... Done.");
+}
+
+function Test_SaveSpdxTemplateToTextFile_Core(
+    OutputFilePath, InputFilePath) {
+    
+    var InputText;
+    InputText = MADODBStream_ReadTextFileUTF8(InputFilePath);
+    
+    var OutputText;
+    OutputText = GetPlainText(InputText);
+    
+    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, false);
 }
