@@ -30,7 +30,7 @@ function GetMatchingLines(TemplateText) {
     // TemplateTextArray
     
     var TemplateTextList;
-    TemplateTextList = TemplateText.replace("\r\n", "\n").split("\n");
+    TemplateTextList = TemplateText.replace(/\r\n/g, "\n").split("\n");
     
     // ResultArray
     
@@ -136,8 +136,8 @@ function GetPlainText(TemplateText) {
     var PlainText;
     PlainText = TemplateText;
     
-    PlainText = PlainText.replace("<<beginOptional>>", "");
-    PlainText = PlainText.replace("<<endOptional>>", "");
+    PlainText = PlainText.replace(/<<beginOptional>>/g, "");
+    PlainText = PlainText.replace(/<<endOptional>>/g, "");
     PlainText = RegExp_Replace(PlainText, "", "<<var;name=\"([^\"]+)\";original=\"", false, true, false);
     PlainText = RegExp_Replace(PlainText, "", "\";match=\"([^\"]+)\">>", false, true, false);
     
