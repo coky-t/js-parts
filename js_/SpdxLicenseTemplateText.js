@@ -131,7 +131,7 @@ function GetMatchingText(TemplateText) {
 }
 
 function GetPlainText(TemplateText) {
-    if (TemplateText == "") { return; }
+    if (TemplateText == "") { return ""; }
     
     var PlainText;
     PlainText = TemplateText;
