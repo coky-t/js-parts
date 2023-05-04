@@ -84,6 +84,18 @@ function Test_SaveSpdxTemplateToTextFiles() {
         OutputDirPath, SpdxTextDirPath);
 }
 
+function Test_SaveSpdxTemplateToTextFilesEx() {
+    var OutputDirPath;
+    OutputDirPath = "C:\\work\\data\\spdx-license-template-to-text-ex";
+    
+    // https://github.com/spdx/license-list-data/tree/vX.XX/template
+    var SpdxTextDirPath
+    SpdxTextDirPath = "C:\\work\\data\\spdx-license-template";
+    
+    Test_SaveSpdxTemplateToTextFilesEx_Core(
+        OutputDirPath, SpdxTextDirPath);
+}
+
 //
 // --- Test Core ---
 //
@@ -110,7 +122,7 @@ function Test_SaveSpdxTextFile_Core(
             "\">" + ReplaceChars(FileText) + "</pre>\r\n";
     }
     
-    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, false);
+    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, true);
     Debug_Print("... Done.");
 }
 
@@ -136,7 +148,7 @@ function Test_SaveSpdxTemplateFile_Core(
             "\">" + ReplaceChars(FileText) + "</pre>\r\n"
     }
     
-    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, false);
+    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, true);
     Debug_Print("... Done.");
 }
 
@@ -174,7 +186,7 @@ function Test_SaveSpdxTextLinesFile_Core(
         }
     }
     
-    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, false);
+    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, true);
     Debug_Print("... Done.");
 }
 
@@ -213,7 +225,7 @@ function Test_SaveSpdxTemplateLinesFile_Core(
         }
     }
     
-    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, false);
+    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, true);
     Debug_Print("... Done.");
 }
 
@@ -268,5 +280,46 @@ function Test_SaveSpdxTemplateToTextFile_Core(
     var OutputText;
     OutputText = GetPlainText(InputText);
     
-    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, false);
+    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, true);
+}
+
+function Test_SaveSpdxTemplateToTextFilesEx_Core(
+    OutputDirPath, DirPath) {
+    
+    var Folder;
+    Folder = GetFileSystemObject().GetFolder(DirPath);
+    
+    var Files = new Enumerator(Folder.Files);
+    for (; !Files.atEnd(); Files.moveNext()) {
+        var File = Files.item();
+        
+        Debug_Print(File.Name);
+        
+        var InputFilePath;
+        InputFilePath = File.Path;
+        
+        var OutputFileName;
+        OutputFileName = File.Name.substring(0, 
+            File.Name.length - ".template.txt".length) + ".txt";
+        
+        var OutputFilePath;
+        OutputFilePath =
+            GetFileSystemObject().BuildPath(OutputDirPath, OutputFileName);
+        
+        Test_SaveSpdxTemplateToTextFileEx_Core(OutputFilePath, InputFilePath);
+    }
+    
+    Debug_Print("... Done.");
+}
+
+function Test_SaveSpdxTemplateToTextFileEx_Core(
+    OutputFilePath, InputFilePath) {
+    
+    var InputText;
+    InputText = MADODBStream_ReadTextFileUTF8(InputFilePath);
+    
+    var OutputText;
+    OutputText = GetPlainTextEx(InputText);
+    
+    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, true);
 }

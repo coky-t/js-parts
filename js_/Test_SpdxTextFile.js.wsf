@@ -47,4 +47,15 @@
             Test_SaveSpdxTemplateToTextFiles();
         </script>
     </job>
+    <job id="Test_SaveSpdxTemplateToTextFilesEx">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="MRegExp.js" />
+        <script language="jscript" src="SpdxLicenseTemplateText.js" />
+        <script language="jscript" src="Test_SpdxTextFile.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_SaveSpdxTemplateToTextFilesEx();
+        </script>
+    </job>
 </package>
