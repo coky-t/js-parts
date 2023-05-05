@@ -339,6 +339,9 @@ function Test_SaveSpdxTemplateToTextFileEx_Core(
 function Test_SaveSpdxTemplateToFontFiles_Core(
     OutputDirPath, DirPath) {
     
+    var OKCount = 0;
+    var NGCount = 0;
+    
     var Folder;
     Folder = GetFileSystemObject().GetFolder(DirPath);
     
@@ -346,7 +349,7 @@ function Test_SaveSpdxTemplateToFontFiles_Core(
     for (; !Files.atEnd(); Files.moveNext()) {
         var File = Files.item();
         
-        Debug_Print(File.Name);
+        //Debug_Print(File.Name);
         
         var InputFilePath;
         InputFilePath = File.Path;
@@ -359,10 +362,21 @@ function Test_SaveSpdxTemplateToFontFiles_Core(
         OutputFilePath =
             GetFileSystemObject().BuildPath(OutputDirPath, OutputFileName);
         
-        Test_SaveSpdxTemplateToFontFile_Core(OutputFilePath, InputFilePath);
+        var Result =
+            Test_SaveSpdxTemplateToFontFile_Core(
+                OutputFilePath, InputFilePath);
+        
+        if (Result) {
+            Debug_Print(File.Name + ": OK");
+            OKCount++;
+        } else {
+            Debug_Print(File.Name + ": NG");
+            NGCount++;
+        }
     }
     
     Debug_Print("... Done.");
+    Debug_Print("OK: " + OKCount.toString() + ", NG: " + NGCount.toString());
 }
 
 function Test_SaveSpdxTemplateToFontFile_Core(
@@ -375,4 +389,9 @@ function Test_SaveSpdxTemplateToFontFile_Core(
     OutputText = GetFontText(InputText);
     
     MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, true);
+    
+    var OutputTextTemp;
+    OutputTextTemp = GetPlainTextEx(InputText);
+    
+    return (OutputText.length == OutputTextTemp.length);
 }
