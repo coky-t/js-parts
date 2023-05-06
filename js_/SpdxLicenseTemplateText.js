@@ -54,81 +54,144 @@ function GetMatchingText(TemplateText) {
     if (TemplateText == "") { return ""; }
     
     // B.15.3 Legacy Text Template format
-    var Pattern = "(?:" + 
-        "<<var;name=\"([^\"]+)\";original=\"(.+)\";match=\"(.+)\">>" + "|" +
-        "<<beginOptional>>([^<]+)<<endOptional>>" + ")";
+    //var Pattern = "(?:" + 
+    //    "<<var;name=\"([^\"]+)\";original=\"(.+)\";match=\"(.+)\">>" + "|" +
+    //    "<<beginOptional>>([^<]+)<<endOptional>>" + ")";
+    var Pattern = "(?:<<var;name=\"([^\"]+)\";original=\"|<<beginOptional>>)";
     
-    if (RegExp_Test(TemplateText, Pattern, true, false)) {
-        var Matches;
-        Matches = RegExp_Execute(TemplateText, Pattern, true, false, false);
+    if (! RegExp_Test(TemplateText, Pattern, true, false)) {
+        return GetSimpleMatchingPattern(TemplateText);
+    }
+    
+    var Matches;
+    Matches = RegExp_Execute(TemplateText, Pattern, true, false, false);
+    
+    var Match;
+    Match = Matches[0];
+    
+    var Match_FirstIndex;
+    Match_FirstIndex = TemplateText.indexOf(Match);
+    
+    var SubMatch1;
+    //var SubMatch2;
+    //var SubMatch3;
+    //var SubMatch4;
+    SubMatch1 = Matches[1];
+    //SubMatch2 = Matches[2];
+    //SubMatch3 = Matches[3];
+    //SubMatch4 = Matches[4];
+    
+    var PreviousPattern = "";
+    if (Match_FirstIndex > 0) {
+        var PreviousText;
+        PreviousText = TemplateText.substr(0, Match_FirstIndex);
+        PreviousPattern = GetSimpleMatchingPattern(PreviousText);
+    }
+    
+    var MiddlePattern = "";
+    var MiddleTextTemp = "";
+    var PostPattern = "";
+    var PostTextTemp = "";
+    
+    if (SubMatch1 != "") {
+        // B.3.4 Guideline: replaceable text
+        // B.8 Bullets and numbering
+        // B.11 Copyright notice
+        // <<var;name="([^"]+)";original="(.+)";match="(.+)">>
         
-        var Match;
-        Match = Matches[0];
+        //var VarName;
+        //var VarOriginal;
+        //var VarMatch;
+        //VarName = SubMatch1;
+        //VarOriginal = SubMatch2;
+        //VarMatch = SubMatch3;
         
-        var Match_FirstIndex;
-        Match_FirstIndex = TemplateText.indexOf(Match);
+        //MiddlePattern = VarMatch;
         
-        var SubMatch1;
-        var SubMatch2;
-        var SubMatch3;
-        var SubMatch4;
-        SubMatch1 = Matches[1];
-        SubMatch2 = Matches[2];
-        SubMatch3 = Matches[3];
-        SubMatch4 = Matches[4];
+        //if (Match_FirstIndex + Match.length < TemplateText.length) {
+        //    PostTextTemp =
+        //        TemplateText.substr(Match_FirstIndex + Match.length);
+        //    PostPattern = GetMatchingText(PostTextTemp);
+        //}
         
-        var PreviousPattern = "";
-        if (Match_FirstIndex > 0) {
-            var PreviousText;
-            PreviousText = TemplateText.substr(0, Match_FirstIndex);
-            PreviousPattern = GetMatchingPattern(PreviousText);
+        var VarMatchPos;
+        var VarEndPos = -1;
+        
+        VarMatchPos =
+            TemplateText.indexOf(
+                "\";match=\"", 
+                Match_FirstIndex + Match.length);
+        
+        if (VarMatchPos >= 0) {
+            VarEndPos =
+                TemplateText.indexOf(
+                    "\">>",
+                    VarMatchPos + "\";match=\"".length);
         }
         
-        var MiddlePattern;
-        if (SubMatch1 != "") {
-            // B.3.4 Guideline: replaceable text
-            // B.8 Bullets and numbering
-            // B.11 Copyright notice
-            // <<var;name="([^"]+)";original="(.+)";match="(.+)">>
+        if (VarEndPos >= 0) {
+            MiddleTextTemp =
+                TemplateText.substr(
+                    VarMatchPos + "\";match=\"".length,
+                    VarEndPos - (VarMatchPos + "\";match=\"".length));
+            MiddlePattern = MiddleTextTemp;
             
-            //var VarName;
-            //var VarOriginal;
-            var VarMatch;
-            //VarName = SubMatch1;
-            //VarOriginal = SubMatch2;
-            VarMatch = SubMatch3;
-            
-            MiddlePattern = VarMatch;
-            
-        } else {
-            // B.3.5 Guideline: omittable text
-            // B.12 License name or title
-            // B.13 Extraneous text at the end of a license
-            // "<<beginOptional>>(.+)<<endOptional>>"
-            
-            var OptText;
-            OptText = SubMatch4;
-            
-            var OptPattern;
-            OptPattern = GetMatchingPattern(OptText);
-            
-            MiddlePattern = "(?:" + OptPattern + ")?";
+            if (VarEndPos + "\">>".length < TemplateText.length) {
+                PostTextTemp = TemplateText.substr(VarEndPos + "\">>".length);
+                PostPattern = GetMatchingText(PostTextTemp);
+            }
             
         }
-        
-        var PostPattern = "";
-        if (Match_FirstIndex + Match.length < TemplateText.length) {
-            var PostText;
-            PostText = TemplateText.substr(Match_FirstIndex + Match.length);
-            PostPattern = GetMatchingText(PostText);
-        }
-        
-        return PreviousPattern + MiddlePattern + PostPattern;
         
     } else {
-        return GetMatchingPattern(TemplateText);
+        // B.3.5 Guideline: omittable text
+        // B.12 License name or title
+        // B.13 Extraneous text at the end of a license
+        // "<<beginOptional>>(.+)<<endOptional>>"
+        
+        //var OptText;
+        //OptText = SubMatch4;
+        
+        //var OptPattern;
+        //OptPattern = GetMatchingPattern(OptText);
+        
+        //MiddlePattern = "(?:" + OptPattern + ")?";
+        
+        //if (Match_FirstIndex + Match.length < TemplateText.length) {
+        //    PostTextTemp =
+        //        TemplateText.substr(Match_FirstIndex + Match.length);
+        //    PostPattern = GetMatchingText(PostTextTemp);
+        //}
+        
+        var EndOptionalPos;
+        //EndOptionalPos =
+        //    TemplateText.indexOf(
+        //        "<<endOptional>>",
+        //        Match_FirstIndex + Match.length);
+        EndOptionalPos =
+            GetEndOptionalPos(
+                Match_FirstIndex + Match.length,
+                TemplateText)
+        if (EndOptionalPos >= 0) {
+            MiddleTextTemp =
+                TemplateText.substr(
+                    Match_FirstIndex + Match.length,
+                    EndOptionalPos - (Match_FirstIndex + Match.length));
+            MiddleText = "(?:" + GetMatchingText(MiddleTextTemp) + ")?";
+            
+            if (EndOptionalPos + "<<endOptional>>".length <
+                TemplateText.length) {
+                PostTextTemp =
+                    TemplateText.substr(
+                        EndOptionalPos + "<<endOptional>>".length);
+                PostPattern = GetMatchingText(PostTextTemp);
+            }
+            
+        }
         
     }
+    
+    return PreviousPattern + MiddlePattern + PostPattern;
 }
 
 function GetPlainText(TemplateText) {

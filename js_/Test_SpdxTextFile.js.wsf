@@ -69,4 +69,16 @@
             Test_SaveSpdxTemplateToFontFiles();
         </script>
     </job>
+    <job id="Test_SaveSpdxTemplateToPatternFiles">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="MRegExp.js" />
+        <script language="jscript" src="SpdxLicenseTemplateText.js" />
+        <script language="jscript" src="SpdxLicenseText.js" />
+        <script language="jscript" src="Test_SpdxTextFile.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_SaveSpdxTemplateToPatternFiles();
+        </script>
+    </job>
 </package>
