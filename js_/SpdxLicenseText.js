@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020,2022 Koki Takeyama
+// Copyright (c) 2020,2022,2023 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -21,8 +21,9 @@
 //
 
 //
-// SPDX License List Matching Guidelines, v2.1
-// https://spdx.org/spdx-license-list/matching-guidelines
+// SPDX specification v2.3.0
+// Annex B License matching guidelines and templates (Informative)
+// https://spdx.github.io/spdx-spec/v2.3/license-matching-guidelines-and-templates/
 //
 
 function GetMatchingPattern(LicenseText) {
@@ -35,26 +36,26 @@ function GetMatchingPattern(LicenseText) {
     TempString = RegExpReplace(TempString, "\\[", "\\\[");
     TempString = RegExpReplace(TempString, "\\]", "\\\]");
     
-    // 8. Varietal Word Spelling
+    // B.9 Varietal word spelling
     TempString = RegExpReplaceWords(TempString);
     
-    // 3. Whitespace
-    // 6. Code Comment Indicators
+    // B.4 Whitespace
+    // B.7 Code Comment Indicators
     TempString = RegExpReplace(TempString, "\\W+", "\\s+");
     
-    // 5.1.1 Guideline: Punctuation
+    // B.6.2 Guideline: punctuation
     TempString = RegExpReplace(TempString, "\\.", "\\\.");
     
-    // 5.1.2 Guideline: Hyphens, Dashes
+    // B.6.3 Guideline: hyphens, dashes
     // https://en.wikipedia.org/wiki/Dash
     // https://en.wikipedia.org/wiki/Hyphen
     TempString = RegExpReplace(TempString, "\\W+", "-");
     
-    // 5.1.3 Guideline: Quotes
+    // B.6.4 Guideline: Quotes
     // https://en.wikipedia.org/wiki/Quotation_mark
     TempString = RegExpReplace(TempString, "\\W+", "['\"]");
     
-    // 13. HTTP Protocol
+    // B.14 HTTP Protocol
     TempString = RegExpReplace(TempString, "https?://", "https?://");
     
     return TempString;
@@ -64,30 +65,31 @@ function GetSimpleMatchingPattern(LicenseText) {
     var TempString;
     TempString = LicenseText.toLowerCase();
     
-    // 3. Whitespace
-    // 5. Punctuation
-    // 5.1.1 Guideline: Punctuation
-    // 5.1.2 Guideline: Hyphens, Dashes
-    // 5.1.3 Guideline: Quotes
-    // 6. Code Comment Indicators
+    // B.4 Whitespace
+    // B.6 Punctuation
+    // B.6.2 Guideline: punctuation
+    // B.6.3 Guideline: hyphens, dashes
+    // B.6.4 Guideline: Quotes
+    // B.7 Code Comment Indicators
     TempString = RegExpReplace(TempString, "\\W*", "\\W+");
     
-    // 8. Varietal Word Spelling
+    // B.9 Varietal word spelling
     TempString = RegExpReplaceWords(TempString);
     
-    // 13. HTTP Protocol
+    // B.14 HTTP Protocol
     TempString = RegExpReplace(TempString, "https?", "https?");
     
     return TempString;
 }
 
 //
-// 8. Varietal Word Spelling
+// B.9 Varietal word spelling
 //
 // | Word1 | Word2 | MatchingPattern |
 // | --- | --- | --- |
 // | acknowledgement | acknowledgment | acknowledge?ment |
 // | analog | analogue | analog(?:ue)? |
+// | and | & | (?:and|&) |
 // | analyze | analyse | analy[zs]e |
 // | artifact | artefact | art[ie]fact |
 // | authorization | authorisation | authori[zs]ation |
@@ -110,6 +112,7 @@ function GetSimpleMatchingPattern(LicenseText) {
 // | labor | labour | labou?r |
 // | license | licence | licen[sc]e |
 // | maximize | maximise | maximi[zs]e |
+// | merchantability | merchantibility | merchant[ai]bility |
 // | modeled | modelled | modell?ed |
 // | modeling | modelling | modell?ing |
 // | noncommercial | non-commercial | non-?commercial |
@@ -138,7 +141,7 @@ function RegExpReplaceWords(SourceString) {
     var PatternAndReplaceStringArray;
     PatternAndReplaceStringArray = new Array(
         "sub\\W*licen[sc]e",
-        "acknowledge?ment", "analog(?:ue)?", "analy[zs]e",
+        "acknowledge?ment", "analog(?:ue)?", "(?:and|&)", "analy[zs]e",
         "art[ie]fact", "authori[zs]ation", "authori[zs]ed",
         "calib(?:er|re)", "cancell?ed", "capitali[zs]ations",
         "catalog(?:ue)?", "categori[zs]e", "cent(?:er|re)",
@@ -146,7 +149,7 @@ function RegExpReplaceWords(SourceString) {
         "favou?r", "favou?rite", "fulfill?",
         "fulfill?ment", "initiali[zs]e", "judge?ment",
         "labell?ing", "labou?r", "licen[sc]e",
-        "maximi[zs]e", "modell?ed", "modell?ing",
+        "maximi[zs]e", "merchant[ai]bility", "modell?ed", "modell?ing",
         "non\\W*commercial", "offen[sc]e", "optimi[zs]e",
         "organi[zs]ation", "organi[zs]e",
         "per\\s*cent", "practi[cs]e", "program(?:me)?",
@@ -178,6 +181,6 @@ function RegExpReplace(
     ReplaceString,
     Pattern) {
     
-    var re = new RegExp(Pattern, "ig"); // 4. Capitalization
+    var re = new RegExp(Pattern, "ig"); // B.5 Capitalization
     return SourceString.replace(re, ReplaceString);
 }

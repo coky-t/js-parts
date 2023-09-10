@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020,2022 Koki Takeyama
+// Copyright (c) 2020,2022,2023 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -75,6 +75,8 @@ function Test_GetMatchingPattern_Words() {
     Test_GetMatchingPattern_Word("acknowledgment");
     Test_GetMatchingPattern_Word("analog");
     Test_GetMatchingPattern_Word("analogue");
+    Test_GetMatchingPattern_Word("and");
+    Test_GetMatchingPattern_Word("&");
     Test_GetMatchingPattern_Word("analyze");
     Test_GetMatchingPattern_Word("analyse");
     Test_GetMatchingPattern_Word("artifact");
@@ -119,6 +121,8 @@ function Test_GetMatchingPattern_Words() {
     Test_GetMatchingPattern_Word("licence");
     Test_GetMatchingPattern_Word("maximize");
     Test_GetMatchingPattern_Word("maximise");
+    Test_GetMatchingPattern_Word("merchantability");
+    Test_GetMatchingPattern_Word("merchantibility");
     Test_GetMatchingPattern_Word("modeled");
     Test_GetMatchingPattern_Word("modelled");
     Test_GetMatchingPattern_Word("modeling");
