@@ -6,7 +6,7 @@
 <script language="javascript">
 <!--
 //
-// Copyright (c) 2022 Koki Takeyama
+// Copyright (c) 2022,2023 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -438,14 +438,14 @@ function GetStr1SES(Str1Words, SES) {
     for (var Index = 0; Index < SES.length; Index ++) {
         switch (SES.substr(Index, 1)) {
         case " ":
-            Str1SES = Str1SES + Str1Words[Index1];
+            Str1SES = Str1SES + ReplaceChars(Str1Words[Index1]);
             Index1++;
             break;
         case "-":
             Str1SES =
                 Str1SES +
                 "<span style=\"color:red;\">" +
-                Str1Words[Index1] +
+                ReplaceChars(Str1Words[Index1]) +
                 "</span>"
             Index1++;
             break;
@@ -462,14 +462,14 @@ function GetStr2SES(Str2Words, SES) {
     for (var Index = 0; Index < SES.length; Index ++) {
         switch (SES.substr(Index, 1)) {
         case " ":
-            Str2SES = Str2SES + Str2Words[Index2];
+            Str2SES = Str2SES + ReplaceChars(Str2Words[Index2]);
             Index2++;
             break;
         case "+":
             Str2SES =
                 Str2SES +
                 "<span style=\"color:red;\">" +
-                Str2Words[Index2] +
+                ReplaceChars(Str2Words[Index2]) +
                 "</span>"
             Index2++;
             break;
@@ -477,6 +477,26 @@ function GetStr2SES(Str2Words, SES) {
     }
     
     return Str2SES;
+}
+
+function GetStrPre(Str) {
+    var StrPre = RegExp_Execute(Str, "^\\W+", false, false, false);
+    if (StrPre == null) { return ""; }
+    if (StrPre.length == 0) { return ""; }
+    
+    return ReplaceChars(StrPre[0]);
+}
+
+function ReplaceChars(Str) {
+    var Temp = Str;
+    
+    Temp = Temp.replace(/&/g, "&amp;");
+    Temp = Temp.replace(/>/g, "&gt;");
+    Temp = Temp.replace(/</g, "&lt;");
+    Temp = Temp.replace(/\r\n/g, "<br>");
+    Temp = Temp.replace(/\n/g, "<br>");
+    
+    return Temp;
 }
 
 function btnDiff_OnClick() {
@@ -491,18 +511,18 @@ function btnDiff_OnClick() {
     
     var StrArray1 = new Array(Len1);
     for (var Index1 = 0; Index1 < Len1; Index1++) {
-        StrArray1[Index1] = Str1Words[Index1];
+        StrArray1[Index1] = /\w+/.exec(Str1Words[Index1].toLowerCase())[0];
     }
     
     var StrArray2 = new Array(Len2);
     for (var Index2 = 0; Index2 < Len2; Index2++) {
-        StrArray2[Index2] = Str2Words[Index2];
+        StrArray2[Index2] = /\w+/.exec(Str2Words[Index2].toLowerCase())[0];
     }
     
     var SES = ShortestEditScript(StrArray1, StrArray2);
     
-    tdResult1.innerHTML = GetStr1SES(Str1Words, SES);
-    tdResult2.innerHTML = GetStr2SES(Str2Words, SES);
+    tdResult1.innerHTML = GetStrPre(Str1) + GetStr1SES(Str1Words, SES);
+    tdResult2.innerHTML = GetStrPre(Str2) + GetStr2SES(Str2Words, SES);
 }
 -->
 </script>
