@@ -120,6 +120,30 @@ function Test_SaveSpdxTemplateToPatternFiles() {
         OutputDirPath, SpdxTextDirPath);
 }
 
+function Test_CheckSpdxPatternFiles1() {
+    var SpdxPatternDirPath;
+    SpdxPatternDirPath = "C:\\work\\data\\spdx-license-template-to-pattern";
+    
+    // https://github.com/spdx/license-list-data/tree/vX.XX/text
+    var SpdxTextDirPath;
+    SpdxTextDirPath = "C:\\work\\data\\spdx-license-text";
+    
+    Test_CheckSpdxPatternFiles1_Core(
+        SpdxPatternDirPath, SpdxTextDirPath);
+}
+
+function Test_CheckSpdxPatternFiles2() {
+    var SpdxPatternDirPath;
+    SpdxPatternDirPath = "C:\\work\\data\\spdx-license-template-to-pattern";
+    
+    // https://github.com/spdx/license-list-data/tree/vX.XX/text
+    var SpdxTextDirPath;
+    SpdxTextDirPath = "C:\\work\\data\\spdx-license-text";
+    
+    Test_CheckSpdxPatternFiles2_Core(
+        SpdxPatternDirPath, SpdxTextDirPath);
+}
+
 //
 // --- Test Core ---
 //
@@ -447,4 +471,206 @@ function Test_SaveSpdxTemplateToPatternFile_Core(
     OutputText = GetMatchingText(InputText);
     
     MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, true);
+}
+
+function Test_CheckSpdxPatternFiles1_Core(
+    SpdxPatternDirPath, SpdxTextDirPath) {
+    
+    var SpdxPatternFolder;
+    SpdxPatternFolder =
+        GetFileSystemObject().GetFolder(SpdxPatternDirPath);
+    
+    var SpdxPatternFiles = new Enumerator(SpdxPatternFolder.Files);
+    for (; !SpdxPatternFiles.atEnd(); SpdxPatternFiles.moveNext()) {
+        var SpdxPatternFile = SpdxPatternFiles.item();
+        
+        //Debug_Print(SpdxPatternFile.Name);
+        
+        var SpdxTextFileName;
+        SpdxTextFileName = SpdxPatternFile.Name;
+        
+        var SpdxTextFilePath;
+        SpdxTextFilePath =
+            GetFileSystemObject().BuildPath(SpdxTextDirPath, SpdxTextFileName);
+        
+        Test_CheckSpdxPatternFile1_Core(
+            SpdxPatternFile.Name, SpdxPatternFile.Path, SpdxTextFilePath);
+    }
+    
+    Debug_Print("... Done.");
+}
+
+function Test_CheckSpdxPatternFile1_Core(
+    SpdxPatternFileName, SpdxPatternFilePath,
+    SpdxTextFilePath) {
+    
+    var IgnoredFile;
+    
+    switch (SpdxPatternFileName) {
+    case "CC-BY-SA-2.1-JP.txt":
+    case "DL-DE-BY-2.0.txt":
+    case "gSOAP-1.3b.txt":
+    case "LPPL-1.3a.txt":
+    case "LPPL-1.3c.txt":
+    case "MulanPSL-1.0.txt":
+    case "MulanPSL-2.0.txt":
+    case "NOSL.txt":
+    case "Python-2.0.txt":
+    case "UCL-1.0.txt":
+        IgnoredFile = true;
+        break;
+    default:
+        IgnoredFile = false;
+        break;
+    }
+    
+    if (IgnoredFile) {
+        Debug_Print(SpdxPatternFileName + ": Ignored");
+        return;
+    }
+        
+    if (!GetFileSystemObject().FileExists(SpdxTextFilePath)) {
+        Debug_Print(SpdxPatternFileName + ": Not Exist");
+        return;
+    }
+    
+    var SpdxPattern;
+    SpdxPattern = MADODBStream_ReadTextFileUTF8(SpdxPatternFilePath);
+    
+    var SpdxText;
+    SpdxText = MADODBStream_ReadTextFileUTF8(SpdxTextFilePath);
+    
+    if (RegExp_Test(SpdxText, SpdxPattern, true, false)) {
+        //Debug_Print(SpdxPatternFileName + ": OK");
+    } else {
+        Debug_Print(SpdxPatternFileName + ": NG");
+    }
+}
+
+function Test_CheckSpdxPatternFiles2_Core(
+    SpdxPatternDirPath, SpdxTextDirPath) {
+    
+    var SpdxTextFolder;
+    SpdxTextFolder =
+        GetFileSystemObject().GetFolder(SpdxTextDirPath);
+    
+    var SpdxText = new Array(SpdxTextFolder.Files.Count);
+    
+    var SpdxTextIndex = 0;
+    
+    var SpdxTextFiles = new Enumerator(SpdxTextFolder.Files);
+    for (; !SpdxTextFiles.atEnd(); SpdxTextFiles.moveNext()) {
+        var SpdxTextFile = SpdxTextFiles.item();
+        
+        var SpdxTextTemp;
+        SpdxTextTemp = MADODBStream_ReadTextFileUTF8(SpdxTextFile.Path);
+        
+        SpdxText[SpdxTextIndex] = new Array(2);
+        SpdxText[SpdxTextIndex][0] = SpdxTextFile.Name;
+        SpdxText[SpdxTextIndex][1] = SpdxTextTemp;
+        SpdxTextIndex = SpdxTextIndex + 1;
+    }
+    
+    // ---
+    
+    var SpdxPatternFolder;
+    SpdxPatternFolder =
+        GetFileSystemObject().GetFolder(SpdxPatternDirPath);
+    
+    var SpdxPatternFiles = new Enumerator(SpdxPatternFolder.Files);
+    for (; !SpdxPatternFiles.atEnd(); SpdxPatternFiles.moveNext()) {
+        var SpdxPatternFile = SpdxPatternFiles.item();
+        
+        //Debug_Print(SpdxPatternFile.Name);
+        
+        var SpdxTextFileName;
+        SpdxTextFileName = SpdxPatternFile.Name;
+        
+        var SpdxTextFilePath;
+        SpdxTextFilePath =
+            GetFileSystemObject().BuildPath(SpdxTextDirPath, SpdxTextFileName);
+        
+        var SpdxPattern;
+        SpdxPattern = MADODBStream_ReadTextFileUTF8(SpdxPatternFile.Path);
+        
+        Test_CheckSpdxPatternFile2_Text(
+            SpdxPatternFile.Name, SpdxPattern,
+            SpdxText);
+    }
+    
+    Debug_Print("... Done.");
+}
+
+function Test_CheckSpdxPatternFile2_Text(
+    SpdxPatternFileName, SpdxPattern,
+    SpdxText) {
+    
+    switch (SpdxPatternFileName) {
+    case "CC-BY-SA-2.1-JP.txt":
+    case "DL-DE-BY-2.0.txt":
+    case "gSOAP-1.3b.txt":
+    case "LPPL-1.3a.txt":
+    case "LPPL-1.3c.txt":
+    case "MulanPSL-1.0.txt":
+    case "MulanPSL-2.0.txt":
+    case "NOSL.txt":
+    case "Python-2.0.txt":
+    case "UCL-1.0.txt":
+        return;
+        break;
+    }
+    
+    if (SpdxPattern.length > 2000) {
+        //Debug_Print(SpdxPatternFileName + ": Large");
+        return;
+    }
+    
+    for (var SpdxTextIndex = 0; SpdxTextIndex < SpdxText.length; SpdxTextIndex++) {
+        Test_CheckSpdxPatternFile2_Text_Core(
+            SpdxPatternFileName, SpdxPattern,
+            SpdxText[SpdxTextIndex][0], SpdxText[SpdxTextIndex][1]);
+    }
+}
+
+function Test_CheckSpdxPatternFile2_Text_Core(
+    SpdxPatternFileName, SpdxPattern,
+    SpdxTextFileName, SpdxText) {
+    
+    switch (SpdxPatternFileName) {
+    case "CC-BY-SA-2.1-JP.txt":
+    case "DL-DE-BY-2.0.txt":
+    case "gSOAP-1.3b.txt":
+    case "LPPL-1.3a.txt":
+    case "LPPL-1.3c.txt":
+    case "MulanPSL-1.0.txt":
+    case "MulanPSL-2.0.txt":
+    case "NOSL.txt":
+    case "Python-2.0.txt":
+    case "UCL-1.0.txt":
+        return;
+        break;
+    case "OGDL-Taiwan-1.0.txt":
+    case "AFL-2.0.txt":
+    case "AFL-2.1.txt":
+    case "AFL-3.0.txt":
+    case "MPL-2.0.txt":
+    case "MPL-2.0-no-copyleft-exception.txt":
+        return;
+        break;
+    }
+    
+    if (SpdxPatternFileName == SpdxTextFileName) {
+        return;
+    }
+    
+    if (SpdxText.length > 2000) {
+        //Debug_Print(SpdxPatternFileName + ": " + SpdxTextFileName + ": Large");
+        return;
+    }
+    
+    if (RegExp_Test(SpdxText, SpdxPattern, true, false)) {
+        Debug_Print(SpdxPatternFileName + ": " + SpdxTextFileName + ": OK");
+    } else {
+        //Debug_Print(SpdxPatternFileName + ": " + SpdxTextFileName + ": NG");
+    }
 }

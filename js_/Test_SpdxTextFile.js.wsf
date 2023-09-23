@@ -81,4 +81,24 @@
             Test_SaveSpdxTemplateToPatternFiles();
         </script>
     </job>
+    <job id="Test_CheckSpdxPatternFiles1">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="MRegExp.js" />
+        <script language="jscript" src="Test_SpdxTextFile.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CheckSpdxPatternFiles1();
+        </script>
+    </job>
+    <job id="Test_CheckSpdxPatternFiles2">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="MRegExp.js" />
+        <script language="jscript" src="Test_SpdxTextFile.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_CheckSpdxPatternFiles2();
+        </script>
+    </job>
 </package>
