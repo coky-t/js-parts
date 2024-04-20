@@ -10,7 +10,7 @@
 <script language="jscript">
 <!--
 //
-// Copyright (c) 2020 Koki Takeyama
+// Copyright (c) 2020,2024 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -134,7 +134,7 @@ function btnTest_OnClick() {
     }
     
     var Pattern;
-    Pattern = inputPattern.value;
+    Pattern = GetPattern();
     if (Pattern == "") {
         alert("Pattern: is blank.");
         return;
@@ -169,7 +169,7 @@ function btnReplace_OnClick() {
     }
     
     var Pattern;
-    Pattern = inputPattern.value;
+    Pattern = GetPattern();
     if (Pattern == "") {
         alert("Pattern: is blank.");
         return;
@@ -206,7 +206,7 @@ function btnExecute_OnClick() {
     }
     
     var Pattern;
-    Pattern = inputPattern.value;
+    Pattern = GetPattern();
     if (Pattern == "") {
         alert("Pattern: is blank.");
         return;
@@ -264,6 +264,24 @@ function Debug_Print_Matches(
     
     tdResult.innerHTML = Html;
 }
+
+function GetPattern() {
+    var Pattern;
+    Pattern = inputPattern.value;
+    if (Pattern != "") {
+        return Pattern;
+    }
+    
+    var Patterns;
+    Patterns = textareaPatterns.innerText;
+    if (Patterns != "") {
+        var re = new RegExp("\r\n", "g");
+        Pattern = "(?:" + Patterns.replace(re, "\n").split("\n").join("|") + ")";
+        return Pattern;
+    }
+    
+    return "";
+}
 -->
 </script>
 
@@ -291,6 +309,11 @@ function Debug_Print_Matches(
 <tr>
 <td>Pattern:</td>
 <td><input id="inputPattern" style="width:100%" /></td>
+</tr>
+
+<tr>
+<td>Patterns:</td>
+<td><textarea id="textareaPatterns" rows="10" cols="50" style="width:100%"></textarea></td>
 </tr>
 
 <tr>
