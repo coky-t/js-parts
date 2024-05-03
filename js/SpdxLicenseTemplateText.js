@@ -177,7 +177,7 @@ function GetMatchingText(TemplateText) {
                 TemplateText.substr(
                     Match_FirstIndex + Match.length,
                     EndOptionalPos - (Match_FirstIndex + Match.length));
-            MiddleText = "(?:" + GetMatchingText(MiddleTextTemp) + ")?";
+            MiddlePattern = "(?:" + GetMatchingText(MiddleTextTemp) + ")?";
             
             if (EndOptionalPos + "<<endOptional>>".length <
                 TemplateText.length) {
