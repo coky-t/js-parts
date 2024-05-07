@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2022,2023 Koki Takeyama
+// Copyright (c) 2022,2023,2024 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -470,7 +470,7 @@ function Test_SaveSpdxTemplateToPatternFile_Core(
     var OutputText;
     OutputText = GetMatchingText(InputText);
     
-    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, true);
+    MADODBStream_WriteTextFileUTF8(OutputFilePath, OutputText, false);
 }
 
 function Test_CheckSpdxPatternFiles1_Core(
