@@ -8,4 +8,12 @@
             Test_StrArray_Unique();
         </script>
     </job>
+    <job id="Test_StrMatrix_Unique">
+        <script language="jscript" src="MDictionary.js" />
+        <script language="jscript" src="Test_MDictionary.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_StrMatrix_Unique();
+        </script>
+    </job>
 </package>

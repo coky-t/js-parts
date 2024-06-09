@@ -28,6 +28,10 @@ function Test_StrArray_Unique() {
     Test_StrArray_Unique_Core(["aaa", "bbb", "ccc", "ddd", "aaa"]);
 }
 
+function Test_StrMatrix_Unique() {
+    Test_StrMatrix_Unique_Core([["aaa","aaa"],["aaa","bbb"],["bbb","ccc"],["aaa","aaa"]]);
+}
+
 //
 // --- Test Core ---
 //
@@ -35,5 +39,19 @@ function Test_StrArray_Unique() {
 function Test_StrArray_Unique_Core(StrArray) {
     Debug_Print("---");
     Debug_Print("Input: " + StrArray.join(", "));
-    Debug_Print("Output: " + StrArray_Unique(StrArray, 0).join(", "));
+    Debug_Print("Output: " + StrArray_Unique(StrArray).join(", "));
+}
+
+function Test_StrMatrix_Unique_Core(StrMatrix) {
+    Debug_Print("---");
+    Debug_Print("Input: ");
+    Debug_Print_StrMatrix(StrMatrix);
+    Debug_Print("Output: ")
+    Debug_Print_StrMatrix(StrMatrix_Unique(StrMatrix));
+}
+
+function Debug_Print_StrMatrix(StrMatrix) {
+    for (var Index = 0; Index < StrMatrix.length; Index++) {
+        Debug_Print(StrMatrix[Index].join(", "));
+    }
 }

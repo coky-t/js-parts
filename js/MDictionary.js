@@ -39,3 +39,22 @@ function StrArray_Unique(StrArray) {
     }
     return Keys;
 }
+
+function StrMatrix_Unique(StrMatrix) {
+    if (!(StrMatrix instanceof Array)) {
+        return StrMatrix;
+    }
+    
+    var StrDic = new Object;
+    var StrMatrixNew = [];
+    
+    for (var Index = 0; Index < StrMatrix.length; Index++ ) {
+        var StrTemp = StrMatrix[Index].join("\t");
+        if (!(StrTemp in StrDic)) {
+            StrDic[StrTemp] = StrTemp;
+            StrMatrixNew.push(StrMatrix[Index]);
+        }
+    }
+    
+    return StrMatrixNew;
+}
