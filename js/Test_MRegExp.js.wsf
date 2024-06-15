@@ -33,4 +33,13 @@
             Test_RegExp_MatchedValue();
         </script>
     </job>
+    <job id="Test_RegExp_Exec">
+        <script language="jscript" src="MRegExp.js" />
+        <script language="jscript" src="Test_MRegExp.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript" src="DebugPrintMatches.js" />
+        <script language="jscript">
+            Test_RegExp_Exec();
+        </script>
+    </job>
 </package>

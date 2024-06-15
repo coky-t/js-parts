@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020 Koki Takeyama
+// Copyright (c) 2020,2024 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -35,5 +35,49 @@ function Debug_Print_Matches(
     
     for (var Index = 0; Index < Matches.length; Index++) {
         Debug_Print(Matches[Index]);
+    }
+}
+
+function Debug_Print_MatchesEx(
+    Matches) {
+    
+    if (Matches == null) {
+        Debug_Print("Matches: null");
+        return;
+    } else if (Matches.length == 0) {
+        Debug_Print("Matches: No item");
+        return;
+    } else {
+        Debug_Print("Matches.length: " + Matches.length.toString());
+    }
+    
+    for (var Index = 0; Index < Matches.length; Index++) {
+        Debug_Print_Match(Matches[Index]);
+    }
+}
+
+function Debug_Print_Match(Match) {
+    Debug_Print("---");
+    Debug_Print("index: " + Match.index.toString());
+    Debug_Print("lastIndex: " + Match.lastIndex.toString());
+    Debug_Print("Match[0]: " + Match[0]);
+    Debug_Print_SubMatches(Match);
+}
+
+function Debug_Print_SubMatches(
+    Match) {
+    
+    if (Match == null) {
+        Debug_Print("Match: null");
+        return;
+    } else if (Match.length == 0) {
+        Debug_Print("Match: No submatch");
+        return;
+    } else {
+        Debug_Print("Match.length: " + Match.length.toString());
+    }
+    
+    for (var Index = 1; Index < Match.length; Index++) {
+        Debug_Print("... " + Match[Index]);
     }
 }

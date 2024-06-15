@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020,2022 Koki Takeyama
+// Copyright (c) 2020,2022,2024 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -39,6 +39,13 @@ function Test_RegExp_Execute() {
 
 function Test_RegExp_MatchedValue() {
     Test_RegExp_MatchedValue_Core("abc 123 xyz #$%", "([a-z]+)", true, true);
+}
+
+function Test_RegExp_Exec() {
+    Test_RegExp_Exec_Core(
+        "abc\r\n123\r\nxyz\r\n#$%",
+        "([a-z]+)",
+        true, true, true, "\r\n");
 }
 
 //
@@ -138,4 +145,55 @@ function Test_RegExp_MatchedValue_Core(
     Debug_Print("IgnoreCase: " + IgnoreCase.toString());
     Debug_Print("MultiLine: " + MultiLine.toString());
     Debug_Print("MatchedValue - result: " + Result);
+}
+
+function Test_RegExp_Exec_Core(
+    SourceString,
+    Pattern,
+    IgnoreCase,
+    GlobalMatch,
+    MultiLine,
+    LineSeparator) {
+    
+    var Matches;
+    Matches =
+        RegExp_Exec(
+            SourceString,
+            Pattern,
+            IgnoreCase,
+            GlobalMatch,
+            MultiLine);
+    
+    Debug_Print("=== RegExp_Exec ===");
+    Debug_Print("SourceString: " + SourceString);
+    Debug_Print("Pattern: " + Pattern);
+    Debug_Print("IgnoreCase: " + IgnoreCase.toString());
+    Debug_Print("GlobalMatch: " + GlobalMatch.toString());
+    Debug_Print("MultiLine: " + MultiLine.toString());
+    Debug_Print("--- Execute ---");
+    
+    Debug_Print_MatchesEx(Matches);
+    
+    if (Matches == null) return;
+    if (Matches.length == 0) return;
+    
+    Debug_Print("--- LineNumber ---");
+    
+    for (var Index = 0; Index < Matches.length; Index++) {
+        Test_RegExp_LineNumber_Core(
+            SourceString, Matches[Index].index, LineSeparator);
+    }
+}
+
+function Test_RegExp_LineNumber_Core(
+    SourceString,
+    Index,
+    LineSeparator) {
+    
+    var LineNumber;
+    LineNumber = RegExp_LineNumber(SourceString, Index, LineSeparator);
+    
+    Debug_Print(
+        "index: " + Index.toString() + 
+        ", LineNumber: " + LineNumber.toString());
 }

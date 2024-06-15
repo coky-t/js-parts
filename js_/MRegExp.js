@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020,2022 Koki Takeyama
+// Copyright (c) 2020,2022,2024 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -132,4 +132,72 @@ function RegExp_MatchedValue(
     }
     
     return Matches[0];
+}
+
+function RegExp_Matches_Count(
+    SourceString,
+    Pattern,
+    IgnoreCase,
+    MultiLine) {
+    
+    var Matches;
+    Matches =
+        RegExp_Execute(
+            SourceString, Pattern, IgnoreCase, true, MultiLine);
+    
+    if (Matches == null) {
+        return 0;
+    } else if (Matches.length == 0) {
+        return 0;
+    }
+    
+    return Matches.length;
+}
+
+function RegExp_LineNumber(
+    SourceString,
+    Index,
+    LineSeparator) {
+    
+    var SourceStr;
+    SourceStr = SourceString.substring(0, Index);
+    
+    var LineSep;
+    switch (LineSeparator) {
+    case "\r":
+        LineSep = "\\r";
+        break;
+    case "\n":
+        LineSep = "\n";
+        break;
+    default: //"\r\n"
+        LineSep = "\\r\\n";
+        break;
+    }
+    
+    return RegExp_Matches_Count(SourceStr, LineSep, false, false) + 1;
+}
+
+function RegExp_Exec(
+    SourceString,
+    Pattern,
+    IgnoreCase,
+    GlobalMatch,
+    MultiLine) {
+    
+    var flags = "";
+    if (IgnoreCase) { flags = flags + "i"; }
+    if (GlobalMatch) { flags = flags + "g"; }
+    if (MultiLine) { flags = flags + "m"; }
+    
+    var re = new RegExp(Pattern, flags);
+    
+    var matches = new Array();
+    
+    var match;
+    while ((match = re.exec(SourceString)) != null) {
+        matches.push(match);
+    }
+    
+    return matches;
 }
