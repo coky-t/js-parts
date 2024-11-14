@@ -1,5 +1,5 @@
 //
-// Copyright (c) 2020,2023 Koki Takeyama
+// Copyright (c) 2020,2023,2024 Koki Takeyama
 //
 // Permission is hereby granted, free of charge, to any person obtaining
 // a copy of this software and associated documentation files (the "Software"),
@@ -200,6 +200,22 @@ function GetPlainText(TemplateText) {
     var PlainText;
     PlainText = TemplateText;
     
+    // For Custom Template
+    PlainText =
+        RegExp_Replace(
+            PlainText,
+            "",
+            "<<var;name=\"([^\"]+)\";original=\"([^\"]+)\";" +
+            "match=\"(\\(\\?<![^\"]+)\">>",
+            false, true, false);
+    PlainText =
+        RegExp_Replace(
+            PlainText,
+            "",
+            "<<var;name=\"([^\"]+)\";original=\"([^\"]+)\";" +
+            "match=\"(\\(\\?![^\"]+)\">>",
+            false, true, false);
+    
     PlainText = PlainText.replace(/<<beginOptional>>/g, "");
     PlainText = PlainText.replace(/<<endOptional>>/g, "");
     PlainText =
@@ -220,6 +236,22 @@ function GetPlainText(TemplateText) {
 
 function GetPlainTextEx(TemplateText) {
     if (TemplateText == "") { return ""; }
+    
+    // For Custom Template
+    TemplateText =
+        RegExp_Replace(
+            TemplateText,
+            "",
+            "<<var;name=\"([^\"]+)\";original=\"([^\"]+)\";" +
+            "match=\"(\\(\\?<![^\"]+)\">>",
+            false, true, false);
+    TemplateText =
+        RegExp_Replace(
+            TemplateText,
+            "",
+            "<<var;name=\"([^\"]+)\";original=\"([^\"]+)\";" +
+            "match=\"(\\(\\?![^\"]+)\">>",
+            false, true, false);
     
     // B.15.3 Legacy Text Template format
     //var Pattern = "(?:" + 
@@ -386,6 +418,22 @@ function GetEndOptionalPos(StartPos, TemplateText) {
 
 function GetFontText(TemplateText) {
     if (TemplateText == "") { return ""; }
+    
+    // For Custom Template
+    TemplateText =
+        RegExp_Replace(
+            TemplateText,
+            "",
+            "<<var;name=\"([^\"]+)\";original=\"([^\"]+)\";" +
+            "match=\"(\\(\\?<![^\"]+)\">>",
+            false, true, false);
+    TemplateText =
+        RegExp_Replace(
+            TemplateText,
+            "",
+            "<<var;name=\"([^\"]+)\";original=\"([^\"]+)\";" +
+            "match=\"(\\(\\?![^\"]+)\">>",
+            false, true, false);
     
     // B.15.3 Legacy Text Template format
     //var Pattern = "(?:" + 
