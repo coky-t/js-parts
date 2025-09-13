@@ -1,0 +1,13 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_SaveScanCodeTextFile">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="MHTMLDocument.js" />
+        <script language="jscript" src="Test_ScanCodeTextFile.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_SaveScanCodeTextFile();
+        </script>
+    </job>
+</package>
