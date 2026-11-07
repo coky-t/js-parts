@@ -65,7 +65,7 @@ Reset: function() {
 // - Returns a FileSystemObject object.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/Language/Reference/User-Interface-Help/filesystemobject-object
+// https://learn.microsoft.com/en-us/office/vba/Language/Reference/User-Interface-Help/filesystemobject-object
 //
 
 getFileSystemObject: function() {
@@ -84,7 +84,7 @@ getFileSystemObject: function() {
 // - Returns a complete and unambiguous path.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getabsolutepathname-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getabsolutepathname-method
 //
 
 getAbsolutePathName: function() {
@@ -96,9 +96,9 @@ getAbsolutePathName: function() {
 // - Sets or returns the attributes of folder.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/attributes-property
-// https://docs.microsoft.com/en-us/office/vba/Language/Reference/user-interface-help/getattr-function
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/setattr-statement
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/attributes-property
+// https://learn.microsoft.com/en-us/office/vba/Language/Reference/user-interface-help/getattr-function
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/setattr-statement
 //
 
 getAttributes: function() {
@@ -114,7 +114,7 @@ setAttributes: function(Attributes_) {
 // - Returns the date and time that the specified folder was created.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/datecreated-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/datecreated-property
 //
 
 getDateCreated: function() {
@@ -126,7 +126,7 @@ getDateCreated: function() {
 // - Returns the date and time that the specified folder was last accessed.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/datelastaccessed-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/datelastaccessed-property
 //
 
 getDateLastAccessed: function() {
@@ -138,7 +138,7 @@ getDateLastAccessed: function() {
 // - Returns the date and time that the specified folder was last modified.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/datelastmodified-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/datelastmodified-property
 //
 
 getDateLastModified: function() {
@@ -150,7 +150,7 @@ getDateLastModified: function() {
 // - Returns a Drive object corresponding to the drive in a specified path.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getdrive-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getdrive-method
 //
 
 getDrive: function() {
@@ -162,8 +162,8 @@ getDrive: function() {
 // - Returns the drive letter of the drive on which the specified folder resides.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/drive-property
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getdrivename-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/drive-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getdrivename-method
 //
 
 getDriveName: function() {
@@ -181,7 +181,7 @@ getDriveName: function() {
 //   and system file attributes set.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/files-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/files-property
 //
 
 getFiles: function() {
@@ -224,7 +224,7 @@ getFilesWithinFolder: function(Folder_) {
 // - Sets or returns a Folder object corresponding to the folder.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getfolder-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getfolder-method
 //
 
 getFolder: function() {
@@ -245,7 +245,7 @@ setFolder: function(Folder_) {
 // - Returns True if a folder is the root folder and False if not.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/isrootfolder-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/isrootfolder-property
 //
 
 getIsRootFolder: function() {
@@ -257,7 +257,7 @@ getIsRootFolder: function() {
 // - Sets or returns the name of a specified folder.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/name-property-filesystemobject-object
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/name-property-filesystemobject-object
 //
 
 getName: function() {
@@ -274,9 +274,9 @@ setName: function(Name_) {
 // - Returns the folder object for the parent of the specified folder.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/parentfolder-property
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getfolder-method
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getparentfoldername-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/parentfolder-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getfolder-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getparentfoldername-method
 //
 
 getParentFolder: function() {
@@ -295,9 +295,9 @@ getParentFolder: function() {
 //   of the last component in a specified path.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/parentfolder-property
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/path-property-filesystemobject-object
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getparentfoldername-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/parentfolder-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/path-property-filesystemobject-object
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getparentfoldername-method
 //
 
 getParentFolderName: function() {
@@ -313,7 +313,7 @@ getParentFolderName: function() {
 // - Sets or returns the path for a specified folder.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/path-property-filesystemobject-object
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/path-property-filesystemobject-object
 //
 
 getPath: function() {
@@ -335,7 +335,7 @@ setPath: function(Path_) {
 //   the earlier 8.3 naming convention.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/shortname-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/shortname-property
 //
 
 getShortName: function() {
@@ -348,7 +348,7 @@ getShortName: function() {
 //   the earlier 8.3 folder naming convention.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/shortpath-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/shortpath-property
 //
 
 getShortPath: function() {
@@ -361,7 +361,7 @@ getShortPath: function() {
 //   contained in the folder.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/size-property-filesystemobject-object
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/size-property-filesystemobject-object
 //
 
 getSize: function() {
@@ -375,7 +375,7 @@ getSize: function() {
 //   and System file attributes set.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/subfolders-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/subfolders-property
 //
 
 getSubFolders: function() {
@@ -411,7 +411,7 @@ getFoldersWithinFolder: function(Folder_) {
 // - Returns information about the type of a folder.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/type-property-filesystemobject-object
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/type-property-filesystemobject-object
 //
 
 getTypeName: function() {
@@ -428,7 +428,7 @@ getTypeName: function() {
 //   with valid path separators.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/buildpath-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/buildpath-method
 //
 
 Build: function(ParentFolderName, FolderName) {
@@ -442,8 +442,8 @@ Build: function(ParentFolderName, FolderName) {
 // - Copies a specified folder from one location to another.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/copy-method-visual-basic-for-applications
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/copyfolder-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/copy-method-visual-basic-for-applications
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/copyfolder-method
 //
 
 Copy: function(
@@ -462,7 +462,7 @@ Copy: function(
 // - Creates a folder.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/createfolder-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/createfolder-method
 //
 
 Create: function(Recursive) {
@@ -489,8 +489,8 @@ CreateFolder: function(Path_) {
 // - Deletes a specified folder.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/delete-method-visual-basic-for-applications
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/deletefolder-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/delete-method-visual-basic-for-applications
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/deletefolder-method
 //
 
 Delete: function(Force) {
@@ -506,7 +506,7 @@ Delete: function(Force) {
 // - Returns True if a specified folder exists; False if it does not.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/folderexists-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/folderexists-method
 //
 
 Exists: function() {
@@ -518,7 +518,7 @@ Exists: function() {
 // - Displays the standard Open dialog box and gets a folder name.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/api/excel.application.filedialog
+// https://learn.microsoft.com/en-us/office/vba/api/excel.application.filedialog
 //
 
 //GetFolderName: function(Title)
@@ -529,7 +529,7 @@ Exists: function() {
 // - Returns the special folder specified.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getspecialfolder-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getspecialfolder-method
 //
 
 GetSpecialFolderName: function(SpecialFolder) {
@@ -554,8 +554,8 @@ GetWindowsFoldername: function() {
 // - Moves a specified folder from one location to another.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/move-method-filesystemobject-object
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/movefolder-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/move-method-filesystemobject-object
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/movefolder-method
 //
 
 Move: function(Destination) {

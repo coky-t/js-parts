@@ -86,7 +86,7 @@ Reset: function() {
 // - Returns a ADODB.Stream object.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/stream-object-ado
+// https://learn.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/stream-object-ado
 //
 
 getADODBStream: function() {
@@ -101,7 +101,7 @@ getADODBStream: function() {
 // - Returns a FileSystemObject object.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/Language/Reference/User-Interface-Help/filesystemobject-object
+// https://learn.microsoft.com/en-us/office/vba/Language/Reference/User-Interface-Help/filesystemobject-object
 //
 
 getFileSystemObject: function() {
@@ -121,7 +121,7 @@ getFileSystemObject: function() {
 // - Returns a complete and unambiguous path.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getabsolutepathname-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getabsolutepathname-method
 //
 
 getAbsolutePathName: function() {
@@ -133,8 +133,8 @@ getAbsolutePathName: function() {
 // - Sets or returns the attributes of file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/attributes-property
-// https://docs.microsoft.com/en-us/office/vba/Language/Reference/user-interface-help/getattr-function
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/attributes-property
+// https://learn.microsoft.com/en-us/office/vba/Language/Reference/user-interface-help/getattr-function
 //
 
 getAttributes: function() {
@@ -151,7 +151,7 @@ setAttributes: function(Attributes_) {
 //   less any file extension, in a path.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getbasename-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getbasename-method
 //
 
 getBaseName: function() {
@@ -177,7 +177,7 @@ setBinary: function(Binary_) {
 // - Returns the date and time that the specified file was created.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/datecreated-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/datecreated-property
 //
 
 getDateCreated: function() {
@@ -189,7 +189,7 @@ getDateCreated: function() {
 // - Returns the date and time that the specified file was last accessed.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/datelastaccessed-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/datelastaccessed-property
 //
 
 getDateLastAccessed: function() {
@@ -201,7 +201,7 @@ getDateLastAccessed: function() {
 // - Returns the date and time that the specified file was last modified.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/datelastmodified-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/datelastmodified-property
 //
 
 getDateLastModified: function() {
@@ -213,7 +213,7 @@ getDateLastModified: function() {
 // - Returns a Drive object corresponding to the drive in a specified path.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getdrive-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getdrive-method
 //
 
 getDrive: function() {
@@ -225,8 +225,8 @@ getDrive: function() {
 // - Returns the drive letter of the drive on which the specified file resides.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/drive-property
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getdrivename-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/drive-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getdrivename-method
 //
 
 getDriveName: function() {
@@ -243,7 +243,7 @@ getDriveName: function() {
 //   in a path.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getextensionname-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getextensionname-method
 //
 
 getExtensionName: function() {
@@ -255,7 +255,7 @@ getExtensionName: function() {
 // - Sets or returns a File object corresponding to the file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getfile-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getfile-method
 //
 
 getFile: function() {
@@ -276,8 +276,8 @@ setFile: function(File_) {
 // - Sets or returns the name of a specified file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/name-property-filesystemobject-object
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getfilename-method-visual-basic-for-applications
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/name-property-filesystemobject-object
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getfilename-method-visual-basic-for-applications
 //
 
 getName: function() {
@@ -298,9 +298,9 @@ setName: function(Name_) {
 // - Returns the folder object for the parent of the specified file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/parentfolder-property
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getfolder-method
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getparentfoldername-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/parentfolder-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getfolder-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getparentfoldername-method
 //
 
 getParentFolder: function() {
@@ -319,9 +319,9 @@ getParentFolder: function() {
 //   of the last component in a specified path.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/parentfolder-property
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/path-property-filesystemobject-object
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getparentfoldername-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/parentfolder-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/path-property-filesystemobject-object
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/getparentfoldername-method
 //
 
 getParentFolderName: function() {
@@ -337,7 +337,7 @@ getParentFolderName: function() {
 // - Sets or returns the path for a specified file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/path-property-filesystemobject-object
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/path-property-filesystemobject-object
 //
 
 getPath: function() {
@@ -359,7 +359,7 @@ setPath: function(Path_) {
 //   the earlier 8.3 naming convention.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/shortname-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/shortname-property
 //
 
 getShortName: function() {
@@ -372,7 +372,7 @@ getShortName: function() {
 //   the earlier 8.3 file naming convention.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/shortpath-property
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/shortpath-property
 //
 
 getShortPath: function() {
@@ -384,7 +384,7 @@ getShortPath: function() {
 // - Returns the size, in bytes, of the specified file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/size-property-filesystemobject-object
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/size-property-filesystemobject-object
 //
 
 getSize: function() {
@@ -422,8 +422,8 @@ setText: function(Charset, Text_) {
 // - Writes a specified string (ASCII) to a file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/readall-method
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/write-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/readall-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/write-method
 //
 
 getTextA: function() {
@@ -493,8 +493,8 @@ setTextUTF8: function(TextUTF8_) {
 // - Writes a specified string (Unicode) to a file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/readall-method
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/write-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/readall-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/write-method
 //
 
 getTextW: function() {
@@ -542,7 +542,7 @@ setTextW: function(TextW_) {
 //   For example, for files ending in .TXT, "Text Document" is returned.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/type-property-filesystemobject-object
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/type-property-filesystemobject-object
 //
 
 getTypeName: function() {
@@ -578,9 +578,9 @@ AppendBinary: function(Binary_) {
 //   in the Windows Registry.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/charset-property-ado
-// https://docs.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/writetext-method-ado
-// https://docs.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/savetofile-method-ado
+// https://learn.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/charset-property-ado
+// https://learn.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/writetext-method-ado
+// https://learn.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/savetofile-method-ado
 //
 
 AppendText: function(Text_, Charset_) {
@@ -601,9 +601,9 @@ AppendText: function(Text_, Charset_) {
 // - Writes a specified string (ASCII) to the end of a file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/openastextstream-method
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/opentextfile-method
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/write-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/openastextstream-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/opentextfile-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/write-method
 //
 
 AppendTextA: function(TextA_) {
@@ -651,9 +651,9 @@ AppendTextUTF8: function(
 // - Writes a specified string (Unicode) to the end of a file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/openastextstream-method
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/opentextfile-method
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/write-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/openastextstream-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/opentextfile-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/write-method
 //
 
 AppendTextW: function(TextW_) {
@@ -683,7 +683,7 @@ AppendTextW: function(TextW_) {
 //   with valid path separators.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/buildpath-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/buildpath-method
 //
 
 Build: function(ParentFolderName, FileName) {
@@ -697,8 +697,8 @@ Build: function(ParentFolderName, FileName) {
 // - Copies a specified file from one location to another.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/copy-method-visual-basic-for-applications
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/copyfile-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/copy-method-visual-basic-for-applications
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/copyfile-method
 //
 
 Copy: function(
@@ -717,7 +717,7 @@ Copy: function(
 // - Creates a specified file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/createtextfile-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/createtextfile-method
 //
 
 Create: function() {
@@ -732,7 +732,7 @@ Create: function() {
 // that can be used to read from or write to the file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/createtextfile-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/createtextfile-method
 //
 
 CreateTextFile: function(
@@ -748,8 +748,8 @@ CreateTextFile: function(
 // - Deletes a specified file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/delete-method-visual-basic-for-applications
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/deletefile-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/delete-method-visual-basic-for-applications
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/deletefile-method
 //
 
 Delete: function(Force) {
@@ -765,7 +765,7 @@ Delete: function(Force) {
 // - Returns True if a specified file exists; False if it does not.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/fileexists-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/fileexists-method
 //
 
 Exists: function() {
@@ -778,7 +778,7 @@ Exists: function() {
 //   from the user without actually opening any files.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/api/excel.application.getopenfilename
+// https://learn.microsoft.com/en-us/office/vba/api/excel.application.getopenfilename
 //
 
 //GetOpenFileName: function(
@@ -794,7 +794,7 @@ Exists: function() {
 //   from the user without actually saving any files.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/api/excel.application.getsaveasfilename
+// https://learn.microsoft.com/en-us/office/vba/api/excel.application.getsaveasfilename
 //
 
 //GetSaveAsFileName: function(
@@ -811,7 +811,7 @@ Exists: function() {
 //   for performing operations that require a temporary file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/gettempname-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/gettempname-method
 //
 
 GetTempName: function() {
@@ -826,8 +826,8 @@ GetTempName: function() {
 // - Moves a specified file from one location to another.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/move-method-filesystemobject-object
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/movefile-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/move-method-filesystemobject-object
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/movefile-method
 //
 
 Move: function(Destination) {
@@ -846,8 +846,8 @@ Move: function(Destination) {
 //   that can be used to read from, write to, or append to the file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/openastextstream-method
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/opentextfile-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/openastextstream-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/opentextfile-method
 //
 
 OpenAsTextStream: function(
@@ -868,7 +868,7 @@ OpenAsTextStream: function(
 //   that can be used to read from, write to, or append to the file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/opentextfile-method
+// https://learn.microsoft.com/en-us/office/vba/language/reference/user-interface-help/opentextfile-method
 //
 
 OpenTextFile: function(
@@ -886,8 +886,8 @@ OpenTextFile: function(
 //   returns the resulting data.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/loadfromfile-method-ado
-// https://docs.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/read-method-ado
+// https://learn.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/loadfromfile-method-ado
+// https://learn.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/read-method-ado
 //
 
 ReadBinary: function(
@@ -925,9 +925,9 @@ ReadBinary: function(
 //   in the Windows Registry.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/charset-property-ado
-// https://docs.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/loadfromfile-method-ado
-// https://docs.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/readtext-method-ado
+// https://learn.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/charset-property-ado
+// https://learn.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/loadfromfile-method-ado
+// https://learn.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/readtext-method-ado
 //
 
 ReadText: function(
@@ -954,8 +954,8 @@ ReadText: function(
 // - Writes a binary data to a file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/write-method-ado
-// https://docs.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/savetofile-method-ado
+// https://learn.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/write-method-ado
+// https://learn.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/savetofile-method-ado
 //
 
 WriteBinary: function(Binary_, Position_) {
@@ -984,8 +984,8 @@ WriteBinary: function(Binary_, Position_) {
 // - Writes a specified string to a file.
 //
 // Reference:
-// https://docs.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/writetext-method-ado
-// https://docs.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/savetofile-method-ado
+// https://learn.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/writetext-method-ado
+// https://learn.microsoft.com/en-us/office/client-developer/access/desktop-database-reference/savetofile-method-ado
 //
 
 WriteText: function(Text_, Charset_) {
