@@ -1,0 +1,73 @@
+<?XML version="1.0" standalone="yes" ?>
+<package>
+    <job id="Test_SaveScanCodeTextFileEx">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="ScanCodeLicense.js" />
+        <script language="jscript" src="Test_ScanCodeTextFileEx.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_SaveScanCodeTextFileEx();
+        </script>
+    </job>
+    <job id="Test_SaveScanCodeTextFileEx2">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="ScanCodeLicense.js" />
+        <script language="jscript" src="Test_ScanCodeTextFileEx.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_SaveScanCodeTextFileEx2();
+        </script>
+    </job>
+    <job id="Test_SaveScanCodeTextFileEx3">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="ScanCodeLicense.js" />
+        <script language="jscript" src="Test_ScanCodeTextFileEx.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_SaveScanCodeTextFileEx3();
+        </script>
+    </job>
+    <job id="Test_SaveScanCodeTextFileEx4">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="ScanCodeLicense.js" />
+        <script language="jscript" src="Test_ScanCodeTextFileEx.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_SaveScanCodeTextFileEx4();
+        </script>
+    </job>
+    <job id="Test_SaveScanCodeTextFileEx5">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="ScanCodeLicense.js" />
+        <script language="jscript" src="Test_ScanCodeTextFileEx.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_SaveScanCodeTextFileEx5();
+        </script>
+    </job>
+    <job id="Test_SaveScanCodeTextFileEx6">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="ScanCodeLicense.js" />
+        <script language="jscript" src="Test_ScanCodeTextFileEx.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_SaveScanCodeTextFileEx6();
+        </script>
+    </job>
+    <job id="Test_SaveScanCodeTextFileEx7">
+        <script language="jscript" src="MADODBStream.js" />
+        <script language="jscript" src="MFileSystem.js" />
+        <script language="jscript" src="ScanCodeLicense.js" />
+        <script language="jscript" src="Test_ScanCodeTextFileEx.js" />
+        <script language="jscript" src="DebugPrint.js" />
+        <script language="jscript">
+            Test_SaveScanCodeTextFileEx7();
+        </script>
+    </job>
+</package>

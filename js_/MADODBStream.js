@@ -166,9 +166,9 @@ function MADODBStream_WriteTextFile(
 //
 
 function GetADODBStream() {
-    if (ADODBStream == null) {
+    //if (ADODBStream == null) {
         ADODBStream = new ActiveXObject("ADODB.Stream");
-    }
+    //}
     return ADODBStream;
 }
 
