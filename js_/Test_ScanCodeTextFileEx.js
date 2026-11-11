@@ -1525,7 +1525,7 @@ function Test_SaveScanCodeTextFileEx4_Core(
                 if (LicenseTextPatternText != "") {
                     LicenseTextPatternText = LicenseTextPatternText + "\n\n" +
                         "tool:" + "\n" +
-                        "https://coky-t.github.io/js-parts/js.html/Test_MRegExp_SpdxLicenseText.js.html" + "\n";
+                        "https://coky-t.github.io/js-parts/js.html/Test_MRegExp_ScanCodeLicenseText.js.html" + "\n";
                     
                     MADODBStream_WriteTextFileUTF8(OutputTextPatternDirPath + "\\" + Key + ".pattern.txt", LicenseTextPatternText, false);
                 }
@@ -3078,7 +3078,7 @@ function GetLicenseText(FileText) {
     if (! (TagIndex > 0)) return "";
     
     var LicenseText;
-    LicenseText = Trim(Right(FileText, Len(FileText) - (TagIndex + Len(Tag) - 1)));
+    LicenseText = Right(FileText, Len(FileText) - (TagIndex + Len(Tag) - 1));
     
     return LicenseText;
 }
